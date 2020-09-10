@@ -8,4 +8,13 @@
     <string name="multi_player">Multi Player</string>
     <string name="single_player">Single Player</string>
     <string name="exit">EXIT</string>
+    <string name="button_back">Button Back</string>
+    <string name="player_1">Player 1</string>
+    <string name="player_2">Player 2</string>
+    <string name="rock">Rock</string>
+    <string name="paper">Paper</string>
+    <string name="scissor">Scissor</string>
+    <string name="vs">VS</string>
+    <string name="button_save">Button save</string>
+    <string name="button_restart">Button restart</string>
 </resources>

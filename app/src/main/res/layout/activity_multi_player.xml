@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sweetPlatinum.MultiPlayerActivity">
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"
+        android:layout_margin="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/button_back" />
+
+    <TextView
+        android:id="@+id/player_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/player_1"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/rock1"
+        app:layout_constraintStart_toStartOf="@id/rock1"
+        app:layout_constraintTop_toBottomOf="@id/guideline" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/player_2"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/player_one"
+        app:layout_constraintEnd_toEndOf="@id/rock2"
+        app:layout_constraintTop_toTopOf="@id/player_one" />
+
+    <ImageView
+        android:id="@+id/rock1"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/rock"
+        android:src="@drawable/ic_batu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/player_one" />
+
+    <ImageView
+        android:id="@+id/paper1"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/paper"
+        android:src="@drawable/ic_kertas"
+        app:layout_constraintStart_toStartOf="@id/rock1"
+        app:layout_constraintTop_toBottomOf="@id/rock1"
+        app:layout_constraintEnd_toEndOf="@id/rock1"/>
+
+    <ImageView
+        android:id="@+id/scissor1"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/scissor"
+        android:src="@drawable/ic_gunting"
+        app:layout_constraintStart_toStartOf="@id/paper1"
+        app:layout_constraintTop_toBottomOf="@id/paper1"
+        app:layout_constraintEnd_toEndOf="@id/paper1"/>
+
+    <ImageView
+        android:id="@+id/rock2"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginEnd="50dp"
+        android:contentDescription="@string/rock"
+        android:src="@drawable/ic_batu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/rock1"
+        app:layout_constraintTop_toTopOf="@id/rock1" />
+
+    <ImageView
+        android:id="@+id/paper2"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/paper"
+        android:src="@drawable/ic_kertas"
+        app:layout_constraintStart_toStartOf="@id/rock2"
+        app:layout_constraintTop_toBottomOf="@id/rock2"
+        app:layout_constraintEnd_toEndOf="@id/rock2"/>
+
+    <ImageView
+        android:id="@+id/scissor2"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/scissor"
+        android:src="@drawable/ic_gunting"
+        app:layout_constraintStart_toStartOf="@id/paper2"
+        app:layout_constraintTop_toBottomOf="@id/paper2"
+        app:layout_constraintEnd_toEndOf="@id/paper2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vs"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="64sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline" />
+
+    <ImageView
+        android:id="@+id/iv_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/button_save"
+        android:src="@drawable/ic_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/scissor1"
+        app:layout_constraintStart_toStartOf="@id/scissor1"
+        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+
+
+    <ImageView
+        android:id="@+id/iv_restart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_refresh"
+        android:contentDescription="@string/button_restart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/scissor2"
+        app:layout_constraintEnd_toEndOf="@id/scissor2" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

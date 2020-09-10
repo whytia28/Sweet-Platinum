@@ -1,12 +1,12 @@
-package com.example.sweetplatinum
+package com.example.sweetPlatinum
 
 import android.content.Context
 import android.content.Intent
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.bumptech.glide.Glide
+import com.example.sweetplatinum.R
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 class SplashScreenActivity : AppCompatActivity() {
