@@ -1,4 +1,4 @@
-package com.example.sweetplatinum.logic
+package com.example.sweetPlatinum.logic
 
 class Controller {
     companion object {

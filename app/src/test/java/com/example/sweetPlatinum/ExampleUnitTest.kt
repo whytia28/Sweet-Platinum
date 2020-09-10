@@ -1,4 +1,4 @@
-package com.example.sweetplatinum
+package com.example.sweetPlatinum
 
 import org.junit.Test
 

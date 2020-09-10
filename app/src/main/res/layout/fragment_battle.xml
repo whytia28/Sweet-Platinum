@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".menuActivity.ui.battle.BattleFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_your_opponent"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"/>
+
+    <ImageView
+        android:id="@+id/multi_player"
+        android:layout_width="0dp"
+        android:layout_height="128dp"
+        android:contentDescription="@string/multi_player"
+        android:src="@drawable/ic_multi_player"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+
+    <TextView
+        android:id="@+id/tv_multi_player"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:hint="@string/multi_player"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/multi_player"
+        app:layout_constraintStart_toStartOf="@id/multi_player"
+        app:layout_constraintTop_toBottomOf="@id/multi_player" />
+
+    <ImageView
+        android:id="@+id/single_player"
+        android:layout_width="0dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/single_player"
+        android:src="@drawable/ic_single_player"
+        app:layout_constraintEnd_toEndOf="@id/multi_player"
+        app:layout_constraintStart_toStartOf="@id/multi_player"
+        app:layout_constraintTop_toBottomOf="@id/multi_player" />
+
+    <TextView
+        android:id="@+id/tv_single_player"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:hint="@string/single_player"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/single_player"
+        app:layout_constraintStart_toStartOf="@id/single_player"
+        app:layout_constraintTop_toBottomOf="@id/single_player" />
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:text="@string/exit"
+        android:textColor="@android:color/white"
+        android:background="@drawable/ripple_effect"
+        app:layout_constraintTop_toBottomOf="@id/single_player"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

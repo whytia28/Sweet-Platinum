@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Sweet Platinum</string>
+    <string name="title_activity_menu">MainActivity</string>
+    <string name="title_battle">Battle</string>
+    <string name="title_history">History</string>
+    <string name="title_profile">Profile</string>
+    <string name="choose_your_opponent">CHOOSE YOUR OPPONENT</string>
+    <string name="multi_player">Multi Player</string>
+    <string name="single_player">Single Player</string>
+    <string name="exit">EXIT</string>
 </resources>
