@@ -17,4 +17,6 @@
     <string name="vs">VS</string>
     <string name="button_save">Button save</string>
     <string name="button_restart">Button restart</string>
+    <string name="vs_player">%1$s vs Player</string>
+    <string name="vs_cpu">%1$s vs CPU</string>
 </resources>
