@@ -8,6 +8,11 @@
             android:title="@string/logout_title"
             app:showAsAction="collapseActionView" />
 
+        <item
+            android:id="@+id/setting"
+            android:title="@string/setting_title"
+            app:showAsAction="collapseActionView" />
+
     </group>
 
 </menu>

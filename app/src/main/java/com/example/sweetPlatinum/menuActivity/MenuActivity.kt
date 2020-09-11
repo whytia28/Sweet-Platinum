@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.sweetPlatinum.setting.SettingActivity
 import com.example.sweetplatinum.MySharedPreferences
 import com.example.sweetplatinum.R
 import kotlinx.android.synthetic.main.activity_menu.*
@@ -45,11 +46,18 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.logout) {
-//            val loginIntent = Intent(this, LoginActivity::class.java)
-            MySharedPreferences(this).deleteData()
+        when (item.itemId) {
+            R.id.logout -> {
+                //            val loginIntent = Intent(this, LoginActivity::class.java)
+                MySharedPreferences(this).deleteData()
 //            startActivity(loginIntent)
-            menuActivityPresenter.onLogoutSuccess()
+                menuActivityPresenter.onLogoutSuccess()
+            }
+
+            R.id.setting -> {
+                val settingIntent = Intent(this, SettingActivity::class.java)
+                startActivity(settingIntent)
+            }
         }
 
         return super.onOptionsItemSelected(item)
