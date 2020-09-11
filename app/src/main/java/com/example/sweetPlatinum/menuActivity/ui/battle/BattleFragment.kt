@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.sweetPlatinum.MultiPlayerActivity
+import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetplatinum.R
 import kotlinx.android.synthetic.main.fragment_battle.*

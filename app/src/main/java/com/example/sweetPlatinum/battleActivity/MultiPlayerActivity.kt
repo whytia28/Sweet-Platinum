@@ -1,4 +1,4 @@
-package com.example.sweetPlatinum
+package com.example.sweetPlatinum.battleActivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

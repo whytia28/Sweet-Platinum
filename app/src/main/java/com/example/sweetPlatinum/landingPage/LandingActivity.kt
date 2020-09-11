@@ -1,10 +1,11 @@
-package com.example.sweetPlatinum
+package com.example.sweetPlatinum.landingPage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.sweetPlatinum.landingPage.FragmentListener
 import com.example.sweetplatinum.*
 
 class LandingActivity : AppCompatActivity(), FragmentListener {

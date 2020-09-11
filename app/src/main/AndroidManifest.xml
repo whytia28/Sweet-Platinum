@@ -17,8 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name="com.example.sweetPlatinum.MultiPlayerActivity" />
-        <activity android:name="com.example.sweetPlatinum.MainActivity" />
+        <activity android:name="com.example.sweetPlatinum.battleActivity.MultiPlayerActivity" />
         <activity android:name="com.example.sweetPlatinum.menuActivity.MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

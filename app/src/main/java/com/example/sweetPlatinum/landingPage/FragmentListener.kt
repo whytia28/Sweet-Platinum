@@ -1,4 +1,4 @@
-package com.example.sweetplatinum
+package com.example.sweetPlatinum.landingPage
 
 interface FragmentListener {
 

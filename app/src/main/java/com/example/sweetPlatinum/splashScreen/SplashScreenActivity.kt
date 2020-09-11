@@ -1,4 +1,4 @@
-package com.example.sweetPlatinum
+package com.example.sweetPlatinum.splashScreen
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.bumptech.glide.Glide
+import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetplatinum.R
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
@@ -36,7 +37,7 @@ class SplashScreenActivity : AppCompatActivity() {
             // This method will be executed once the timer is over
             // Start your app main activity
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
 
             // close this activity
