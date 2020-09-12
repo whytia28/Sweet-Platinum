@@ -17,7 +17,7 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
 
     private lateinit var battleViewModel: BattleViewModel
     private lateinit var username: String
-    lateinit var presenter: BattlePresenter
+    private lateinit var presenter: BattlePresenter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,23 +47,27 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
 //            }
 //        }
 
+        username = "Pemain"
 
         tv_multi_player.text = getString(R.string.vs_player, username)
         tv_single_player.text = getString(R.string.vs_cpu, username)
 
+        presenter = BattlePresenter()
         presenter.listener = this
 
         single_player.setOnClickListener {
-            presenter.goToSinglePlayer(username)
+            goToSinglePlayer(username)
         }
 
         multi_player.setOnClickListener {
-            presenter.goToMultiPlayer(username)
+            goToMultiPlayer(username)
         }
 
         btn_exit.setOnClickListener {
             activity?.finish()
         }
+
+
     }
 
     override fun goToMultiPlayer(username: String) {

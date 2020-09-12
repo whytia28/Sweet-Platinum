@@ -11,10 +11,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
+import com.example.sweetPlatinum.menuActivity.ui.battle.BattleFragment
 import com.example.sweetPlatinum.setting.SettingActivity
-import com.example.sweetplatinum.MySharedPreferences
 import com.example.sweetplatinum.R
-import kotlinx.android.synthetic.main.activity_menu.*
+
 
 class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
 
@@ -24,7 +25,8 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        setSupportActionBar(menu_actionbar)
+//        setSupportActionBar(menu_actionbar)
+        menuActivityPresenter = MenuActivityPresenter()
         menuActivityPresenter.listener = this
 
         val navController = findNavController(R.id.nav_host_fragment)
@@ -49,9 +51,9 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
         when (item.itemId) {
             R.id.logout -> {
                 //            val loginIntent = Intent(this, LoginActivity::class.java)
-                MySharedPreferences(this).deleteData()
+//                MySharedPreferences(this).deleteData()
 //            startActivity(loginIntent)
-                menuActivityPresenter.onLogoutSuccess()
+                onLogoutSuccess()
             }
 
             R.id.setting -> {
@@ -67,4 +69,5 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
         Toast.makeText(this, R.string.logout_success, Toast.LENGTH_SHORT).show()
         finish()
     }
+
 }

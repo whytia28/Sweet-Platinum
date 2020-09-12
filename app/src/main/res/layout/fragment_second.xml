@@ -1,47 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SecondFragment">
+    tools:context="com.example.sweetPlatinum.landingPage.SecondFragment">
 
     <ImageView
-        android:id="@+id/ivSingleplayer"
+        android:id="@+id/ivSinglePlayer"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/single_player"
+        android:src="@drawable/ic_vs_computer"
+        app:layout_constraintBottom_toTopOf="@id/ivNext"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/ic_vs_computer">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </ImageView>
 
     <TextView
-        android:id="@+id/tvSingleplayer"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
+        android:id="@+id/tvSinglePlayer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ivSingleplayer"
-        app:layout_constraintEnd_toEndOf="@id/ivSingleplayer"
-        app:layout_constraintStart_toStartOf="@id/ivSingleplayer"
-        android:text="Bermain Melawan Computer"
-        android:textSize="20dp">
-    </TextView>
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:text="@string/playing_versus_cpu"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivSinglePlayer" />
 
     <ImageView
-        android:id="@+id/ivLanjut"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSingleplayer"
+        android:id="@+id/ivNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/button_next"
+        android:src="@drawable/ic_next"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/ic_baseline_navigate_next_24">
+        app:layout_constraintEnd_toEndOf="parent">
 
     </ImageView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

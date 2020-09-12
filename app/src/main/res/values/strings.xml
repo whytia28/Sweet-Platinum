@@ -36,4 +36,23 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="button_next">Button next</string>
+    <string name="play_with_your_friend">Play with your friend</string>
+    <string name="image_multi_player">image multi player</string>
+    <string name="playing_versus_cpu">Playing versus Cpu</string>
+    <string name="relax_and_enjoy">Relax and enjoy the game!</string>
+    <string name="logo_image">logo image</string>
+    <string name="notification">Notification</string>
+    <string name="enable_reminder">Enable Reminder</string>
+    <string name="language">Language</string>
+    <string name="set_reminder">Set Reminder Time</string>
+    <string name="change_language">Change Language</string>
+    <string name="save_history_success">Save History Success</string>
+    <string name="save_history_failed">Save History Failed</string>
+    <string name="congrats_you_win">Congrats %1$s</string>
+    <string name="ok">OK</string>
+    <string name="result">Result</string>
+    <string name="player_2_win">Player 2 Win</string>
+    <string name="draw">Draw</string>
+    <string name="player_win">%1$s Win</string>
 </resources>

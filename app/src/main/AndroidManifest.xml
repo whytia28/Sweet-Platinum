@@ -10,16 +10,17 @@
 
     <application
         android:allowBackup="true"
-        android:fullBackupContent=""
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name="com.example.sweetPlatinum.setting.SettingActivity"></activity>
+        <activity android:name="com.example.sweetPlatinum.setting.SettingActivity" />
         <activity android:name="com.example.sweetPlatinum.battleActivity.MultiPlayerActivity" />
-        <activity android:name="com.example.sweetPlatinum.menuActivity.MenuActivity">
+        <activity android:name="com.example.sweetPlatinum.menuActivity.MenuActivity" />
+        <activity android:name="com.example.sweetPlatinum.landingPage.LandingActivity" />
+        <activity android:name="com.example.sweetPlatinum.splashScreen.SplashScreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

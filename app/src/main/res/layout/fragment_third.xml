@@ -1,42 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ThirdFragment">
+    tools:context="com.example.sweetPlatinum.landingPage.ThirdFragment">
 
     <ImageView
         android:id="@+id/ivImageUser"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/title_profile"
+        android:src="@drawable/ic_image_user"
+        app:layout_constraintBottom_toTopOf="@id/ivNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/ic_image_user">
+        app:layout_constraintTop_toTopOf="parent">
+
     </ImageView>
 
     <TextView
-        android:id="@+id/tvPersiapkan"
+        android:id="@+id/tvPrepare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_margin="16dp"
         android:gravity="center"
-        android:text="PERSIAPKAN DIRIMU!!"
-        app:layout_constraintTop_toBottomOf="@id/ivImageUser"
+        android:text="@string/relax_and_enjoy"
+        android:textSize="26sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivImageUser" />
 
     <ImageView
-        android:id="@+id/ivButtonLanjut"
-        android:layout_marginEnd="10dp"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/ivNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/button_next"
+        android:src="@drawable/ic_next"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPersiapkan"
-        android:src="@drawable/ic_baseline_navigate_next_24">
+        app:layout_constraintEnd_toEndOf="parent">
 
     </ImageView>
 
