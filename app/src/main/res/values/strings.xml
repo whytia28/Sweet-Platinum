@@ -55,4 +55,15 @@
     <string name="player_2_win">Player 2 Win</string>
     <string name="draw">Draw</string>
     <string name="player_win">%1$s Win</string>
+    <string name="edit">Edit</string>
+    <string name="data_profile">DATA PROFILE</string>
+    <string name="image_profile">image profile</string>
+    <string name="button_set_profile">button set profile</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="save">SAVE</string>
+    <string name="update_success">Update Profile Successful</string>
+    <string name="choose_from">Choose from</string>
+    <string name="from_gallery">From Gallery</string>
+    <string name="take_picture">Take Picture with Camera</string>
 </resources>

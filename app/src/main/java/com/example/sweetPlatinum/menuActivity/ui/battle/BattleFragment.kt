@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
-import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetplatinum.R
 import kotlinx.android.synthetic.main.fragment_battle.*
 
@@ -33,8 +32,8 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val context = view.context as MenuActivity
-        context.supportActionBar?.title = getString(R.string.title_battle)
+//        val context = view.context as MenuActivity
+//        context.supportActionBar?.title = getString(R.string.title_battle)
 
 //        if (context.intent.hasExtra("data")) {
 //            context.intent.getParcelableExtra<LoginResponse.Data>("data")?.let {

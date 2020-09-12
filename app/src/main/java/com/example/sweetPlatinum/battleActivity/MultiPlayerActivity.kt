@@ -149,6 +149,7 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
 
     override fun onSuccessSaveHistory() {
         Toast.makeText(this, getString(R.string.save_history_success), Toast.LENGTH_SHORT).show()
+        iv_save.setImageResource(R.drawable.ic_saved)
     }
 
     override fun onFailedSaveHistory() {
