@@ -19,13 +19,15 @@ import com.bumptech.glide.Glide
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import com.example.sweetplatinum.R
 import kotlinx.android.synthetic.main.fragment_profile.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class ProfileFragment : Fragment(), ProfilePresenter.Listener {
 
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var bitmapResult: Bitmap
     private lateinit var token: String
-    private lateinit var presenter: ProfilePresenter
+    private val presenter: ProfilePresenter by inject { parametersOf(this) }
 
     companion object {
         const val REQUEST_CODE = 201
@@ -51,7 +53,6 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = ProfilePresenter()
         presenter.listener = this
         token = context?.let { MySharedPreferences(it).getData("key") }.toString()
 

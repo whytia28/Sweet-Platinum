@@ -1,6 +1,8 @@
 package com.example.sweetPlatinum.menuActivity.ui.battle
 
-class BattlePresenter {
+import com.example.sweetPlatinum.network.ApiService
+
+class BattlePresenter(apiService: ApiService) {
     var listener: Listener? = null
 
     fun goToMultiPlayer(username: String) {

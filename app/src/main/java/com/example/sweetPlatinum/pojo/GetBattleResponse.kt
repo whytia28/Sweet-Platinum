@@ -1,5 +1,4 @@
-package com.example.binarchapter8.pojo
-
+package com.example.sweetPlatinum.pojo
 
 import com.google.gson.annotations.SerializedName
 

@@ -5,28 +5,26 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
-import com.example.sweetPlatinum.menuActivity.ui.battle.BattleFragment
 import com.example.sweetPlatinum.setting.SettingActivity
 import com.example.sweetplatinum.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 
 class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
 
-    lateinit var menuActivityPresenter: MenuActivityPresenter
+    private val menuActivityPresenter: MenuActivityPresenter by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-//        setSupportActionBar(menu_actionbar)
-        menuActivityPresenter = MenuActivityPresenter()
         menuActivityPresenter.listener = this
 
         val navController = findNavController(R.id.nav_host_fragment)

@@ -10,13 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
 import com.example.sweetplatinum.R
 import kotlinx.android.synthetic.main.fragment_battle.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 
 class BattleFragment : Fragment(), BattlePresenter.Listener {
 
     private lateinit var battleViewModel: BattleViewModel
     private lateinit var username: String
-    private lateinit var presenter: BattlePresenter
+    private val presenter: BattlePresenter by inject { parametersOf(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +53,6 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
         tv_multi_player.text = getString(R.string.vs_player, username)
         tv_single_player.text = getString(R.string.vs_cpu, username)
 
-        presenter = BattlePresenter()
         presenter.listener = this
 
         single_player.setOnClickListener {

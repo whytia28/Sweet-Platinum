@@ -1,6 +1,8 @@
 package com.example.sweetPlatinum.menuActivity.ui.profile
 
-class ProfilePresenter {
+import com.example.sweetPlatinum.network.ApiService
+
+class ProfilePresenter(apiService: ApiService) {
 
     var listener: Listener? = null
 

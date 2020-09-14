@@ -4,11 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.sweetPlatinum.login.LoginActivity
 import com.example.sweetplatinum.R
 
-/*class RegisterActivity : AppCompatActivity(), RegisterActivityPresenter.Listener {
+class RegisterActivity : AppCompatActivity(), RegisterActivityPresenter.Listener {
 
-    private lateinit var binding : ActivityRegisterBinding
+    /*private lateinit var binding : ActivityRegisterBinding
     private lateinit var presenter: RegisterActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +52,7 @@ import com.example.sweetplatinum.R
                 Toast.makeText(this, "Terdapat Kesalahan Pada Inputan", Toast.LENGTH_LONG).show()
             }
         }
-    }
+    }*/
 
     override fun onRegisterSuccess(successMessage: String) {
         Toast.makeText(this, successMessage, Toast.LENGTH_LONG).show()
@@ -63,4 +64,4 @@ import com.example.sweetplatinum.R
         Toast.makeText(this, failureMessage, Toast.LENGTH_LONG).show()
         finish()
     }
-}*/
+}

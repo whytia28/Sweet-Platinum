@@ -8,9 +8,9 @@ import android.widget.Toast
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetplatinum.R
 
-/*class LoginActivity : AppCompatActivity(), LoginActivityPresenter.Listener {
+class LoginActivity : AppCompatActivity(), LoginActivityPresenter.Listener {
 
-    companion object {
+    /*companion object {
         const val SP_NAME = "data_user"
         const val FIELD_EMAIL = "email"
         const val ID = "id"
@@ -30,7 +30,7 @@ import com.example.sweetplatinum.R
         val sharedPreferences = getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
 
         ini untuk ngirim data login ketika user menekan tombol login
-     /*   binding.btnLogin.setOnClickListener {
+       binding.btnLogin.setOnClickListener {
             //ini kumpulan logic untuk user logic
             if(binding.etUsername.text.isEmpty() && binding.etPassword.text.isEmpty()){
                 Toast.makeText(this, "Username dan Password Kosong", Toast.LENGTH_LONG).show()
@@ -49,7 +49,7 @@ import com.example.sweetplatinum.R
             startActivity(Intent(applicationContext, RegisterActivity::class.java))
         }
     }*/
-    /*override fun onLoginSuccess(successMessage: String, successSaveData: String) {
+    override fun onLoginSuccess(successMessage: String, successSaveData: String) {
         Toast.makeText(this, "$successMessage dan $successSaveData", Toast.LENGTH_LONG).show()
         startActivity(Intent(applicationContext, MenuActivity::class.java))
         finish()
@@ -59,4 +59,4 @@ import com.example.sweetplatinum.R
         Toast.makeText(this, "$failureMessage dan $failedSaveData", Toast.LENGTH_LONG).show()
         finish()
     }
-}}*/
+}

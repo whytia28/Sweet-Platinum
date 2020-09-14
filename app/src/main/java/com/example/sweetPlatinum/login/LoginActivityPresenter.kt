@@ -5,9 +5,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-/*class LoginActivityPresenter(val listener : Listener) {
+class LoginActivityPresenter(val listener : Listener) {
 
-    fun loginPerson(email : String, password: String, sharedPreferences: SharedPreferences){
+    /*fun loginPerson(email : String, password: String, sharedPreferences: SharedPreferences){
 
         val person =
             PostPersonLoginBody(
@@ -44,11 +44,11 @@ import retrofit2.Response
                 }
             }
         })
-    }
+    }*/
 
     interface Listener{
         fun onLoginSuccess(successMessage: String, successSaveData: String)
         fun onLoginFailure(failureMessage: String, failedSaveData: String)
     }
 
-}*/
+}

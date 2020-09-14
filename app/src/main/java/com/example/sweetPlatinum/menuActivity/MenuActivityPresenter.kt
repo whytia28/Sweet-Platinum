@@ -1,6 +1,8 @@
 package com.example.sweetPlatinum.menuActivity
 
-class MenuActivityPresenter {
+import com.example.sweetPlatinum.network.ApiService
+
+class MenuActivityPresenter(apiService: ApiService) {
 
     var listener: Listener? = null
 
