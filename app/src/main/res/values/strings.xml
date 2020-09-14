@@ -68,4 +68,6 @@
     <string name="take_picture">Take Picture with Camera</string>
     <string name="share_to">Share to</string>
     <string name="share_game">Lets play match together</string>
+    <string name="button_share">Button Share</string>
+    <string name="body_share">Yeah %1$s, lets play together. Download game here</string>
 </resources>

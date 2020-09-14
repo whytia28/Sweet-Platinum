@@ -68,6 +68,9 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
         btn_back.setOnClickListener {
             onBackPressed()
         }
+        btn_share.setOnClickListener {
+            shareTo()
+        }
     }
 
     override fun startNew() {
@@ -159,7 +162,7 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
 
     override fun shareTo() {
         val shareIntent = Intent(Intent.ACTION_SEND)
-        val  body = "Yeay $message, let's play together"
+        val  body = getString(R.string.body_share, message)
         shareIntent.type = "text/plain"
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_game))
         shareIntent.putExtra(Intent.EXTRA_TEXT, body)
