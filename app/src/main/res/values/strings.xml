@@ -66,4 +66,6 @@
     <string name="choose_from">Choose from</string>
     <string name="from_gallery">From Gallery</string>
     <string name="take_picture">Take Picture with Camera</string>
+    <string name="share_to">Share to</string>
+    <string name="share_game">Lets play match together</string>
 </resources>

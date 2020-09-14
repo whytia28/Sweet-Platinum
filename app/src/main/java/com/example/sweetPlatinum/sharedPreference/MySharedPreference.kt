@@ -1,4 +1,4 @@
-package com.example.sweetplatinum
+package com.example.sweetPlatinum.sharedPreference
 
 import android.content.Context
 

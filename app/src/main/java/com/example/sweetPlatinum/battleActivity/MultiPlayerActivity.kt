@@ -1,6 +1,7 @@
 package com.example.sweetPlatinum.battleActivity
 
 import android.app.AlertDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -154,5 +155,14 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
 
     override fun onFailedSaveHistory() {
         Toast.makeText(this, getString(R.string.save_history_failed), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun shareTo() {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        val  body = "Yeay $message, let's play together"
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_game))
+        shareIntent.putExtra(Intent.EXTRA_TEXT, body)
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_to)))
     }
 }

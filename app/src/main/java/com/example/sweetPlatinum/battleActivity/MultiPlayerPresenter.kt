@@ -10,5 +10,6 @@ class MultiPlayerPresenter {
         fun setOverlay()
         fun onSuccessSaveHistory()
         fun onFailedSaveHistory()
+        fun shareTo()
     }
 }

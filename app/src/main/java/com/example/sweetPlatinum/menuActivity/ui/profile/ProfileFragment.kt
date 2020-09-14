@@ -16,7 +16,7 @@ import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.sweetplatinum.MySharedPreferences
+import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import com.example.sweetplatinum.R
 import kotlinx.android.synthetic.main.fragment_profile.*
 
