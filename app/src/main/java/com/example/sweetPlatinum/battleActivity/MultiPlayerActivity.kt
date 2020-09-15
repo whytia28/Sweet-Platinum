@@ -7,10 +7,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.example.sweetPlatinum.logic.Controller
+import com.example.sweetPlatinum.pojo.PostBattleBody
+import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import com.example.sweetplatinum.R
 import kotlinx.android.synthetic.main.activity_multi_player.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.view.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
     private var playerOne: String = ""
@@ -19,14 +23,13 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
     private lateinit var message: String
     private var username: String? = ""
 
-    private lateinit var presenter: MultiPlayerPresenter
+    private val presenter: MultiPlayerPresenter by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_multi_player)
 
         username = intent.getStringExtra("username")
-        presenter = MultiPlayerPresenter()
         presenter.listener = this
 
         rock1.setOnClickListener {
@@ -63,7 +66,10 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
             startNew()
         }
         iv_save.setOnClickListener {
-
+            val token = MySharedPreferences(applicationContext).getData("key").toString()
+            val mode = "Multiplayer"
+            val body = PostBattleBody(mode, winner)
+            presenter.saveHistory(token, body)
         }
         btn_back.setOnClickListener {
             onBackPressed()
@@ -156,8 +162,8 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
         iv_save.setImageResource(R.drawable.ic_saved)
     }
 
-    override fun onFailedSaveHistory() {
-        Toast.makeText(this, getString(R.string.save_history_failed), Toast.LENGTH_SHORT).show()
+    override fun onFailedSaveHistory(errorMessage: String) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
     }
 
     override fun shareTo() {

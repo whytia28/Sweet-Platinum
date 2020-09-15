@@ -1,5 +1,6 @@
 package com.example.sweetPlatinum.di
 
+import com.example.sweetPlatinum.battleActivity.MultiPlayerPresenter
 import com.example.sweetPlatinum.menuActivity.MenuActivityPresenter
 import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
 import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
@@ -39,5 +40,8 @@ val appModule: Module = module {
     }
     factory {
         ProfilePresenter(get())
+    }
+    factory {
+        MultiPlayerPresenter(get())
     }
 }
