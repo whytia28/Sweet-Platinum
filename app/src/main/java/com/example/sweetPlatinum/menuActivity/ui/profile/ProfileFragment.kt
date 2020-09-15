@@ -83,12 +83,19 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
         }
 
         btn_save.setOnClickListener {
-
+            presenter.updateUser(
+                token,
+                bitmapResult,
+                et_username.text.toString(),
+                et_email.text.toString()
+            )
         }
 
         btn_back.setOnClickListener {
             showSetupUi()
         }
+
+        presenter.getProfileUser(token)
     }
 
     private fun checkPermission(): Boolean {
