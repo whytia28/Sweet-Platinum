@@ -1,11 +1,13 @@
 package com.example.sweetPlatinum.landingPage
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.sweetPlatinum.*
+import com.example.sweetPlatinum.login.LoginActivity
 
 class LandingActivity : AppCompatActivity(), FragmentListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +44,8 @@ class LandingActivity : AppCompatActivity(), FragmentListener {
     }
 
     override fun goToLoginActivity() {
-//        val intentKeLoginActivity = Intent(this, LoginActivity::class.java)
-//        startActivity(intentKeLoginActivity)
+        val intentKeLoginActivity = Intent(this, LoginActivity::class.java)
+        startActivity(intentKeLoginActivity)
+        finish()
     }
 }

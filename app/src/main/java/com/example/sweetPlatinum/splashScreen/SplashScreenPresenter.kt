@@ -19,13 +19,13 @@ class SplashScreenPresenter(private val apiService: ApiService) {
                     listener?.goToMenuActivity(it)
                 }, {
                     it.message?.let { it1 -> listener?.onAuthLoginFailed(it1) }
-                    listener?.goToLoginActivity()
+                    listener?.goToLandingPage()
                 })
         )
     }
 
     interface Listener {
-        fun goToLoginActivity()
+        fun goToLandingPage()
         fun goToMenuActivity(data: AuthResponse.Data)
         fun onAuthLoginFailed(errorMessage: String)
     }

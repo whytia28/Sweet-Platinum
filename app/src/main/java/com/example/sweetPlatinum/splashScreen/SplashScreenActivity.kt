@@ -3,13 +3,13 @@ package com.example.sweetPlatinum.splashScreen
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
-import com.example.sweetPlatinum.menuActivity.MenuActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.sweetPlatinum.R
-import com.example.sweetPlatinum.login.LoginActivity
+import com.example.sweetPlatinum.landingPage.LandingActivity
+import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import io.reactivex.disposables.CompositeDisposable
@@ -39,24 +39,23 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenPresenter.Listener
                 val token = MySharedPreferences(this).getData("token").toString()
                 presenter.autoLogin(token)
             } else {
-                goToLoginActivity()
+                goToLandingPage()
             }
 
             // close this activity
+            finish()
         }, splashTimeOut)
     }
 
-    override fun goToLoginActivity() {
-        val goToLoginIntent = Intent(this, LoginActivity::class.java)
+    override fun goToLandingPage() {
+        val goToLoginIntent = Intent(this, LandingActivity::class.java)
         startActivity(goToLoginIntent)
-        finish()
     }
 
     override fun goToMenuActivity(data: AuthResponse.Data) {
         val intent = Intent(this, MenuActivity::class.java)
         intent.putExtra("dataFromAuth", data)
         startActivity(intent)
-        finish()
     }
 
     override fun onAuthLoginFailed(errorMessage: String) {
