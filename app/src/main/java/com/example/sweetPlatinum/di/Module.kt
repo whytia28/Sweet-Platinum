@@ -5,7 +5,7 @@ import com.example.sweetPlatinum.menuActivity.MenuActivityPresenter
 import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
 import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
 import com.example.sweetPlatinum.network.ApiService
-import com.example.sweetplatinum.BuildConfig
+import com.example.sweetPlatinum.BuildConfig
 import okhttp3.OkHttpClient
 import org.koin.core.module.Module
 import org.koin.dsl.module

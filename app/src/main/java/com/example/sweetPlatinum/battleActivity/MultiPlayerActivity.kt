@@ -9,7 +9,8 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.sweetPlatinum.logic.Controller
 import com.example.sweetPlatinum.pojo.PostBattleBody
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
-import com.example.sweetplatinum.R
+import com.example.sweetPlatinum.R
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_multi_player.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.view.*
@@ -22,6 +23,7 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
     private var winner: String = ""
     private lateinit var message: String
     private var username: String? = ""
+    private val disposables = CompositeDisposable()
 
     private val presenter: MultiPlayerPresenter by inject { parametersOf(this) }
 
@@ -31,6 +33,7 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
 
         username = intent.getStringExtra("username")
         presenter.listener = this
+        player_one.text = username
 
         rock1.setOnClickListener {
             playerOne = Controller.gameChoice[0]
@@ -173,5 +176,10 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_game))
         shareIntent.putExtra(Intent.EXTRA_TEXT, body)
         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_to)))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposables.dispose()
     }
 }

@@ -11,7 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.sweetPlatinum.setting.SettingActivity
-import com.example.sweetplatinum.R
+import com.example.sweetPlatinum.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf

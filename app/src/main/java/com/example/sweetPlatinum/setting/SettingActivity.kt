@@ -2,7 +2,7 @@ package com.example.sweetPlatinum.setting
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.sweetplatinum.R
+import com.example.sweetPlatinum.R
 
 class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

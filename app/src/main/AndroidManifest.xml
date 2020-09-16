@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.sweetplatinum">
+    package="com.example.sweetPlatinum">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -17,6 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        <receiver
+            android:name="com.example.sweetPlatinum.setting.AlarmReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+
+        </receiver>
+
         <activity android:name="com.example.sweetPlatinum.register.RegisterActivity" />
         <activity android:name="com.example.sweetPlatinum.login.LoginActivity" />
         <activity android:name="com.example.sweetPlatinum.setting.SettingActivity" />

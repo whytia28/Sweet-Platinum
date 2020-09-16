@@ -3,6 +3,7 @@ package com.example.sweetPlatinum.menuActivity.ui.profile
 import android.graphics.Bitmap
 import com.example.sweetPlatinum.network.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -11,18 +12,21 @@ import java.io.ByteArrayOutputStream
 class ProfilePresenter(private val apiService: ApiService) {
 
     var listener: Listener? = null
+    private val disposable = CompositeDisposable()
 
     fun getProfileUser(token: String) {
         listener?.showProgressBar()
-        apiService.getProfileUser(token)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                listener?.showProfile(it.data.username, it.data.email, it.data.photo)
-                listener?.hiddenProgressBar()
-            }, {
-                listener?.showProfileFailed(it.localizedMessage)
-            })
+        disposable.add(
+            apiService.getProfileUser(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    listener?.showProfile(it.data.username, it.data.email, it.data.photo)
+                    listener?.hiddenProgressBar()
+                }, {
+                    it.message?.let { it1 -> listener?.showProfileFailed(it1) }
+                })
+        )
     }
 
     fun updateUser(token: String, bitmap: Bitmap, username: String, email: String) {
@@ -43,17 +47,19 @@ class ProfilePresenter(private val apiService: ApiService) {
         val map = HashMap<String, String>()
         map["username"] = username
         map["email"] = email
-        apiService.updateUser(token, builder.build())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                listener?.hiddenProgressBar()
-                listener?.onUpdateSuccess()
-                listener?.showProfile(it.data.username, it.data.email, it.data.photo)
-            }, {
-                listener?.hiddenProgressBar()
-                it.message?.let { it1 -> listener?.onUpdateFailed(it1) }
-            })
+        disposable.add(
+            apiService.updateUser(token, builder.build())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    listener?.hiddenProgressBar()
+                    listener?.onUpdateSuccess()
+                    listener?.showProfile(it.data.username, it.data.email, it.data.photo)
+                }, {
+                    listener?.hiddenProgressBar()
+                    it.message?.let { it1 -> listener?.onUpdateFailed(it1) }
+                })
+        )
     }
 
     interface Listener {

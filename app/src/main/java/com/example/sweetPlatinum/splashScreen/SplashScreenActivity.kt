@@ -5,9 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.example.sweetPlatinum.landingPage.LandingActivity
 import com.example.sweetPlatinum.menuActivity.MenuActivity
-import com.example.sweetplatinum.R
+import com.example.sweetPlatinum.R
 
 class SplashScreenActivity : AppCompatActivity() {
 

@@ -2,10 +2,8 @@ package com.example.sweetPlatinum.register
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.widget.Toast
 import com.example.sweetPlatinum.login.LoginActivity
-import com.example.sweetplatinum.R
 
 class RegisterActivity : AppCompatActivity(), RegisterActivityPresenter.Listener {
 

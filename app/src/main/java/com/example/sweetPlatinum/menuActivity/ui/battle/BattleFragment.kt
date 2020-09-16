@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
-import com.example.sweetplatinum.R
+import com.example.sweetPlatinum.R
 import kotlinx.android.synthetic.main.fragment_battle.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf

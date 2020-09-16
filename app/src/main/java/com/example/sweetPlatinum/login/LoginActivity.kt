@@ -1,12 +1,9 @@
 package com.example.sweetPlatinum.login
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.widget.Toast
 import com.example.sweetPlatinum.menuActivity.MenuActivity
-import com.example.sweetplatinum.R
 
 class LoginActivity : AppCompatActivity(), LoginActivityPresenter.Listener {
 

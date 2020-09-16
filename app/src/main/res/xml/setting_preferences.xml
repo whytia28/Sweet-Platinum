@@ -1,27 +1,27 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        app:key="notification_category"
-        app:title="@string/notification">
+        android:key="notification_category"
+        android:title="@string/notification">
 
         <SwitchPreference
-            app:key="reminder_switch"
-            app:title="@string/enable_reminder" />
+            android:key="reminder_switch"
+            android:title="@string/enable_reminder" />
 
         <Preference
-            app:key="reminder_time"
-            app:summary="09.00"
-            app:title="@string/set_reminder" />
+            android:key="reminder_time"
+            android:summary="09.00"
+            android:title="@string/set_reminder" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:key="language_category"
-        app:title="@string/language">
+        android:key="language_category"
+        android:title="@string/language">
 
         <Preference
-            app:key="language"
-            app:title="@string/change_language" />
+            android:key="language"
+            android:title="@string/change_language" />
 
     </PreferenceCategory>
 

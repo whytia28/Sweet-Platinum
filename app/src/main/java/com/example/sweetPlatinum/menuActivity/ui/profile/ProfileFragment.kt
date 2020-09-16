@@ -17,7 +17,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
-import com.example.sweetplatinum.R
+import com.example.sweetPlatinum.R
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -28,6 +29,7 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
     private lateinit var bitmapResult: Bitmap
     private lateinit var token: String
     private val presenter: ProfilePresenter by inject { parametersOf(this) }
+    val disposable = CompositeDisposable()
 
     companion object {
         const val REQUEST_CODE = 201
@@ -223,5 +225,10 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
 
     override fun onUpdateFailed(errorMessage: String) {
         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.dispose()
     }
 }
