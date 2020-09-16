@@ -6,6 +6,8 @@ import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
 import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
 import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.BuildConfig
+import com.example.sweetPlatinum.login.LoginActivityPresenter
+import com.example.sweetPlatinum.register.RegisterActivityPresenter
 import com.example.sweetPlatinum.splashScreen.SplashScreenPresenter
 import okhttp3.OkHttpClient
 import org.koin.core.module.Module
@@ -37,7 +39,7 @@ val appModule: Module = module {
         MenuActivityPresenter(get())
     }
     factory {
-        BattlePresenter(get())
+        BattlePresenter()
     }
     factory {
         ProfilePresenter(get())
@@ -47,5 +49,11 @@ val appModule: Module = module {
     }
     factory {
         SplashScreenPresenter(get())
+    }
+    factory {
+        LoginActivityPresenter(get())
+    }
+    factory {
+        RegisterActivityPresenter(get())
     }
 }

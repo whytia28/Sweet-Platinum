@@ -24,6 +24,9 @@ class MultiPlayerPresenter(private val apiService: ApiService) {
         )
 
     }
+    fun dispose() {
+        disposables.dispose()
+    }
 
     interface Listener {
         fun startNew()

@@ -14,10 +14,10 @@ data class AuthResponse(
     @Parcelize
     data class Data(
         @SerializedName("email")
-        val email: String,
+        val email: String?,
         @SerializedName("_id")
-        val id: String,
+        val id: String?,
         @SerializedName("username")
-        val username: String
+        val username: String?
     ) : Parcelable
 }

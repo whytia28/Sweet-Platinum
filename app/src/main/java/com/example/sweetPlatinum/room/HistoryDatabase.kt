@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.sweetPlatinum.menuActivity.ui.history.HistoryFragment
 
-@Database(entities = arrayOf(HistoryFragment::class), version = 1)
+@Database(entities = arrayOf(History::class), version = 1)
 abstract class HistoryDatabase : RoomDatabase() {
 
     abstract fun historyDAO() : HistoryDAO

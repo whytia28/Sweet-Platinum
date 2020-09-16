@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
 import com.example.sweetPlatinum.R
+import com.example.sweetPlatinum.battleActivity.SinglePlayerActivity
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
 import com.example.sweetPlatinum.pojo.LoginResponse
@@ -46,13 +47,14 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
             }
         }
         if (context.intent.hasExtra("dataFromAuth")) {
-            context.intent.getParcelableExtra<AuthResponse.Data>("dataFromPrepare")?.let {
-                username = it.username
+            context.intent.getParcelableExtra<AuthResponse.Data>("dataFromAuth")?.let {
+                username = it.username!!
             }
         }
 
         tv_multi_player.text = getString(R.string.vs_player, username)
         tv_single_player.text = getString(R.string.vs_cpu, username)
+
 
         presenter.listener = this
 
@@ -78,8 +80,8 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
     }
 
     override fun goToSinglePlayer(username: String) {
-//        val singlePlayerIntent = Intent(context, SinglePlayerActivity::class.java)
-//        singlePlayerIntent.putExtra("username", username)
-//        startActivity(singlePlayerIntent)
+        val singlePlayerIntent = Intent(context, SinglePlayerActivity::class.java)
+        singlePlayerIntent.putExtra("username", username)
+        startActivity(singlePlayerIntent)
     }
 }

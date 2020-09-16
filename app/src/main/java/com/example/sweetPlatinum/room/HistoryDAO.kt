@@ -6,14 +6,14 @@ import com.example.sweetPlatinum.menuActivity.ui.history.HistoryFragment
 @Dao
 interface HistoryDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun create(historyFragment: HistoryFragment): Long
+    fun create(historyBattle: History): Long
 
     @Query("SELECT * FROM history")
-    fun read(): List<HistoryFragment>
+    fun read(): List<History>
 
     @Update
-    fun update(memo: HistoryFragment): Int
+    fun update(memo: History): Int
 
     @Delete
-    fun delete(memo: HistoryFragment): Int
+    fun delete(memo: History): Int
 }

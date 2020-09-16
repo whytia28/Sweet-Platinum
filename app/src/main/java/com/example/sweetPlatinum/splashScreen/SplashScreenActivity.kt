@@ -9,17 +9,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.landingPage.LandingActivity
+import com.example.sweetPlatinum.login.LoginActivity
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
-import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 class SplashScreenActivity : AppCompatActivity(), SplashScreenPresenter.Listener {
 
-    private val splashTimeOut: Long = 6000 // 1 sec
-    private val disposable = CompositeDisposable()
+    private val splashTimeOut: Long = 6000 // 2
     private lateinit var sharedPref: SharedPreferences
     private val presenter: SplashScreenPresenter by inject { parametersOf(this) }
 
@@ -43,19 +42,20 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenPresenter.Listener
             }
 
             // close this activity
-            finish()
         }, splashTimeOut)
     }
 
     override fun goToLandingPage() {
         val goToLoginIntent = Intent(this, LandingActivity::class.java)
         startActivity(goToLoginIntent)
+        finish()
     }
 
     override fun goToMenuActivity(data: AuthResponse.Data) {
         val intent = Intent(this, MenuActivity::class.java)
         intent.putExtra("dataFromAuth", data)
         startActivity(intent)
+        finish()
     }
 
     override fun onAuthLoginFailed(errorMessage: String) {
@@ -63,9 +63,15 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenPresenter.Listener
         MySharedPreferences(this).deleteData()
     }
 
+    override fun goToLoginActivity() {
+        val loginIntent = Intent(this, LoginActivity::class.java)
+        startActivity(loginIntent)
+        finish()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        disposable.dispose()
+        presenter.dispose()
     }
 
 }

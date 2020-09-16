@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
-import com.example.binarchapter8.pojo.PostBattleBody
 import com.example.sweetPlatinum.logic.Controller
-import com.example.sweetplatinum.R
 
-class SinglePlayerActivity : AppCompatActivity(), SinglePlayerPresenter.Listener {
+class SinglePlayerActivity : AppCompatActivity() {
 
    /* private var pilihanSatu: String = ""
     private var pemenang: String = ""

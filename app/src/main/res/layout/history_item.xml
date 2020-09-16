@@ -17,7 +17,7 @@
             android:id="@+id/title_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/date_title"
+            android:text="@string/date"
             style="@style/TexContent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:hint="@string/tanggal_sekarang"
+            android:hint="@string/date_now"
             app:layout_constraintStart_toEndOf="@id/title_date"
             app:layout_constraintTop_toTopOf="@id/title_date"
             app:layout_constraintBottom_toBottomOf="@id/title_date"/>
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TexContent"
-            android:text="@string/mode_title"
+            android:text="@string/mode"
             app:layout_constraintTop_toBottomOf="@id/title_date"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TexContent"
-            android:text="@string/history_title"
+            android:text="@string/history"
             app:layout_constraintTop_toBottomOf="@id/title_mode"
             app:layout_constraintStart_toStartOf="parent" />
 

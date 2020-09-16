@@ -30,6 +30,7 @@
         <activity android:name="com.example.sweetPlatinum.login.LoginActivity" />
         <activity android:name="com.example.sweetPlatinum.setting.SettingActivity" />
         <activity android:name="com.example.sweetPlatinum.battleActivity.MultiPlayerActivity" />
+        <activity android:name="com.example.sweetPlatinum.battleActivity.SinglePlayerActivity" />
         <activity android:name="com.example.sweetPlatinum.menuActivity.MenuActivity" />
         <activity android:name="com.example.sweetPlatinum.landingPage.LandingActivity" />
         <activity android:name="com.example.sweetPlatinum.splashScreen.SplashScreenActivity">

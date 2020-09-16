@@ -20,6 +20,8 @@
     <string name="vs_player">%1$s vs Player</string>
     <string name="vs_cpu">%1$s vs CPU</string>
     <string name="logout_success">Logout Successful</string>
+    <string name="login_success">Login Successful</string>
+    <string name="register_success">Register Successful</string>
     <string name="logout_title">Logout</string>
     <string name="setting_title">Setting</string>
     <!-- Preference Titles -->
@@ -78,4 +80,11 @@
     <string name="remember_me">Remember me</string>
     <string name="register_your_account">REGISTER YOUR ACCOUNT</string>
     <string name="register">REGISTER</string>
+    <string name="history_battle">HISTORY BATTLE</string>
+    <string name="history_is_empty">History is empty!</string>
+    <string name="date">Date</string>
+    <string name="date_now">date now</string>
+    <string name="mode">Mode</string>
+    <string name="history">History</string>
+    <string name="cpu_win">cpu win</string>
 </resources>
