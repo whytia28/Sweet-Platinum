@@ -76,4 +76,6 @@
     <string name="does_not_have_account">Does n\'t have account yet? Register</string>
     <string name="here">here</string>
     <string name="remember_me">Remember me</string>
+    <string name="register_your_account">REGISTER YOUR ACCOUNT</string>
+    <string name="register">REGISTER</string>
 </resources>
