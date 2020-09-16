@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.example.sweetPlatinum.logic.Controller
@@ -16,19 +17,20 @@ import kotlinx.android.synthetic.main.custom_alert_dialog.view.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
+class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
     private var playerOne: String = ""
     private var playerTwo: String = ""
     private var winner: String = ""
     private lateinit var message: String
     private var username: String? = ""
 
-    private val presenter: MultiPlayerPresenter by inject { parametersOf(this) }
+    private val presenter: GamePlayPresenter by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_multi_player)
 
+        supportActionBar?.title = getString(R.string.multi_player)
         username = intent.getStringExtra("username")
         presenter.listener = this
         player_one.text = username
@@ -37,31 +39,37 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
             playerOne = Controller.gameChoice[0]
             setOverlay()
             showResult()
+            showButtonShare()
         }
         paper1.setOnClickListener {
             playerOne = Controller.gameChoice[1]
             setOverlay()
             showResult()
+            showButtonShare()
         }
         scissor1.setOnClickListener {
             playerOne = Controller.gameChoice[2]
             setOverlay()
             showResult()
+            showButtonShare()
         }
         rock2.setOnClickListener {
             playerTwo = Controller.gameChoice[0]
             setOverlay()
             showResult()
+            showButtonShare()
         }
         paper2.setOnClickListener {
             playerTwo = Controller.gameChoice[1]
             setOverlay()
             showResult()
+            showButtonShare()
         }
         scissor2.setOnClickListener {
             playerTwo = Controller.gameChoice[2]
             setOverlay()
             showResult()
+            showButtonShare()
         }
         iv_restart.setOnClickListener {
             startNew()
@@ -89,6 +97,7 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
         rock2.foreground = null
         paper2.foreground = null
         scissor2.foreground = null
+        btn_share.visibility = View.GONE
     }
 
     override fun showResult() {
@@ -131,6 +140,10 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
             }
 
         }
+    }
+
+    override fun setCpuOverlay() {
+
     }
 
     override fun setOverlay() {
@@ -180,6 +193,14 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_game))
         shareIntent.putExtra(Intent.EXTRA_TEXT, body)
         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_to)))
+    }
+
+    override fun showButtonShare() {
+        if (playerOne.isNotEmpty() && playerTwo.isNotEmpty()) {
+            btn_share.visibility = View.VISIBLE
+        } else {
+            btn_share.visibility = View.GONE
+        }
     }
 
     override fun onDestroy() {

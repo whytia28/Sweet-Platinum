@@ -2,10 +2,11 @@ package com.example.sweetPlatinum.battleActivity
 
 import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.logic.Controller
@@ -17,19 +18,20 @@ import kotlinx.android.synthetic.main.custom_alert_dialog.view.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class SinglePlayerActivity : AppCompatActivity(), SinglePlayerPresenter.Listener {
+class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
 
     private var playerOne: String = ""
     private var winner: String = ""
     private var username: String? = ""
     private lateinit var message: String
 
-    private val presenter: SinglePlayerPresenter by inject { parametersOf(this) }
+    private val presenter: GamePlayPresenter by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single_player)
 
+        supportActionBar?.title = getString(R.string.single_player)
         username = intent.getStringExtra("username")
         presenter.listener = this
         player_one.text = username
@@ -38,19 +40,21 @@ class SinglePlayerActivity : AppCompatActivity(), SinglePlayerPresenter.Listener
             playerOne = Controller.gameChoice[0]
             setOverlay()
             showResult()
-
+            showButtonShare()
         }
 
         paper1.setOnClickListener {
             playerOne = Controller.gameChoice[1]
             setOverlay()
             showResult()
+            showButtonShare()
         }
 
         scissor1.setOnClickListener {
             playerOne = Controller.gameChoice[2]
             setOverlay()
             showResult()
+            showButtonShare()
         }
 
         iv_restart.setOnClickListener {
@@ -164,6 +168,13 @@ class SinglePlayerActivity : AppCompatActivity(), SinglePlayerPresenter.Listener
         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_to)))
     }
 
+    override fun showButtonShare() {
+        if (playerOne.isNotEmpty() ) {
+            btn_share.visibility = View.VISIBLE
+        } else {
+            btn_share.visibility = View.GONE
+        }    }
+
 
     override fun startNew() {
         playerOne = ""
@@ -174,6 +185,7 @@ class SinglePlayerActivity : AppCompatActivity(), SinglePlayerPresenter.Listener
         paper2.foreground = null
         scissor1.foreground = null
         scissor2.foreground = null
+        btn_share.visibility = View.GONE
     }
 
     override fun setOverlay() {
