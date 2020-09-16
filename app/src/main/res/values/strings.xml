@@ -70,4 +70,10 @@
     <string name="share_game">Lets play match together</string>
     <string name="button_share">Button Share</string>
     <string name="body_share">Yeah %1$s, lets play together. Download game here</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="reset">RESET</string>
+    <string name="does_not_have_account">Does n\'t have account yet? Register</string>
+    <string name="here">here</string>
+    <string name="remember_me">Remember me</string>
 </resources>
