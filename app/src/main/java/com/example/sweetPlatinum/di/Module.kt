@@ -6,6 +6,7 @@ import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
 import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
 import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.BuildConfig
+import com.example.sweetPlatinum.battleActivity.SinglePlayerPresenter
 import com.example.sweetPlatinum.login.LoginActivityPresenter
 import com.example.sweetPlatinum.register.RegisterActivityPresenter
 import com.example.sweetPlatinum.splashScreen.SplashScreenPresenter
@@ -46,6 +47,9 @@ val appModule: Module = module {
     }
     factory {
         MultiPlayerPresenter(get())
+    }
+    factory {
+        SinglePlayerPresenter(get())
     }
     factory {
         SplashScreenPresenter(get())

@@ -86,5 +86,6 @@
     <string name="date_now">date now</string>
     <string name="mode">Mode</string>
     <string name="history">History</string>
-    <string name="cpu_win">cpu win</string>
+    <string name="cpu_win">Cpu Win</string>
+    <string name="cpu">CPU</string>
 </resources>

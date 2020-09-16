@@ -3,55 +3,42 @@ package com.example.sweetPlatinum.battleActivity
 import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.pojo.PostBattleBody
 import com.example.sweetPlatinum.pojo.PostBattleResponse
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class SinglePlayerPresenter(private val apiService: ApiService) {
 
+    private val disposable = CompositeDisposable()
     var listener: Listener? = null
 
-    fun showResult() {
-        listener?.showResult()
+    fun saveHistory(token: String, body: PostBattleBody) {
+        disposable.add(
+            apiService.saveHistoryBattle(token, body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+
+                }, {
+
+                })
+        )
     }
 
-    fun startNew() {
-        listener?.startNew()
+    fun dispose() {
+        disposable.dispose()
     }
-
-    fun setOverlay() {
-        listener?.setOverlay()
-    }
-
-    fun setCpuOverlay() {
-        listener?.setCpuOverlay()
-    }
-
-//    fun saveHistory(token: String, body: PostBattleBody) {
-//        apiService.saveHistoryBattle(token, body).enqueue(object : Callback<PostBattleResponse> {
-//            override fun onResponse(
-//                call: Call<PostBattleResponse>,
-//                response: Response<PostBattleResponse>
-//            ) {
-//                listener?.showSuccessSave()
-//            }
-//
-//            override fun onFailure(call: Call<PostBattleResponse>, t: Throwable) {
-//                t.message?.let {
-//                    listener?.showFailedSave(it)
-//                }
-//            }
-//
-//        })
-//    }
-
 
     interface Listener {
         fun startNew()
         fun setOverlay()
         fun showResult()
         fun setCpuOverlay()
-        fun showSuccessSave()
-        fun showFailedSave(errorMessage: String)
+        fun onSuccessSaveHistory()
+        fun onFailedSaveHistory(errorMessage: String)
+        fun shareTo()
     }
 }

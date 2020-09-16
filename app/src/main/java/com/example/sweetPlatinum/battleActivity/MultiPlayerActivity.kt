@@ -95,7 +95,7 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
         if (playerOne != "" && playerTwo != "") {
             val controller = Controller()
             val result = controller.multiPlayer(playerOne, playerTwo)
-            winner = when(result) {
+            winner = when (result) {
                 "Player Win" -> {
                     "Player Win"
                 }
@@ -107,7 +107,7 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
                 }
             }
 
-            message = when(winner) {
+            message = when (winner) {
                 "Player Win" -> {
                     getString(R.string.player_win, username)
                 }
@@ -134,26 +134,32 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
     }
 
     override fun setOverlay() {
-        when(playerOne) {
+        when (playerOne) {
             Controller.gameChoice[0] -> {
-                rock1.foreground = ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
+                rock1.foreground =
+                    ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
             }
             Controller.gameChoice[1] -> {
-                paper1.foreground = ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
+                paper1.foreground =
+                    ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
             }
             Controller.gameChoice[2] -> {
-                scissor1.foreground = ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
+                scissor1.foreground =
+                    ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
             }
         }
-        when(playerTwo) {
+        when (playerTwo) {
             Controller.gameChoice[0] -> {
-                rock2.foreground = ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
+                rock2.foreground =
+                    ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
             }
             Controller.gameChoice[1] -> {
-                paper2.foreground = ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
+                paper2.foreground =
+                    ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
             }
             Controller.gameChoice[2] -> {
-                scissor2.foreground = ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
+                scissor2.foreground =
+                    ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
             }
         }
     }
@@ -169,7 +175,7 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
 
     override fun shareTo() {
         val shareIntent = Intent(Intent.ACTION_SEND)
-        val  body = getString(R.string.body_share, message)
+        val body = getString(R.string.body_share, message)
         shareIntent.type = "text/plain"
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_game))
         shareIntent.putExtra(Intent.EXTRA_TEXT, body)
