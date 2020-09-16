@@ -82,10 +82,10 @@
     <string name="register">REGISTER</string>
     <string name="history_battle">HISTORY BATTLE</string>
     <string name="history_is_empty">History is empty!</string>
-    <string name="date">Date</string>
+    <string name="date">Date: </string>
     <string name="date_now">date now</string>
-    <string name="mode">Mode</string>
-    <string name="history">History</string>
+    <string name="mode">Mode: </string>
+    <string name="history">History: </string>
     <string name="cpu_win">Cpu Win</string>
     <string name="cpu">CPU</string>
 </resources>

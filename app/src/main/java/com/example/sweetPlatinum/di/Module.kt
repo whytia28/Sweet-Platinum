@@ -8,6 +8,7 @@ import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.BuildConfig
 import com.example.sweetPlatinum.battleActivity.SinglePlayerPresenter
 import com.example.sweetPlatinum.login.LoginActivityPresenter
+import com.example.sweetPlatinum.menuActivity.ui.history.HistoryPresenter
 import com.example.sweetPlatinum.register.RegisterActivityPresenter
 import com.example.sweetPlatinum.splashScreen.SplashScreenPresenter
 import okhttp3.OkHttpClient
@@ -59,5 +60,8 @@ val appModule: Module = module {
     }
     factory {
         RegisterActivityPresenter(get())
+    }
+    factory {
+        HistoryPresenter(get())
     }
 }
