@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
 import com.example.sweetPlatinum.R
+import com.example.sweetPlatinum.menuActivity.MenuActivity
+import com.example.sweetPlatinum.pojo.AuthResponse
+import com.example.sweetPlatinum.pojo.LoginResponse
 import kotlinx.android.synthetic.main.fragment_battle.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -34,21 +37,19 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val context = view.context as MenuActivity
-//        context.supportActionBar?.title = getString(R.string.title_battle)
+        val context = view.context as MenuActivity
+        context.supportActionBar?.title = getString(R.string.title_battle)
 
-//        if (context.intent.hasExtra("data")) {
-//            context.intent.getParcelableExtra<LoginResponse.Data>("data")?.let {
-//                username = it.username
-//            }
-//        }
-//        if (context.intent.hasExtra("dataFromPrepare")) {
-//            context.intent.getParcelableExtra<AuthResponse.Data>("dataFromPrepare")?.let {
-//                username = it.username
-//            }
-//        }
-
-        username = "Pemain"
+        if (context.intent.hasExtra("data")) {
+            context.intent.getParcelableExtra<LoginResponse.Data>("data")?.let {
+                username = it.username
+            }
+        }
+        if (context.intent.hasExtra("dataFromAuth")) {
+            context.intent.getParcelableExtra<AuthResponse.Data>("dataFromPrepare")?.let {
+                username = it.username
+            }
+        }
 
         tv_multi_player.text = getString(R.string.vs_player, username)
         tv_single_player.text = getString(R.string.vs_cpu, username)

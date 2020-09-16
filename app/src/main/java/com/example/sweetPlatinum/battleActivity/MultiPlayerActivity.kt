@@ -69,7 +69,7 @@ class MultiPlayerActivity : AppCompatActivity(), MultiPlayerPresenter.Listener {
             startNew()
         }
         iv_save.setOnClickListener {
-            val token = MySharedPreferences(applicationContext).getData("key").toString()
+            val token = MySharedPreferences(applicationContext).getData("token").toString()
             val mode = "Multiplayer"
             val body = PostBattleBody(mode, winner)
             presenter.saveHistory(token, body)

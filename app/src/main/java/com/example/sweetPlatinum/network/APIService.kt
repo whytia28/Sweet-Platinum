@@ -11,7 +11,7 @@ interface ApiService {
     fun validateLogin(@Body body: PostLoginBody): Single<LoginResponse>
 
     @GET("v1/auth/me")
-    fun autoLogin(@Header("Authorization") auth: String): Single<AuthResponse>
+    fun autoLogin(@Header("Authorization") auth: String): Single<AuthResponse.Data>
 
     @POST("v1/auth/register")
     fun registerUser(@Body bodyRegister: PostBodyRegister): Single<RegisterResponse>

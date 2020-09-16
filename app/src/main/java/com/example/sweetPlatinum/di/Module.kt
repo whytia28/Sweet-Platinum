@@ -6,6 +6,7 @@ import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
 import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
 import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.BuildConfig
+import com.example.sweetPlatinum.splashScreen.SplashScreenPresenter
 import okhttp3.OkHttpClient
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -43,5 +44,8 @@ val appModule: Module = module {
     }
     factory {
         MultiPlayerPresenter(get())
+    }
+    factory {
+        SplashScreenPresenter(get())
     }
 }

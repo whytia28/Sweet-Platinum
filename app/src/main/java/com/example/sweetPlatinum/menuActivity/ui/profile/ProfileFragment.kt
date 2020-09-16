@@ -56,7 +56,7 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
         super.onViewCreated(view, savedInstanceState)
 
         presenter.listener = this
-        token = context?.let { MySharedPreferences(it).getData("key") }.toString()
+        token = context?.let { MySharedPreferences(it).getData("token") }.toString()
 
         tv_edit.setOnClickListener {
             showEditUi()
