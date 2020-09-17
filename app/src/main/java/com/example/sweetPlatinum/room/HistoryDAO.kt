@@ -12,8 +12,11 @@ interface HistoryDAO {
     fun read(): List<History>
 
     @Update
-    fun update(memo: History): Int
+    fun update(historyBattle: History ): Int
 
     @Delete
-    fun delete(memo: History): Int
+    fun delete(historyBattle: History): Int
+
+    @Delete
+    fun deleteAll(historyBattle: History):Int
 }
