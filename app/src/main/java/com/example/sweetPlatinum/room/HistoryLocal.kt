@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity
 @Parcelize
-data class History(
+data class HistoryLocal(
     @PrimaryKey(autoGenerate = true) var id: Int?,
     @ColumnInfo(name = "tanggal") var tanggal: String,
     @ColumnInfo(name = "hasil") var hasil: String,
