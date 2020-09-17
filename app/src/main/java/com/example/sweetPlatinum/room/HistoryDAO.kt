@@ -17,6 +17,6 @@ interface HistoryDAO {
     @Delete
     fun delete(historyBattle: History): Int
 
-    @Delete
+    @Query("DELETE FROM historylocal")
     fun deleteAll(historyBattle: History):Int
 }
