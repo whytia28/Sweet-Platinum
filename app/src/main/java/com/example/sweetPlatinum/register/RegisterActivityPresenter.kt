@@ -1,39 +1,33 @@
 package com.example.sweetPlatinum.register
 
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.sweetPlatinum.network.ApiService
+import com.example.sweetPlatinum.pojo.PostBodyRegister
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
-class RegisterActivityPresenter(val listener : Listener) {
+class RegisterActivityPresenter(private val apiService: ApiService) {
 
-//    fun registerPerson(username : String, email : String, password: String){
-//        val person =
-//            PostPersonRegisterBody(
-//                username,
-//                email,
-//                password
-//            )
-//
-//        ApiClient.apiService.registerPerson(person).enqueue(object :
-//            Callback<PostPersonRegisterResponse> {
-//            override fun onFailure(call: Call<PostPersonRegisterResponse>, t: Throwable) {
-//                listener.onRegisterFailure(t.toString())
-//            }
-//            override fun onResponse(
-//                call: Call<PostPersonRegisterResponse>,
-//                response: Response<PostPersonRegisterResponse>
-//            ) {
-//                if(response.isSuccessful && response.body()?.status == 201) {
-//                    listener.onRegisterSuccess("${response.body()?.message}")
-//                }else {
-//                    listener.onRegisterFailure("${response.body()?.message}")
-//                }
-//            }
-//        })
-//    }
+    private val disposables = CompositeDisposable()
+    var listener : Listener? = null
+
+    fun registerPerson(email: String, username: String, password: String) {
+        val body = PostBodyRegister(email, password, username)
+        disposables.add(
+            apiService.registerUser(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    listener?.onRegisterSuccess()
+                }, {
+                    it.message?.let { it1 -> listener?.onRegisterFailure(it1) }
+                })
+        )
+    }
 
     interface Listener{
-        fun onRegisterSuccess(successMessage: String)
+        fun onRegisterSuccess()
         fun onRegisterFailure(failureMessage: String)
+        fun resetEditText()
     }
 }

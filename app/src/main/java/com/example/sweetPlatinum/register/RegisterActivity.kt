@@ -1,65 +1,49 @@
 package com.example.sweetPlatinum.register
 
 import android.content.Intent
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.login.LoginActivity
+import kotlinx.android.synthetic.main.activity_register.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class RegisterActivity : AppCompatActivity(), RegisterActivityPresenter.Listener {
 
-    /*private lateinit var binding : ActivityRegisterBinding
-    private lateinit var presenter: RegisterActivityPresenter
+    private val presenter: RegisterActivityPresenter by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-        presenter = RegisterActivityPresenter(this)
+        setContentView(R.layout.activity_register)
 
-        binding.iconArrowBack.setOnClickListener {
-            startActivity(Intent(applicationContext, LoginActivity::class.java))
-        }
-        binding.textClickHere.setOnClickListener {
-            startActivity(Intent(applicationContext, LoginActivity::class.java))
-        }
+        presenter.listener = this
 
-        binding.btnRegister.setOnClickListener {
-            if(binding.inputTextUsername.text.isNotEmpty() && binding.inputTextEmail.text.isNotEmpty() && binding.inputTextPassword.text.isNotEmpty()) {
-                //here code to register
-                presenter.registerPerson(
-                    binding.inputTextUsername.text.toString(),
-                    binding.inputTextEmail.text.toString(),
-                    binding.inputTextPassword.text.toString()
-                )
-            }
-            else if(binding.inputTextUsername.text.isEmpty() && binding.inputTextEmail.text.isEmpty() && binding.inputTextPassword.text.isEmpty()){
-                Toast.makeText(this, "Username, Email dan Password anda Kosong", Toast.LENGTH_LONG).show()
-                binding.inputTextUsername.requestFocus()
-            }else if(binding.inputTextUsername.text.isEmpty() && binding.inputTextEmail.text.isNotEmpty() && binding.inputTextPassword.text.isNotEmpty()) {
-                Toast.makeText(this, "Username anda Kosong", Toast.LENGTH_LONG).show()
-                binding.inputTextUsername.requestFocus()
-            }else if(binding.inputTextUsername.text.isNotEmpty() && binding.inputTextEmail.text.isEmpty() && binding.inputTextPassword.text.isNotEmpty()) {
-                Toast.makeText(this, "Email anda Kosong", Toast.LENGTH_LONG).show()
-                binding.inputTextEmail.requestFocus()
-            }else if(binding.inputTextUsername.text.isNotEmpty() && binding.inputTextEmail.text.isNotEmpty() && binding.inputTextPassword.text.isEmpty()) {
-                Toast.makeText(this, "Password anda Kosong", Toast.LENGTH_LONG).show()
-                binding.inputTextPassword.requestFocus()
-            }
-            else {
-                Toast.makeText(this, "Terdapat Kesalahan Pada Inputan", Toast.LENGTH_LONG).show()
-            }
+        btn_register.setOnClickListener {
+            presenter.registerPerson(et_email.text.toString(), et_username.text.toString(), etPassword.text.toString())
         }
-    }*/
+        btn_reset.setOnClickListener {
+            resetEditText()
+        }
+        btn_back.setOnClickListener {
+            onBackPressed()
+        }
+    }
+    override fun onRegisterSuccess() {
+        Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_LONG).show()
+        startActivity(Intent(this, LoginActivity::class.java))
 
-    override fun onRegisterSuccess(successMessage: String) {
-        Toast.makeText(this, successMessage, Toast.LENGTH_LONG).show()
-        startActivity(Intent(applicationContext, LoginActivity::class.java))
-        finish()
     }
 
     override fun onRegisterFailure(failureMessage: String) {
         Toast.makeText(this, failureMessage, Toast.LENGTH_LONG).show()
-        finish()
     }
+
+    override fun resetEditText() {
+        et_username.setText("")
+        etPassword.setText("")
+        et_email.setText("")
+    }
+
 }

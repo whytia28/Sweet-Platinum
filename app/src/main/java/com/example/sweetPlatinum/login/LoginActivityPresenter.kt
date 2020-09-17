@@ -1,54 +1,49 @@
 package com.example.sweetPlatinum.login
 
-import android.content.SharedPreferences
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.sweetPlatinum.network.ApiService
+import com.example.sweetPlatinum.pojo.LoginResponse
+import com.example.sweetPlatinum.pojo.PostLoginBody
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
-class LoginActivityPresenter(val listener : Listener) {
+class LoginActivityPresenter(private val apiService: ApiService) {
 
-    /*fun loginPerson(email : String, password: String, sharedPreferences: SharedPreferences){
+    var listener: Listener? = null
+    private val disposables = CompositeDisposable()
 
-        val person =
-            PostPersonLoginBody(
-                email,
-                password
-            )
-
-        ApiClient.apiService.loginPerson(person).enqueue(object :
-            Callback<PostPersonLoginResponse> {
-            override fun onFailure(call: Call<PostPersonLoginResponse>, t: Throwable) {
-                listener.onLoginFailure(t.toString(), "Terjadi Kesalahan Pada Api Service")
-            }
-
-            override fun onResponse(
-                call: Call<PostPersonLoginResponse>,
-                response: Response<PostPersonLoginResponse>
-            ) {
-                if(response.isSuccessful && response.body()?.status == 200) {
-//                    disini push data ke shared preference
-                    val editor = sharedPreferences.edit()
-                    editor.putString(FIELD_EMAIL, response.body()?.data?.email)
-                    editor.putString(ID, response.body()?.data?.id.toString())
-                    editor.putString(FIELD_USERNAME, response.body()?.data?.username)
-
-                    val toastStatus = editor.commit()
-
-                    if(toastStatus){
-                        listener.onLoginSuccess("${response.body()?.message}", "Data Berhasil Disimpan")
-                    }else{
-                        listener.onLoginSuccess("${response.body()?.message}", "Data Gagal Disimpan")
+    fun loginPerson(email: String, password: String, rememberMe: Boolean) {
+        listener?.showProgressBar()
+        val body = PostLoginBody(email, password)
+        disposables.add(
+            apiService.validateLogin(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    listener?.hideProgressBar()
+                    listener?.goToMenuActivity(it.data)
+                    listener?.onLoginSuccess()
+                    if (rememberMe) {
+                        listener?.saveToken("token", "Bearer ${it.data.token}")
                     }
-                }else {
-                    listener.onLoginFailure("${response.body()?.message}", "Data Tidak Ada")
-                }
-            }
-        })
-    }*/
+                }, {
+                    it.message?.let { it1 -> listener?.onLoginFailure(it1) }
+                })
+        )
+    }
+    fun dispose() {
+        disposables.dispose()
+    }
 
-    interface Listener{
-        fun onLoginSuccess(successMessage: String, successSaveData: String)
-        fun onLoginFailure(failureMessage: String, failedSaveData: String)
+    interface Listener {
+        fun onLoginSuccess()
+        fun onLoginFailure(failureMessage: String)
+        fun goToRegister()
+        fun goToMenuActivity(data: LoginResponse.Data)
+        fun showProgressBar()
+        fun hideProgressBar()
+        fun saveToken(key: String, data: String)
+        fun resetEditText()
     }
 
 }

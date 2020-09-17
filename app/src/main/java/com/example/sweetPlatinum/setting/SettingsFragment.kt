@@ -25,6 +25,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
     private var reminderTimePreference: Preference? = null
     private var hours = 0
     private var minutes = 0
+    private lateinit var timePickerDialog: TimePickerDialog
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.setting_preferences, rootKey)
@@ -57,7 +58,8 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
                 startActivity(changeIntent)
             }
             "reminder_time" -> {
-                TimePickerDialog(context, this, 9, 0, true).show()
+                timePickerDialog = TimePickerDialog(context, this, hours, minutes, true)
+                timePickerDialog.show()
             }
         }
         return true

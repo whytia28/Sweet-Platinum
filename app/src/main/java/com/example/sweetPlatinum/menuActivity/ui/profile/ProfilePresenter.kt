@@ -62,6 +62,10 @@ class ProfilePresenter(private val apiService: ApiService) {
         )
     }
 
+    fun dispose() {
+        disposable.dispose()
+    }
+
     interface Listener {
         fun showEditUi()
         fun showSetupUi()

@@ -6,31 +6,36 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class MultiPlayerPresenter(private val apiService: ApiService) {
+class GamePlayPresenter(private val apiService: ApiService) {
 
+    private val disposable = CompositeDisposable()
     var listener: Listener? = null
-    private val disposables = CompositeDisposable()
 
     fun saveHistory(token: String, body: PostBattleBody) {
-        disposables.add(
+        disposable.add(
             apiService.saveHistoryBattle(token, body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    listener?.onSuccessSaveHistory()
+
                 }, {
-                    it.message?.let { it1 -> listener?.onFailedSaveHistory(it1) }
+
                 })
         )
+    }
 
+    fun dispose() {
+        disposable.dispose()
     }
 
     interface Listener {
         fun startNew()
-        fun showResult()
         fun setOverlay()
+        fun showResult()
+        fun setCpuOverlay()
         fun onSuccessSaveHistory()
         fun onFailedSaveHistory(errorMessage: String)
         fun shareTo()
+        fun showButtonShare()
     }
 }

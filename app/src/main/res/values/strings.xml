@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Sweet Platinum</string>
-    <string name="title_activity_menu">MainActivity</string>
+    <string name="title_activity_menu" translatable="false">MainActivity</string>
     <string name="title_battle">Battle</string>
     <string name="title_history">History</string>
     <string name="title_profile">Profile</string>
@@ -9,39 +9,41 @@
     <string name="single_player">Single Player</string>
     <string name="exit">EXIT</string>
     <string name="button_back">Button Back</string>
-    <string name="player_1">Player 1</string>
+    <string name="player_1" translatable="false">Player 1</string>
     <string name="player_2">Player 2</string>
     <string name="rock">Rock</string>
     <string name="paper">Paper</string>
     <string name="scissor">Scissor</string>
-    <string name="vs">VS</string>
+    <string name="vs" translatable="false">VS</string>
     <string name="button_save">Button save</string>
     <string name="button_restart">Button restart</string>
     <string name="vs_player">%1$s vs Player</string>
-    <string name="vs_cpu">%1$s vs CPU</string>
+    <string name="vs_cpu" translatable="false">%1$s vs CPU</string>
     <string name="logout_success">Logout Successful</string>
+    <string name="login_success">Login Successful</string>
+    <string name="register_success">Register Successful</string>
     <string name="logout_title">Logout</string>
     <string name="setting_title">Setting</string>
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="messages_header" translatable="false">Messages</string>
+    <string name="sync_header" translatable="false">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
     <string name="button_next">Button next</string>
     <string name="play_with_your_friend">Play with your friend</string>
-    <string name="image_multi_player">image multi player</string>
+    <string name="image_multi_player" translatable="false">image multi player</string>
     <string name="playing_versus_cpu">Playing versus Cpu</string>
     <string name="relax_and_enjoy">Relax and enjoy the game!</string>
-    <string name="logo_image">logo image</string>
+    <string name="logo_image" translatable="false">logo image</string>
     <string name="notification">Notification</string>
     <string name="enable_reminder">Enable Reminder</string>
     <string name="language">Language</string>
@@ -49,18 +51,18 @@
     <string name="change_language">Change Language</string>
     <string name="save_history_success">Save History Success</string>
     <string name="save_history_failed">Save History Failed</string>
-    <string name="congrats_you_win">Congrats %1$s</string>
-    <string name="ok">OK</string>
+    <string name="congrats_you_win" translatable="false">Congrats %1$s</string>
+    <string name="ok" translatable="false">OK</string>
     <string name="result">Result</string>
     <string name="player_2_win">Player 2 Win</string>
     <string name="draw">Draw</string>
     <string name="player_win">%1$s Win</string>
     <string name="edit">Edit</string>
     <string name="data_profile">DATA PROFILE</string>
-    <string name="image_profile">image profile</string>
-    <string name="button_set_profile">button set profile</string>
-    <string name="email">Email</string>
-    <string name="username">Username</string>
+    <string name="image_profile" translatable="false">image profile</string>
+    <string name="button_set_profile" translatable="false">button set profile</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="username" translatable="false">Username</string>
     <string name="save">SAVE</string>
     <string name="update_success">Update Profile Successful</string>
     <string name="choose_from">Choose from</string>
@@ -68,14 +70,22 @@
     <string name="take_picture">Take Picture with Camera</string>
     <string name="share_to">Share to</string>
     <string name="share_game">Lets play match together</string>
-    <string name="button_share">Button Share</string>
+    <string name="button_share" translatable="false">Button Share</string>
     <string name="body_share">Yeah %1$s, lets play together. Download game here</string>
     <string name="password">Password</string>
     <string name="login">LOGIN</string>
-    <string name="reset">RESET</string>
+    <string name="reset" translatable="false">RESET</string>
     <string name="does_not_have_account">Does n\'t have account yet? Register</string>
     <string name="here">here</string>
     <string name="remember_me">Remember me</string>
     <string name="register_your_account">REGISTER YOUR ACCOUNT</string>
     <string name="register">REGISTER</string>
+    <string name="history_battle">HISTORY BATTLE</string>
+    <string name="history_is_empty">History is empty!</string>
+    <string name="date">Date: </string>
+    <string name="date_now" translatable="false">date now</string>
+    <string name="mode">Mode: </string>
+    <string name="history">History: </string>
+    <string name="cpu_win">Cpu Win</string>
+    <string name="cpu" translatable="false">CPU</string>
 </resources>

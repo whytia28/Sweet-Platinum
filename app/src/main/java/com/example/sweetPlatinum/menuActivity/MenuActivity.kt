@@ -12,6 +12,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.sweetPlatinum.setting.SettingActivity
 import com.example.sweetPlatinum.R
+import com.example.sweetPlatinum.login.LoginActivity
+import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -48,9 +50,9 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.logout -> {
-                //            val loginIntent = Intent(this, LoginActivity::class.java)
-//                MySharedPreferences(this).deleteData()
-//            startActivity(loginIntent)
+                val loginIntent = Intent(this, LoginActivity::class.java)
+                MySharedPreferences(this).deleteData()
+                startActivity(loginIntent)
                 onLogoutSuccess()
             }
 

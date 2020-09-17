@@ -1,11 +1,14 @@
 package com.example.sweetPlatinum.di
 
-import com.example.sweetPlatinum.battleActivity.MultiPlayerPresenter
 import com.example.sweetPlatinum.menuActivity.MenuActivityPresenter
 import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
 import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
 import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.BuildConfig
+import com.example.sweetPlatinum.battleActivity.GamePlayPresenter
+import com.example.sweetPlatinum.login.LoginActivityPresenter
+import com.example.sweetPlatinum.menuActivity.ui.history.HistoryPresenter
+import com.example.sweetPlatinum.register.RegisterActivityPresenter
 import com.example.sweetPlatinum.splashScreen.SplashScreenPresenter
 import okhttp3.OkHttpClient
 import org.koin.core.module.Module
@@ -37,15 +40,24 @@ val appModule: Module = module {
         MenuActivityPresenter(get())
     }
     factory {
-        BattlePresenter(get())
+        BattlePresenter()
     }
     factory {
         ProfilePresenter(get())
     }
     factory {
-        MultiPlayerPresenter(get())
+        GamePlayPresenter(get())
     }
     factory {
         SplashScreenPresenter(get())
+    }
+    factory {
+        LoginActivityPresenter(get())
+    }
+    factory {
+        RegisterActivityPresenter(get())
+    }
+    factory {
+        HistoryPresenter(get())
     }
 }

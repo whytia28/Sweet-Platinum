@@ -16,17 +16,21 @@ class SplashScreenPresenter(private val apiService: ApiService) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    listener?.goToMenuActivity(it)
+                    listener?.goToMenuActivity(it.data)
                 }, {
                     it.message?.let { it1 -> listener?.onAuthLoginFailed(it1) }
-                    listener?.goToLandingPage()
+                    listener?.goToLoginActivity()
                 })
         )
+    }
+    fun dispose() {
+        disposable.dispose()
     }
 
     interface Listener {
         fun goToLandingPage()
         fun goToMenuActivity(data: AuthResponse.Data)
         fun onAuthLoginFailed(errorMessage: String)
+        fun goToLoginActivity()
     }
 }
