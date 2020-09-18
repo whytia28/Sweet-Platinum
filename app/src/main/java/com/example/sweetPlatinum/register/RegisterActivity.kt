@@ -2,6 +2,7 @@ package com.example.sweetPlatinum.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import com.example.sweetPlatinum.R
@@ -33,7 +34,7 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityPresenter.Listener
     override fun onRegisterSuccess() {
         Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_LONG).show()
         startActivity(Intent(this, LoginActivity::class.java))
-
+        finish()
     }
 
     override fun onRegisterFailure(failureMessage: String) {
@@ -44,6 +45,14 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityPresenter.Listener
         et_username.setText("")
         etPassword.setText("")
         et_email.setText("")
+    }
+
+    override fun showProgressBar() {
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        progress_bar.visibility = View.GONE
     }
 
 }

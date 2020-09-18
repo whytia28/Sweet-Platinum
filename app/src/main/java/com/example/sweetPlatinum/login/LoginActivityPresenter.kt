@@ -6,6 +6,7 @@ import com.example.sweetPlatinum.pojo.PostLoginBody
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import org.json.JSONObject
 
 class LoginActivityPresenter(private val apiService: ApiService) {
 
@@ -19,18 +20,29 @@ class LoginActivityPresenter(private val apiService: ApiService) {
             apiService.validateLogin(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    listener?.hideProgressBar()
-                    listener?.goToMenuActivity(it.data)
-                    listener?.onLoginSuccess()
-                    if (rememberMe) {
-                        listener?.saveToken("token", "Bearer ${it.data.token}")
+                .subscribe({ response ->
+                    if (response.code() == 200) {
+                        response.body()?.data?.let {
+                            listener?.goToMenuActivity(it)
+                            listener?.onLoginSuccess()
+                            if (rememberMe) {
+                                listener?.saveToken("token", "Bearer ${it.token}")
+                            }
+                        }
+                    } else {
+                        response.errorBody()?.string()?.let {
+                            val jsonObject = JSONObject(it)
+                            listener?.onLoginFailure(jsonObject.getString("errors"))
+                        }
                     }
+                    listener?.hideProgressBar()
                 }, {
                     it.message?.let { it1 -> listener?.onLoginFailure(it1) }
+                    listener?.hideProgressBar()
                 })
         )
     }
+
     fun dispose() {
         disposables.dispose()
     }

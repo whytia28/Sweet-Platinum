@@ -46,7 +46,6 @@ class LoginActivity : AppCompatActivity(), LoginActivityPresenter.Listener {
 
     override fun onLoginFailure(failureMessage: String) {
         Toast.makeText(this, failureMessage, Toast.LENGTH_LONG).show()
-        finish()
     }
 
     override fun goToRegister() {
