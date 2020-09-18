@@ -11,6 +11,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.R
+import com.example.sweetPlatinum.sharedPreference.TimePref
 import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
@@ -19,7 +20,7 @@ class AlarmReceiver : BroadcastReceiver() {
         const val ID_REPEATING = 100
         const val CHANNEL_ID = "channel_01"
         const val CHANNEL_NAME = "Reminder Alarm"
-        const val NOTIF_TITLE = "Daily notification"
+        const val NOTIF_TITLE = "Sweet Platinum"
         const val NOTIF_MESSAGE = "Hello, let's play match!"
     }
 
@@ -61,7 +62,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val intent = Intent(context, AlarmReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(context, ID_REPEATING, intent, 0)
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val calendar = getCalendar() as Calendar
+        val calendar = getCalendar(context) as Calendar
         val receiver = ComponentName(context, AlarmReceiver::class.java)
 
         enableReceiver(context, receiver)
@@ -108,11 +109,11 @@ class AlarmReceiver : BroadcastReceiver() {
         )
     }
 
-    private fun getCalendar() : Any {
+    private fun getCalendar(context: Context) : Any {
        return Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, 9)
-            set(Calendar.MINUTE, 0)
+            set(Calendar.HOUR_OF_DAY, TimePref(context).getHour())
+            set(Calendar.MINUTE, TimePref(context).getMinute())
         }
     }
 }

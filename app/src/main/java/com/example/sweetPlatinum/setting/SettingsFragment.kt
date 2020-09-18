@@ -11,6 +11,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreference
 import com.example.sweetPlatinum.R
+import com.example.sweetPlatinum.sharedPreference.TimePref
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,7 +26,6 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
     private var reminderTimePreference: Preference? = null
     private var hours = 0
     private var minutes = 0
-    private lateinit var timePickerDialog: TimePickerDialog
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.setting_preferences, rootKey)
@@ -58,23 +58,24 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
                 startActivity(changeIntent)
             }
             "reminder_time" -> {
-                timePickerDialog = TimePickerDialog(context, this, hours, minutes, true)
-                timePickerDialog.show()
+                hours = TimePref(requireContext()).getHour()
+                minutes = TimePref(requireContext()).getMinute()
+                TimePickerDialog(context, this, hours, minutes, true).show()
             }
         }
         return true
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        hours = hourOfDay
-        minutes = minute
+        TimePref(requireContext()).setHour(hourOfDay)
+        TimePref(requireContext()).setMinute(minute)
         setSummaries()
         AlarmReceiver().setReminder(requireContext())
     }
 
     private fun setSummaries() {
         reminderTimePreference?.summary =
-            simpleDateFormat.format(getHourAnMinute())
+            simpleDateFormat.format(TimePref(requireContext()).getHourAndMinute())
     }
 
     override fun onResume() {
@@ -102,12 +103,5 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
                 }
             }
         }
-    }
-
-    private fun getHourAnMinute() : Date {
-        val calendar = Calendar.getInstance().apply {
-            set(0, 0, 0, 9, 0)
-        }
-        return calendar.time
     }
 }

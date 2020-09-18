@@ -10,8 +10,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class History(
     @PrimaryKey(autoGenerate = true) var id: Int?,
-    @ColumnInfo(name = "tanggal") var tanggal: String,
-    @ColumnInfo(name = "hasil") var hasil: String,
+    @ColumnInfo(name = "date") var date: String,
+    @ColumnInfo(name = "history") var history: String,
     @ColumnInfo(name = "mode") var mode: String
 
 ) : Parcelable

@@ -5,30 +5,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetPlatinum.R
-import com.example.sweetPlatinum.pojo.GetBattleResponse
+import com.example.sweetPlatinum.room.History
 import kotlinx.android.synthetic.main.history_item.view.*
 
 class AdapterHistoryLocal(
-    private val historyBattle: List<GetBattleResponse.Data>
-) : RecyclerView.Adapter<AdapterHistory.ViewHolder>() {
+    private val historyBattle: List<History>
+) : RecyclerView.Adapter<AdapterHistoryLocal.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.history_local_item, parent, false)
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = historyBattle.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(historyBattle[position])
     }
 
+    override fun getItemCount(): Int = historyBattle.size
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(battle: GetBattleResponse.Data) {
+        fun bind(battle: History) {
             with(itemView) {
-                tv_date.text = battle.createdAt
+                tv_date.text = battle.date
                 tv_mode.text = battle.mode
-                tv_history.text = battle.message
+                tv_history.text = battle.history
             }
         }
     }

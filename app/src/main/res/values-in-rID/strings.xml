@@ -59,4 +59,5 @@
     <string name="mode">Mode:</string>
     <string name="history">Riwayat:</string>
     <string name="cpu_win">Cpu Menang</string>
+    <string name="delete">Hapus</string>
 </resources>
