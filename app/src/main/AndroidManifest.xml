@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".saveBattle.SaveBattleActivity"></activity>
+        <activity android:name=".saveBattle.SaveBattleActivity" />
 
         <receiver
             android:name=".setting.AlarmReceiver"

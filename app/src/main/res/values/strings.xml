@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Sweet Platinum</string>
-    <string name="title_activity_menu" translatable="false">MainActivity</string>
     <string name="title_battle">Battle</string>
     <string name="title_history">History</string>
     <string name="title_profile">Profile</string>
@@ -25,19 +24,10 @@
     <string name="logout_title">Logout</string>
     <string name="setting_title">Setting</string>
     <!-- Preference Titles -->
-    <string name="messages_header" translatable="false">Messages</string>
-    <string name="sync_header" translatable="false">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title" translatable="false">Your signature</string>
-    <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title" translatable="false">Sync email periodically</string>
-    <string name="attachment_title" translatable="false">Download incoming attachments</string>
-    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
     <string name="button_next">Button next</string>
     <string name="play_with_your_friend">Play with your friend</string>
     <string name="image_multi_player" translatable="false">image multi player</string>
@@ -50,7 +40,6 @@
     <string name="set_reminder">Set Reminder Time</string>
     <string name="change_language">Change Language</string>
     <string name="save_history_success">Save History Success</string>
-    <string name="save_history_failed">Save History Failed</string>
     <string name="congrats_you_win" translatable="false">Congrats %1$s</string>
     <string name="ok" translatable="false">OK</string>
     <string name="result">Result</string>
