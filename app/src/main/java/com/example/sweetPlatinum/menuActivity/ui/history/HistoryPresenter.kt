@@ -16,8 +16,12 @@ class HistoryPresenter(private val apiService: ApiService) {
         disposable.add(
             apiService.getHistoryBattle(token).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    listener?.getHistorySuccess(it.data)
+                .subscribe({response ->
+                    response.body()?.data.let {
+                        if (it != null){
+                            listener?.getHistorySuccess(it)
+                        }
+                    }
                     listener?.hideProgressBar()
                 }, {
                     it.message?.let { it1 -> listener?.getHistoryFailed(it1) }

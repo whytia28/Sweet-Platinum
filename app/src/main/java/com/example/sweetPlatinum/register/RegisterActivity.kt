@@ -18,11 +18,15 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityPresenter.Listener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-
+        supportActionBar?.title = getString(R.string.title_register)
         presenter.listener = this
 
         btn_register.setOnClickListener {
-            presenter.registerPerson(et_email.text.toString(), et_username.text.toString(), etPassword.text.toString())
+            presenter.registerPerson(
+                et_email.text.toString(),
+                et_username.text.toString(),
+                etPassword.text.toString()
+            )
         }
         btn_reset.setOnClickListener {
             resetEditText()
@@ -31,6 +35,7 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityPresenter.Listener
             onBackPressed()
         }
     }
+
     override fun onRegisterSuccess() {
         Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_LONG).show()
         startActivity(Intent(this, LoginActivity::class.java))

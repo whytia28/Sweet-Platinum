@@ -26,6 +26,7 @@ class ThirdFragment : Fragment() {
             listener.goToLoginActivity()
         }
     }
+
     fun setListener(fragmentListener: FragmentListener) {
         this.listener = fragmentListener
     }

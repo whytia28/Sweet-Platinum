@@ -22,6 +22,7 @@ class LoginActivity : AppCompatActivity(), LoginActivityPresenter.Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        supportActionBar?.title = getString(R.string.title_login)
         presenter.listener = this
 
         btn_login.setOnClickListener {

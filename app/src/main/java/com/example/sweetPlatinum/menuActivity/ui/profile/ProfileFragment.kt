@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.sweetPlatinum.R
+import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.ext.android.inject
@@ -53,8 +54,10 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val context = view.context as MenuActivity
+        context.supportActionBar?.title = getString(R.string.title_profile)
         presenter.listener = this
-        token = context?.let { MySharedPreferences(it).getData("token") }.toString()
+        token = context.let { MySharedPreferences(it).getData("token") }.toString()
 
         tv_edit.setOnClickListener {
             showEditUi()

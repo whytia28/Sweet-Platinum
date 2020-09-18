@@ -3,6 +3,8 @@
     <string name="title_battle">Battle</string>
     <string name="title_history">History</string>
     <string name="title_profile">Profile</string>
+    <string name="title_login">Login</string>
+    <string name="title_register">Register</string>
     <string name="choose_your_opponent">CHOOSE YOUR OPPONENT</string>
     <string name="multi_player">Multi Player</string>
     <string name="single_player">Single Player</string>

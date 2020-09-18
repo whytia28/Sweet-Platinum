@@ -37,6 +37,7 @@ class HistoryFragment : Fragment(), HistoryPresenter.Listener {
         super.onViewCreated(view, savedInstanceState)
 
         val context = view.context as MenuActivity
+        context.supportActionBar?.title = getString(R.string.title_history)
         token = MySharedPreferences(context).getData("token").toString()
         presenter.listener = this
         presenter.getHistory(token)

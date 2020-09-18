@@ -4,27 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
     tools:context="com.example.sweetPlatinum.menuActivity.ui.profile.ProfileFragment">
 
     <ImageView
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_back"
         android:layout_margin="8dp"
+        android:contentDescription="@string/button_back"
+        android:src="@drawable/ic_back"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/button_back" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/edit"
-        android:textStyle="bold"
-        android:textSize="24sp"
         android:layout_margin="8dp"
+        android:text="@string/edit"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,32 +45,32 @@
         android:id="@+id/iv_profile"
         android:layout_width="172dp"
         android:layout_height="172dp"
+        android:contentDescription="@string/image_profile"
         android:src="@drawable/ic_account_circle"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_profile"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        android:contentDescription="@string/image_profile" />
+        app:layout_constraintTop_toBottomOf="@id/tv_profile" />
 
     <ImageView
         android:id="@+id/iv_set_profile"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:contentDescription="@string/button_set_profile"
         android:src="@drawable/ic_camera"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/iv_profile"
         app:layout_constraintBottom_toBottomOf="@id/iv_profile"
-        android:contentDescription="@string/button_set_profile" />
+        app:layout_constraintEnd_toEndOf="@id/iv_profile" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline"
-        app:layout_constraintBottom_toBottomOf="@id/guideline2" />
+        app:layout_constraintTop_toTopOf="@id/guideline" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_profile"
@@ -106,10 +107,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/email"
+                android:enabled="false"
                 android:inputType="textEmailAddress"
                 android:labelFor="@id/tv_email"
                 android:textSize="20sp"
-                android:enabled="false"
                 android:theme="@style/MyEditText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -131,10 +132,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/username"
+                android:enabled="false"
                 android:inputType="textPersonName"
                 android:labelFor="@id/et_username"
                 android:textSize="20sp"
-                android:enabled="false"
                 android:theme="@style/MyEditText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -148,13 +149,13 @@
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save"
         android:background="@drawable/ripple_effect"
+        android:text="@string/save"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_profile"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_profile" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

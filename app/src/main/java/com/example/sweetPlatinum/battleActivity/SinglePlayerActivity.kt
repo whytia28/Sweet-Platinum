@@ -175,11 +175,12 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
     }
 
     override fun showButtonShare() {
-        if (playerOne.isNotEmpty() ) {
+        if (playerOne.isNotEmpty()) {
             btn_share.visibility = View.VISIBLE
         } else {
             btn_share.visibility = View.GONE
-        }    }
+        }
+    }
 
 
     override fun startNew() {

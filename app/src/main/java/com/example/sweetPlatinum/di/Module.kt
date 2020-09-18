@@ -38,7 +38,7 @@ val appModule: Module = module {
         retrofit.create(ApiService::class.java)
     }
 
-    factory {(context: Context) ->
+    factory { (context: Context) ->
         MenuActivityPresenter(context)
     }
     factory {
@@ -47,7 +47,7 @@ val appModule: Module = module {
     factory {
         ProfilePresenter(get())
     }
-    factory {(context: Context) ->
+    factory { (context: Context) ->
         GamePlayPresenter(context, get())
     }
     factory {
@@ -62,7 +62,7 @@ val appModule: Module = module {
     factory {
         HistoryPresenter(get())
     }
-    factory {(context: Context) ->
+    factory { (context: Context) ->
         SaveBattlePresenter(context)
     }
 }

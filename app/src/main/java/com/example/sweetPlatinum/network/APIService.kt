@@ -16,7 +16,7 @@ interface ApiService {
     fun autoLogin(@Header("Authorization") auth: String): Single<AuthResponse>
 
     @POST("v1/auth/register")
-    fun registerUser(@Body bodyRegister: PostBodyRegister): Observable<Response<RegisterResponse>>
+    fun registerUser(@Body bodyRegister: PostBodyRegister): Single<Response<RegisterResponse>>
 
     @PUT("v1/users")
     fun updateUser(
@@ -28,7 +28,7 @@ interface ApiService {
     fun getProfileUser(@Header("Authorization") auth: String): Single<GetProfileResponse>
 
     @GET("v1/battle")
-    fun getHistoryBattle(@Header("Authorization") auth: String): Single<GetBattleResponse>
+    fun getHistoryBattle(@Header("Authorization") auth: String): Single<Response<GetBattleResponse>>
 
     @POST("v1/battle")
     fun saveHistoryBattle(

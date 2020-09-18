@@ -28,10 +28,12 @@ class AlarmReceiver : BroadcastReceiver() {
         if (intent.action == "android.intent.action.BOOT_COMPLETED") setReminder(context)
         showReminderNotification(context)
     }
+
     private fun showReminderNotification(context: Context) {
         val title = NOTIF_TITLE
         val message = NOTIF_MESSAGE
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val mainIntent = Intent(context, MenuActivity::class.java)
 
@@ -109,8 +111,8 @@ class AlarmReceiver : BroadcastReceiver() {
         )
     }
 
-    private fun getCalendar(context: Context) : Any {
-       return Calendar.getInstance().apply {
+    private fun getCalendar(context: Context): Any {
+        return Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, TimePref(context).getHour())
             set(Calendar.MINUTE, TimePref(context).getMinute())

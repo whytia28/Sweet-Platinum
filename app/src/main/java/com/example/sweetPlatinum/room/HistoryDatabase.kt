@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [History::class], version = 1)
 abstract class HistoryDatabase : RoomDatabase() {
 
-    abstract fun historyDAO() : HistoryDAO
+    abstract fun historyDAO(): HistoryDAO
 
     companion object {
         private var INSTANCE: HistoryDatabase? = null
@@ -16,8 +16,10 @@ abstract class HistoryDatabase : RoomDatabase() {
         fun getInstance(context: Context): HistoryDatabase? {
             if (INSTANCE == null) {
                 synchronized(HistoryDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext,
-                        HistoryDatabase::class.java, "history.db")
+                    INSTANCE = Room.databaseBuilder(
+                        context.applicationContext,
+                        HistoryDatabase::class.java, "history.db"
+                    )
                         .build()
                 }
             }

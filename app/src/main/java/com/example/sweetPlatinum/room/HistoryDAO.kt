@@ -11,7 +11,7 @@ interface HistoryDAO {
     fun read(): List<History>
 
     @Update
-    fun update(historyBattle: History ): Int
+    fun update(historyBattle: History): Int
 
     @Delete
     fun delete(historyBattle: History): Int

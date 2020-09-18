@@ -23,6 +23,7 @@ class SplashScreenPresenter(private val apiService: ApiService) {
                 })
         )
     }
+
     fun dispose() {
         disposable.dispose()
     }
