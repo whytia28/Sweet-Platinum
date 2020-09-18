@@ -60,4 +60,7 @@
     <string name="history">Riwayat:</string>
     <string name="cpu_win">Cpu Menang</string>
     <string name="delete">Hapus</string>
+    <string name="delete_history_success">Hapus Riwayat Sukses</string>
+    <string name="delete_history_failed">Hapus Riwayat Gagagl</string>
+    <string name="save_battle">Riwayat Tersimpan</string>
 </resources>

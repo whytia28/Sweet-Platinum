@@ -11,6 +11,7 @@ import com.example.sweetPlatinum.logic.Controller
 import com.example.sweetPlatinum.pojo.PostBattleBody
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import com.example.sweetPlatinum.R
+import com.example.sweetPlatinum.room.History
 import kotlinx.android.synthetic.main.activity_multi_player.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.view.*
@@ -23,6 +24,8 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
     private var winner: String = ""
     private lateinit var message: String
     private var username: String? = ""
+    private lateinit var mode: String
+    private lateinit var date: String
 
     private val presenter: GamePlayPresenter by inject { parametersOf(this) }
 
@@ -34,6 +37,8 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         username = intent.getStringExtra("username")
         presenter.listener = this
         player_one.text = username
+        mode = "Multiplayer"
+        date = presenter.getCurrentDate()
 
         rock1.setOnClickListener {
             playerOne = Controller.gameChoice[0]
@@ -76,7 +81,6 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         }
         iv_save.setOnClickListener {
             val token = MySharedPreferences(applicationContext).getData("token").toString()
-            val mode = "Multiplayer"
             val body = PostBattleBody(mode, winner)
             presenter.saveHistory(token, body)
         }
@@ -138,7 +142,8 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             dialog.btn_exit.setOnClickListener {
                 dialogMessage.dismiss()
             }
-
+            val history = History(null, date, message, mode)
+            presenter.saveHistoryLocal(history)
         }
     }
 

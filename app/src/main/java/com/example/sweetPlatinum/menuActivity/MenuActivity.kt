@@ -10,9 +10,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.sweetPlatinum.setting.SettingActivity
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.login.LoginActivity
+import com.example.sweetPlatinum.saveBattle.SaveBattleActivity
+import com.example.sweetPlatinum.setting.SettingActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.android.inject
@@ -53,7 +54,13 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
                 val loginIntent = Intent(this, LoginActivity::class.java)
                 MySharedPreferences(this).deleteData()
                 startActivity(loginIntent)
+                menuActivityPresenter.deleteAllHistory()
                 onLogoutSuccess()
+            }
+
+            R.id.save_battle -> {
+                val saveIntent = Intent(this, SaveBattleActivity::class.java)
+                startActivity(saveIntent)
             }
 
             R.id.setting -> {

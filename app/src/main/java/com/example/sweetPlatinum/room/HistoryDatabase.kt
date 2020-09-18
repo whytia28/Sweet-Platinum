@@ -25,8 +25,5 @@ abstract class HistoryDatabase : RoomDatabase() {
             return INSTANCE
         }
 
-        fun destroyInstance() {
-            INSTANCE = null
-        }
     }
 }

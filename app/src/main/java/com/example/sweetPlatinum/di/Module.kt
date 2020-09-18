@@ -1,5 +1,6 @@
 package com.example.sweetPlatinum.di
 
+import android.content.Context
 import com.example.sweetPlatinum.menuActivity.MenuActivityPresenter
 import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
 import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
@@ -9,6 +10,7 @@ import com.example.sweetPlatinum.battleActivity.GamePlayPresenter
 import com.example.sweetPlatinum.login.LoginActivityPresenter
 import com.example.sweetPlatinum.menuActivity.ui.history.HistoryPresenter
 import com.example.sweetPlatinum.register.RegisterActivityPresenter
+import com.example.sweetPlatinum.saveBattle.SaveBattlePresenter
 import com.example.sweetPlatinum.splashScreen.SplashScreenPresenter
 import okhttp3.OkHttpClient
 import org.koin.core.module.Module
@@ -36,8 +38,8 @@ val appModule: Module = module {
         retrofit.create(ApiService::class.java)
     }
 
-    factory {
-        MenuActivityPresenter(get())
+    factory {(context: Context) ->
+        MenuActivityPresenter(context)
     }
     factory {
         BattlePresenter()
@@ -45,8 +47,8 @@ val appModule: Module = module {
     factory {
         ProfilePresenter(get())
     }
-    factory {
-        GamePlayPresenter(get())
+    factory {(context: Context) ->
+        GamePlayPresenter(context, get())
     }
     factory {
         SplashScreenPresenter(get())
@@ -59,5 +61,8 @@ val appModule: Module = module {
     }
     factory {
         HistoryPresenter(get())
+    }
+    factory {(context: Context) ->
+        SaveBattlePresenter(context)
     }
 }

@@ -1,12 +1,11 @@
 package com.example.sweetPlatinum.room
 
 import androidx.room.*
-import com.example.sweetPlatinum.menuActivity.ui.history.HistoryFragment
 
 @Dao
 interface HistoryDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun create(historyBattle: History): Long
+    fun create(historyBattle: History)
 
     @Query("SELECT * FROM history")
     fun read(): List<History>
@@ -17,6 +16,6 @@ interface HistoryDAO {
     @Delete
     fun delete(historyBattle: History): Int
 
-    @Delete
-    fun deleteAll(listHistory: List<History>):Int
+    @Query("DELETE  FROM history")
+    fun deleteAll()
 }

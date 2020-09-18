@@ -89,4 +89,7 @@
     <string name="cpu_win">Cpu Win</string>
     <string name="cpu" translatable="false">CPU</string>
     <string name="delete">Delete</string>
+    <string name="delete_history_success">Delete History Success</string>
+    <string name="delete_history_failed">Delete History Failed</string>
+    <string name="save_battle">Save Battle</string>
 </resources>

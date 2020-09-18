@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.example.sweetPlatinum.BaseApp"
+        android:name=".BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,23 +17,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        <activity android:name=".saveBattle.SaveBattleActivity"></activity>
+
         <receiver
-            android:name="com.example.sweetPlatinum.setting.AlarmReceiver"
+            android:name=".setting.AlarmReceiver"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-
         </receiver>
 
-        <activity android:name="com.example.sweetPlatinum.register.RegisterActivity" />
-        <activity android:name="com.example.sweetPlatinum.login.LoginActivity" />
-        <activity android:name="com.example.sweetPlatinum.setting.SettingActivity" />
-        <activity android:name="com.example.sweetPlatinum.battleActivity.MultiPlayerActivity" />
-        <activity android:name="com.example.sweetPlatinum.battleActivity.SinglePlayerActivity" />
-        <activity android:name="com.example.sweetPlatinum.menuActivity.MenuActivity" />
-        <activity android:name="com.example.sweetPlatinum.landingPage.LandingActivity" />
-        <activity android:name="com.example.sweetPlatinum.splashScreen.SplashScreenActivity">
+        <activity android:name=".register.RegisterActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".setting.SettingActivity" />
+        <activity android:name=".battleActivity.MultiPlayerActivity" />
+        <activity android:name=".battleActivity.SinglePlayerActivity" />
+        <activity android:name=".menuActivity.MenuActivity" />
+        <activity android:name=".landingPage.LandingActivity" />
+        <activity android:name=".splashScreen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
