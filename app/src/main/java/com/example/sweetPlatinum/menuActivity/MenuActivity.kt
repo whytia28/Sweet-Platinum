@@ -28,6 +28,7 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        navView.itemIconTintList = null
         menuActivityPresenter.listener = this
 
         val navController = findNavController(R.id.nav_host_fragment)
