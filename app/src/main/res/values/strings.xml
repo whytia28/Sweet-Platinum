@@ -23,11 +23,6 @@
     <string name="register_success">Register Successful</string>
     <string name="logout_title">Logout</string>
     <string name="setting_title">Setting</string>
-    <!-- Preference Titles -->
-
-    <!-- Messages Preferences -->
-
-    <!-- Sync Preferences -->
     <string name="button_next">Button next</string>
     <string name="play_with_your_friend">Play with your friend</string>
     <string name="image_multi_player" translatable="false">image multi player</string>
