@@ -8,15 +8,6 @@
     android:padding="16dp"
     tools:context="com.example.sweetPlatinum.register.RegisterActivity">
 
-    <ImageView
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/button_back"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"

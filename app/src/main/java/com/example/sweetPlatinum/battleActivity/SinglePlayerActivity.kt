@@ -35,6 +35,8 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         setContentView(R.layout.activity_single_player)
 
         supportActionBar?.title = getString(R.string.single_player)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         username = intent.getStringExtra("username")
         presenter.listener = this
         player_one.text = username
@@ -72,12 +74,14 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             presenter.saveHistory(token, body)
         }
 
-        btn_back.setOnClickListener {
-            onBackPressed()
-        }
         btn_share.setOnClickListener {
             shareTo()
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     override fun showResult() {

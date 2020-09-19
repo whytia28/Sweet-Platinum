@@ -20,6 +20,8 @@ class SaveBattleActivity : AppCompatActivity(), SaveBattlePresenter.Listener {
         setContentView(R.layout.activity_save_battle)
 
         supportActionBar?.title = getString(R.string.save_battle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         presenter.listener = this
         presenter.getListHistory()
     }
@@ -27,6 +29,11 @@ class SaveBattleActivity : AppCompatActivity(), SaveBattlePresenter.Listener {
     override fun onResume() {
         super.onResume()
         presenter.getListHistory()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun setRecyclerView(listHistory: List<History>) {

@@ -18,7 +18,10 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityPresenter.Listener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
         supportActionBar?.title = getString(R.string.title_register)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         presenter.listener = this
 
         btn_register.setOnClickListener {
@@ -31,9 +34,11 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityPresenter.Listener
         btn_reset.setOnClickListener {
             resetEditText()
         }
-        btn_back.setOnClickListener {
-            onBackPressed()
-        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     override fun onRegisterSuccess() {

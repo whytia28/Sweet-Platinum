@@ -13,5 +13,11 @@ class SettingActivity : AppCompatActivity() {
             .add(R.id.setting_holder, SettingsFragment())
             .commit()
         supportActionBar?.title = getString(R.string.setting_title)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

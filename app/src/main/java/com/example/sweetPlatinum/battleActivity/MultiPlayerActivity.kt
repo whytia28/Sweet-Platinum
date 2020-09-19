@@ -34,6 +34,7 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         setContentView(R.layout.activity_multi_player)
 
         supportActionBar?.title = getString(R.string.multi_player)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         username = intent.getStringExtra("username")
         presenter.listener = this
         player_one.text = username
@@ -45,36 +46,42 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             setOverlay()
             showResult()
             showButtonShare()
+            onPlayerSelected()
         }
         paper1.setOnClickListener {
             playerOne = Controller.gameChoice[1]
             setOverlay()
             showResult()
             showButtonShare()
+            onPlayerSelected()
         }
         scissor1.setOnClickListener {
             playerOne = Controller.gameChoice[2]
             setOverlay()
             showResult()
             showButtonShare()
+            onPlayerSelected()
         }
         rock2.setOnClickListener {
             playerTwo = Controller.gameChoice[0]
             setOverlay()
             showResult()
             showButtonShare()
+            onPlayerSelected()
         }
         paper2.setOnClickListener {
             playerTwo = Controller.gameChoice[1]
             setOverlay()
             showResult()
             showButtonShare()
+            onPlayerSelected()
         }
         scissor2.setOnClickListener {
             playerTwo = Controller.gameChoice[2]
             setOverlay()
             showResult()
             showButtonShare()
+            onPlayerSelected()
         }
         iv_restart.setOnClickListener {
             startNew()
@@ -84,11 +91,33 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             val body = PostBattleBody(mode, winner)
             presenter.saveHistory(token, body)
         }
-        btn_back.setOnClickListener {
-            onBackPressed()
-        }
+
         btn_share.setOnClickListener {
             shareTo()
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    private fun onPlayerSelected() {
+        if (playerOne.isNotEmpty() && playerTwo.isEmpty()) {
+            rock1.visibility = View.GONE
+            paper1.visibility = View.GONE
+            scissor1.visibility = View.GONE
+        } else if (playerOne.isEmpty() && playerTwo.isNotEmpty()) {
+            rock2.visibility = View.GONE
+            paper2.visibility = View.GONE
+            scissor2.visibility = View.GONE
+        } else {
+            rock1.visibility = View.VISIBLE
+            paper1.visibility = View.VISIBLE
+            scissor1.visibility = View.VISIBLE
+            rock2.visibility = View.VISIBLE
+            paper2.visibility = View.VISIBLE
+            scissor2.visibility = View.VISIBLE
         }
     }
 
