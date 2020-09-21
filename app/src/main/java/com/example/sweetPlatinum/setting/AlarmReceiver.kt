@@ -9,9 +9,9 @@ import android.content.pm.PackageManager
 import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.sharedPreference.TimePref
+import com.example.sweetPlatinum.splashScreen.SplashScreenActivity
 import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
@@ -35,10 +35,10 @@ class AlarmReceiver : BroadcastReceiver() {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val mainIntent = Intent(context, MenuActivity::class.java)
+        val mainIntent = Intent(context, SplashScreenActivity::class.java)
 
         val pendingIntent = TaskStackBuilder.create(context)
-            .addParentStack(MenuActivity::class.java)
+            .addParentStack(SplashScreenActivity::class.java)
             .addNextIntent(mainIntent)
             .getPendingIntent(110, PendingIntent.FLAG_UPDATE_CURRENT)
 

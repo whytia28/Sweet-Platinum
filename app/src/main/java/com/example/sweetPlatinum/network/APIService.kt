@@ -27,6 +27,9 @@ interface ApiService {
     @GET("v1/users")
     fun getProfileUser(@Header("Authorization") auth: String): Single<GetProfileResponse>
 
+    @GET("v1/users")
+    fun getProfileUserNoPhoto(@Header("Authorization") auth: String): Single<GetProfileResponseNoPhoto>
+
     @GET("v1/battle")
     fun getHistoryBattle(@Header("Authorization") auth: String): Single<Response<GetBattleResponse>>
 

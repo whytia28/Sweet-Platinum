@@ -124,6 +124,7 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
     override fun startNew() {
         playerOne = ""
         playerTwo = ""
+        iv_save.setImageResource(R.drawable.ic_save)
         rock1.foreground = null
         paper1.foreground = null
         scissor1.foreground = null

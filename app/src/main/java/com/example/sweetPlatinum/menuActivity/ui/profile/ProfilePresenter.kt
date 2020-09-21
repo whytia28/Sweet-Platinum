@@ -33,6 +33,22 @@ class ProfilePresenter(private val apiService: ApiService) {
         )
     }
 
+    fun getProfileNoPhoto(token: String) {
+        listener?.showProgressBar()
+        disposable.add(
+            apiService.getProfileUserNoPhoto(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    listener?.showProfileNoPhoto(it.data.username, it.data.email)
+                    listener?.hiddenProgressBar()
+                }, {
+                    it.message?.let { it1 -> listener?.onUpdateFailed(it1) }
+                })
+        )
+    }
+
+
     fun updateUser(token: String, bitmap: Bitmap, username: String, email: String) {
         listener?.showProgressBar()
         val builder: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)

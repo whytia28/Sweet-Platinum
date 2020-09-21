@@ -100,6 +100,7 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
         }
 
         presenter.getProfileUser(token)
+        presenter.getProfileNoPhoto(token)
     }
 
     private fun checkPermission(): Boolean {

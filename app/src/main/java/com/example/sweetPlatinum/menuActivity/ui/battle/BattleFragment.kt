@@ -13,6 +13,7 @@ import com.example.sweetPlatinum.battleActivity.SinglePlayerActivity
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
 import com.example.sweetPlatinum.pojo.LoginResponse
+import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import kotlinx.android.synthetic.main.fragment_battle.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
