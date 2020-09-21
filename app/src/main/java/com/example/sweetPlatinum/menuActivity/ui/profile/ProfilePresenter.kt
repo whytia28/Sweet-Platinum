@@ -21,7 +21,11 @@ class ProfilePresenter(private val apiService: ApiService) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    listener?.showProfile(it.data.username, it.data.email, it.data.photo)
+                    if (it.data.photo.isNotEmpty()){
+                        listener?.showProfile(it.data.username, it.data.email, it.data.photo)
+                    } else if (it.data.photo.isEmpty()) {
+                        listener?.showProfileNoPhoto(it.data.username, it.data.email)
+                    }
                     listener?.hiddenProgressBar()
                 }, {
                     it.message?.let { it1 -> listener?.showProfileFailed(it1) }
@@ -75,5 +79,6 @@ class ProfilePresenter(private val apiService: ApiService) {
         fun showProfile(username: String, email: String, photo: String)
         fun showProfileFailed(errorMessage: String)
         fun onUpdateFailed(errorMessage: String)
+        fun showProfileNoPhoto(username: String, email: String)
     }
 }
