@@ -100,7 +100,6 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
         }
 
         presenter.getProfileUser(token)
-        presenter.getProfileNoPhoto(token)
     }
 
     private fun checkPermission(): Boolean {
@@ -228,11 +227,6 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
 
     override fun onUpdateFailed(errorMessage: String) {
         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun showProfileNoPhoto(username: String, email: String) {
-        et_username.setText(username)
-        et_email.setText(email)
     }
 
     override fun onDestroy() {

@@ -21,33 +21,13 @@ class ProfilePresenter(private val apiService: ApiService) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    if (it.data.photo.isNotEmpty()){
-                        listener?.showProfile(it.data.username, it.data.email, it.data.photo)
-                    } else if (it.data.photo.isEmpty()) {
-                        listener?.showProfileNoPhoto(it.data.username, it.data.email)
-                    }
+                    listener?.showProfile(it.data.username, it.data.email, it.data.photo)
                     listener?.hiddenProgressBar()
                 }, {
                     it.message?.let { it1 -> listener?.showProfileFailed(it1) }
                 })
         )
     }
-
-    fun getProfileNoPhoto(token: String) {
-        listener?.showProgressBar()
-        disposable.add(
-            apiService.getProfileUserNoPhoto(token)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    listener?.showProfileNoPhoto(it.data.username, it.data.email)
-                    listener?.hiddenProgressBar()
-                }, {
-                    it.message?.let { it1 -> listener?.onUpdateFailed(it1) }
-                })
-        )
-    }
-
 
     fun updateUser(token: String, bitmap: Bitmap, username: String, email: String) {
         listener?.showProgressBar()
@@ -95,6 +75,5 @@ class ProfilePresenter(private val apiService: ApiService) {
         fun showProfile(username: String, email: String, photo: String)
         fun showProfileFailed(errorMessage: String)
         fun onUpdateFailed(errorMessage: String)
-        fun showProfileNoPhoto(username: String, email: String)
     }
 }
