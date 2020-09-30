@@ -16,17 +16,20 @@ import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class SplashScreenActivity : AppCompatActivity(), SplashScreenPresenter.Listener {
+class SplashScreenActivity : AppCompatActivity() {
 
     private val splashTimeOut: Long = 6000 // 2
     private lateinit var sharedPref: SharedPreferences
-    private val presenter: SplashScreenPresenter by inject { parametersOf(this) }
+
+    //    lateinit var viewModel: SplashScreenViewModel
+    private val viewModel: SplashScreenViewModel by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        presenter.listener = this
+//        presenter.listener = this
+//        viewModel = ViewModelProvider(this, defaultViewModelProviderFactory).get(SplashScreenViewModel::class.java)
         sharedPref = applicationContext.getSharedPreferences("userData", Context.MODE_PRIVATE)
 
 
@@ -35,8 +38,7 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenPresenter.Listener
             // Start your app main activity
 
             if (sharedPref.contains("token")) {
-                val token = MySharedPreferences(this).getData("token").toString()
-                presenter.autoLogin(token)
+                autoLogin()
             } else {
                 goToLandingPage()
             }
@@ -45,25 +47,32 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenPresenter.Listener
         }, splashTimeOut)
     }
 
-    override fun goToLandingPage() {
+    private fun autoLogin() {
+        val token = MySharedPreferences(this).getData("token").toString()
+        viewModel.autoLogin(token, this).observe(this, {
+            goToMenuActivity(it.data)
+        })
+    }
+
+    fun goToLandingPage() {
         val goToLoginIntent = Intent(this, LandingActivity::class.java)
         startActivity(goToLoginIntent)
         finish()
     }
 
-    override fun goToMenuActivity(data: AuthResponse.Data) {
+    fun goToMenuActivity(data: AuthResponse.Data) {
         val intent = Intent(this, MenuActivity::class.java)
         intent.putExtra("dataFromAuth", data)
         startActivity(intent)
         finish()
     }
 
-    override fun onAuthLoginFailed(errorMessage: String) {
+    fun onAuthLoginFailed(errorMessage: String) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
         MySharedPreferences(this).deleteData()
     }
 
-    override fun goToLoginActivity() {
+    fun goToLoginActivity() {
         val loginIntent = Intent(this, LoginActivity::class.java)
         startActivity(loginIntent)
         finish()
@@ -71,7 +80,7 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenPresenter.Listener
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.dispose()
+        viewModel.dispose()
     }
 
 }

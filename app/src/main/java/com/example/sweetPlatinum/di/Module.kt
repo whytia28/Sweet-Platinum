@@ -1,41 +1,25 @@
 package com.example.sweetPlatinum.di
 
 import android.content.Context
-import com.example.sweetPlatinum.menuActivity.MenuActivityPresenter
-import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
-import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
-import com.example.sweetPlatinum.network.ApiService
-import com.example.sweetPlatinum.BuildConfig
 import com.example.sweetPlatinum.battleActivity.GamePlayPresenter
 import com.example.sweetPlatinum.login.LoginActivityPresenter
+import com.example.sweetPlatinum.menuActivity.MenuActivityPresenter
+import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
 import com.example.sweetPlatinum.menuActivity.ui.history.HistoryPresenter
+import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
 import com.example.sweetPlatinum.register.RegisterActivityPresenter
+import com.example.sweetPlatinum.repository.SweetRepository
 import com.example.sweetPlatinum.saveBattle.SaveBattlePresenter
 import com.example.sweetPlatinum.splashScreen.SplashScreenPresenter
-import okhttp3.OkHttpClient
+import com.example.sweetPlatinum.splashScreen.SplashScreenViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
-const val BASE_URL = BuildConfig.BASE_URL
 val appModule: Module = module {
 
-    single {
-        OkHttpClient.Builder()
-            .build()
-    }
-
-    factory<ApiService> {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(get())
-            .build()
-
-        retrofit.create(ApiService::class.java)
+    factory {
+        SweetRepository(get())
     }
 
     factory { (context: Context) ->
@@ -65,4 +49,7 @@ val appModule: Module = module {
     factory { (context: Context) ->
         SaveBattlePresenter(context)
     }
+}
+val repositoryModule = module {
+    viewModel { SplashScreenViewModel(get())}
 }
