@@ -8,7 +8,6 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sweetPlatinum.R
-import com.example.sweetPlatinum.landingPage.LandingActivity
 import com.example.sweetPlatinum.login.LoginActivity
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
@@ -49,7 +48,17 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun autoLogin() {
         val token = MySharedPreferences(this).getData("token").toString()
         viewModel.autoLogin(token, this).observe(this, {
-            goToMenuActivity(it.data)
+            //Diseleksi, kalau Throwablenya null, berarti masuk onResponse, kalo throwablenya gak nul, berarti masuk onFailure
+
+            if(it.t != null){
+                //onResponse
+                it?.data?.let { response ->
+                    goToMenuActivity(response)
+                }
+            }else{
+                //onFailure bisa memanggil throwable yang hanya ada ketika masuk onFailure
+                Toast.makeText(this,"Kesalahan : ${it.t?.localizedMessage}",Toast.LENGTH_LONG).show()
+            }
         })
     }
 

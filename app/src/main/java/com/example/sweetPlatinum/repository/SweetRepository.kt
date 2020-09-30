@@ -53,6 +53,10 @@ class SweetRepository(private val historyDAO: HistoryDAO) {
                 .subscribe({
                     authData.postValue(it)
                 }, {
+                    //No2
+                    //Kalo gagal, bikin object AuthResponse manual dengan Throwable yang diisi.
+                    //Lanjut ke SplashScreenActivity
+                    authData.postValue(AuthResponse(it))
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 })
         )
