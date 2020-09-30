@@ -8,6 +8,7 @@ import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
 import com.example.sweetPlatinum.menuActivity.ui.history.HistoryPresenter
 import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
 import com.example.sweetPlatinum.register.RegisterActivityPresenter
+import com.example.sweetPlatinum.register.RegisterViewModel
 import com.example.sweetPlatinum.repository.SweetRepository
 import com.example.sweetPlatinum.saveBattle.SaveBattlePresenter
 import com.example.sweetPlatinum.splashScreen.SplashScreenPresenter
@@ -51,5 +52,6 @@ val appModule: Module = module {
     }
 }
 val repositoryModule = module {
-    viewModel { SplashScreenViewModel(get())}
+    viewModel { SplashScreenViewModel(get()) }
+    viewModel { RegisterViewModel(get()) }
 }

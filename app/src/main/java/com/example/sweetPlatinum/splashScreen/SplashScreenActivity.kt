@@ -12,6 +12,7 @@ import com.example.sweetPlatinum.landingPage.LandingActivity
 import com.example.sweetPlatinum.login.LoginActivity
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
+import com.example.sweetPlatinum.register.RegisterActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -21,15 +22,13 @@ class SplashScreenActivity : AppCompatActivity() {
     private val splashTimeOut: Long = 6000 // 2
     private lateinit var sharedPref: SharedPreferences
 
-    //    lateinit var viewModel: SplashScreenViewModel
+
     private val viewModel: SplashScreenViewModel by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-//        presenter.listener = this
-//        viewModel = ViewModelProvider(this, defaultViewModelProviderFactory).get(SplashScreenViewModel::class.java)
         sharedPref = applicationContext.getSharedPreferences("userData", Context.MODE_PRIVATE)
 
 
@@ -54,13 +53,13 @@ class SplashScreenActivity : AppCompatActivity() {
         })
     }
 
-    fun goToLandingPage() {
-        val goToLoginIntent = Intent(this, LandingActivity::class.java)
+    private fun goToLandingPage() {
+        val goToLoginIntent = Intent(this, RegisterActivity::class.java)
         startActivity(goToLoginIntent)
         finish()
     }
 
-    fun goToMenuActivity(data: AuthResponse.Data) {
+    private fun goToMenuActivity(data: AuthResponse.Data) {
         val intent = Intent(this, MenuActivity::class.java)
         intent.putExtra("dataFromAuth", data)
         startActivity(intent)
@@ -78,9 +77,9 @@ class SplashScreenActivity : AppCompatActivity() {
         finish()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.dispose()
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        viewModel.dispose()
+//    }
 
 }
