@@ -2,14 +2,17 @@ package com.example.sweetPlatinum
 
 import android.app.Application
 import com.example.sweetPlatinum.di.appModule
+import com.example.sweetPlatinum.di.dbModule
 import com.example.sweetPlatinum.di.repositoryModule
-import org.koin.core.context.startKoin
+import com.example.sweetPlatinum.di.viewModule
+import org.koin.android.ext.android.startKoin
+
 
 class BaseApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        startKoin {
-            modules(appModule, repositoryModule)
-        }
+        startKoin(
+            this, listOf(appModule, dbModule, repositoryModule, viewModule)
+        )
     }
 }

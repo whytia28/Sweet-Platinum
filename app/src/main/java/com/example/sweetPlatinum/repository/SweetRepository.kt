@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.sweetPlatinum.BuildConfig
 import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.pojo.*
 import com.example.sweetPlatinum.room.History
@@ -19,31 +18,34 @@ import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.json.JSONObject
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.ByteArrayOutputStream
 
-const val BASE_URL = BuildConfig.BASE_URL
 
 class SweetRepository(private val historyDAO: HistoryDAO) {
-    private val disposable = CompositeDisposable()
     private val apiService: ApiService
+    private val disposable = CompositeDisposable()
     private val listHistoryLocal = MutableLiveData<List<History>>()
     private val listHistory = MutableLiveData<List<GetBattleResponse.Data>>()
     private val history = MutableLiveData<PostBattleResponse>()
     private val authData = MutableLiveData<AuthResponse>()
-    private val loginData = MutableLiveData<LoginResponse.Data>()
-    private val registerData = MutableLiveData<String>()
+    private val loginData = MutableLiveData<LoginResponse>()
+    private val registerData = MutableLiveData<Response<RegisterResponse>>()
 
     init {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl("https://binar-gdd-cc8.herokuapp.com/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
+
         apiService = retrofit.create(ApiService::class.java)
     }
+
+
 
     fun autoLogin(token: String, context: Context): LiveData<AuthResponse> {
         disposable.add(
@@ -53,13 +55,13 @@ class SweetRepository(private val historyDAO: HistoryDAO) {
                 .subscribe({
                     authData.postValue(it)
                 }, {
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    authData.postValue(AuthResponse(it))
                 })
         )
         return authData
     }
 
-    fun loginPerson(context: Context, email: String, password: String, rememberMe: Boolean) {
+    fun loginPerson(context: Context, email: String, password: String, rememberMe: Boolean): LiveData<LoginResponse> {
         val body = PostLoginBody(email, password)
         disposable.add(
             apiService.validateLogin(body)
@@ -67,10 +69,10 @@ class SweetRepository(private val historyDAO: HistoryDAO) {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
                     if (response.code() == 200) {
-                        response.body()?.data?.let {
+                        response.body()?.let {
                             loginData.postValue(it)
                             if (rememberMe) {
-                                saveToken(context, "token", "Bearer ${it.token}")
+                                saveToken(context, "token", "Bearer ${it.data?.token}")
                             }
                         }
                     } else {
@@ -80,35 +82,26 @@ class SweetRepository(private val historyDAO: HistoryDAO) {
                         }
                     }
                 }, {
+                    loginData.postValue(LoginResponse(it))
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 })
         )
+        return loginData
     }
 
-    fun registerPerson(context: Context, email: String, username: String, password: String) {
+    fun registerPerson(context: Context, email: String, username: String, password: String): LiveData<Response<RegisterResponse>> {
         val body = PostBodyRegister(email, password, username)
         disposable.add(
             apiService.registerUser(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
-                    if (response.code() == 422) {
-                        response.errorBody()?.string()?.let {
-                            val jsonObject = JSONObject(it)
-                            Toast.makeText(context, jsonObject.getString("errors"), Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        response.body()?.success.let {
-                            if (it != null) {
-                                registerData.postValue(it)
-                                Toast.makeText(context, "Register Success", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
+                    registerData.postValue(response)
                 }, {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 })
         )
+        return registerData
     }
 
     fun getHistory(token: String) {

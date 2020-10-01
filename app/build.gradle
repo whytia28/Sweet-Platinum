@@ -69,11 +69,11 @@ dependencies {
     implementation "androidx.room:room-runtime:2.2.5"
     kapt "androidx.room:room-compiler:2.2.5"
 
-    implementation "org.koin:koin-androidx-scope:2.1.6"
-// Koin AndroidX ViewModel features
-    implementation "org.koin:koin-androidx-viewmodel:2.1.6"
-// Koin AndroidX Experimental features
-    implementation "org.koin:koin-androidx-ext:2.1.6"
+//    implementation "org.koin:koin-androidx:2.0.1"
+    // or Koin for view model features
+    implementation "org.koin:koin-android:1.0.2"
+    // or Koin for view model features
+    implementation "org.koin:koin-android-viewmodel:1.0.2"
 
     //Retrofit Rest client
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -102,6 +102,7 @@ dependencies {
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 //    kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 
 }

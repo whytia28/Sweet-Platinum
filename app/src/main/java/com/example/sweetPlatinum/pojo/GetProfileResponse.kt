@@ -15,7 +15,7 @@ data class GetProfileResponse(
         @SerializedName("_id")
         val id: String,
         @SerializedName("photo")
-        var photo: String = "",
+        var photo: String? = null,
         @SerializedName("username")
         val username: String
     )

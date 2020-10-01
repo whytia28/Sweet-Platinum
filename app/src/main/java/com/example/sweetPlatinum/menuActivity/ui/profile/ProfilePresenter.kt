@@ -21,7 +21,11 @@ class ProfilePresenter(private val apiService: ApiService) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    listener?.showProfile(it.data.username, it.data.email, it.data.photo)
+                    if (it.data.photo != null) {
+                        listener?.showProfile(it.data.username, it.data.email, it.data.photo!!)
+                    } else {
+                        listener?.showProfile(it.data.username, it.data.email, "")
+                    }
                     listener?.hiddenProgressBar()
                 }, {
                     it.message?.let { it1 -> listener?.showProfileFailed(it1) }
