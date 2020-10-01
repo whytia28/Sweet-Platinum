@@ -49,12 +49,14 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
+        overridePendingTransition(R.anim.from_left, R.anim.to_right)
         return true
     }
 
     private fun onRegisterSuccess() {
         Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_LONG).show()
         startActivity(Intent(this, LoginActivity::class.java))
+        overridePendingTransition(R.anim.from_left, R.anim.to_right)
         finish()
     }
 

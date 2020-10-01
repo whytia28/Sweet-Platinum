@@ -57,6 +57,7 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
                 val loginIntent = Intent(this, LoginActivity::class.java)
                 MySharedPreferences(this).deleteData()
                 startActivity(loginIntent)
+                overridePendingTransition(R.anim.from_left, R.anim.to_right)
                 menuActivityPresenter.deleteAllHistory()
                 onLogoutSuccess()
             }
@@ -64,11 +65,13 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
             R.id.save_battle -> {
                 val saveIntent = Intent(this, SaveBattleActivity::class.java)
                 startActivity(saveIntent)
+                overridePendingTransition(R.anim.from_right, R.anim.to_left)
             }
 
             R.id.setting -> {
                 val settingIntent = Intent(this, SettingActivity::class.java)
                 startActivity(settingIntent)
+                overridePendingTransition(R.anim.from_right, R.anim.to_left)
             }
         }
 

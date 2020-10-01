@@ -62,6 +62,7 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun goToLandingPage() {
         val goToLandingIntent = Intent(this, LandingActivity::class.java)
         startActivity(goToLandingIntent)
+        overridePendingTransition(R.anim.from_right, R.anim.to_left)
         finish()
     }
 
@@ -69,6 +70,7 @@ class SplashScreenActivity : AppCompatActivity() {
         val intent = Intent(this, MenuActivity::class.java)
         intent.putExtra("dataFromAuth", data)
         startActivity(intent)
+        overridePendingTransition(R.anim.from_right, R.anim.to_left)
         finish()
     }
 
@@ -80,6 +82,7 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun goToLoginActivity() {
         val loginIntent = Intent(this, LoginActivity::class.java)
         startActivity(loginIntent)
+        overridePendingTransition(R.anim.from_right, R.anim.to_left)
         finish()
     }
 

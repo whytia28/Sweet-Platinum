@@ -64,12 +64,14 @@ class LoginActivity : AppCompatActivity() {
     private fun goToRegister() {
         val registerIntent = Intent(this, RegisterActivity::class.java)
         startActivity(registerIntent)
+        overridePendingTransition(R.anim.from_right, R.anim.to_left)
     }
 
     private fun goToMenuActivity(data: LoginResponse.Data) {
         val menuIntent = Intent(this, MenuActivity::class.java)
         menuIntent.putExtra("data", data)
         startActivity(menuIntent)
+        overridePendingTransition(R.anim.from_right, R.anim.to_left)
         finish()
     }
 

@@ -99,6 +99,7 @@ class MultiPlayerActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
+        overridePendingTransition(R.anim.from_left, R.anim.to_right)
         return true
     }
 

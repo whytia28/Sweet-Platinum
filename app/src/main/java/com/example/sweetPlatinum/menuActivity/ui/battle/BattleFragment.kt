@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
 import com.example.sweetPlatinum.R
+import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
 import com.example.sweetPlatinum.battleActivity.SinglePlayerActivity
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
 import com.example.sweetPlatinum.pojo.LoginResponse
-import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import kotlinx.android.synthetic.main.fragment_battle.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -78,11 +77,13 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
         val multiPlayerIntent = Intent(context, MultiPlayerActivity::class.java)
         multiPlayerIntent.putExtra("username", username)
         startActivity(multiPlayerIntent)
+        activity?.overridePendingTransition(R.anim.from_right, R.anim.to_left)
     }
 
     override fun goToSinglePlayer(username: String) {
         val singlePlayerIntent = Intent(context, SinglePlayerActivity::class.java)
         singlePlayerIntent.putExtra("username", username)
         startActivity(singlePlayerIntent)
+        activity?.overridePendingTransition(R.anim.from_right, R.anim.to_left)
     }
 }

@@ -47,6 +47,7 @@ class LandingActivity : AppCompatActivity(), FragmentListener {
     override fun goToLoginActivity() {
         val intentKeLoginActivity = Intent(this, LoginActivity::class.java)
         startActivity(intentKeLoginActivity)
+        overridePendingTransition(R.anim.from_right, R.anim.to_left)
         finish()
     }
 }
