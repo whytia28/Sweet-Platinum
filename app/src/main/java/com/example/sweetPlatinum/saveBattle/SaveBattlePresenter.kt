@@ -1,6 +1,7 @@
 package com.example.sweetPlatinum.saveBattle
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import com.example.sweetPlatinum.room.History
 import com.example.sweetPlatinum.room.HistoryDatabase
 import kotlinx.coroutines.GlobalScope
@@ -16,7 +17,7 @@ class SaveBattlePresenter(context: Context) {
         GlobalScope.launch {
             val listHistory = historyDb?.historyDAO()?.read()
             listHistory?.let {
-                listener?.showAllHistory(it)
+//                listener?.showAllHistory(it)
             }
         }
     }

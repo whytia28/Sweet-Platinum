@@ -3,6 +3,7 @@ package com.example.sweetPlatinum.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.room.History

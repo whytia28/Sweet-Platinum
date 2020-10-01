@@ -161,7 +161,7 @@ class SweetRepository(private val historyDAO: HistoryDAO, private val apiService
         )
     }
 
-    fun saveHistory(token: String, body: PostBattleBody): LiveData<PostBattleResponse>  {
+    fun saveHistory(token: String, body: PostBattleBody): LiveData<PostBattleResponse> {
         disposable.add(
             apiService.saveHistoryBattle(token, body)
                 .subscribeOn(Schedulers.io())
@@ -175,22 +175,21 @@ class SweetRepository(private val historyDAO: HistoryDAO, private val apiService
         return history
     }
 
-    fun saveHistoryLocal(history: History){
+    fun saveHistoryLocal(history: History) {
         GlobalScope.launch {
             historyDAO.create(history)
         }
     }
 
-//    fun getListHistory(): List<History>  {
-//        return historyDAO.read()
-//    }
+    fun getListHistory(): List<History> {
+        return historyDAO.read()
+    }
 
     fun deleteAllHistory() {
         GlobalScope.launch {
             historyDAO.deleteAll()
         }
     }
-
 
     fun dispose() {
         disposable.dispose()
