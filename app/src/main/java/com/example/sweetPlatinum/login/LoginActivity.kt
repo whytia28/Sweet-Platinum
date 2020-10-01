@@ -9,12 +9,13 @@ import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.LoginResponse
 import com.example.sweetPlatinum.register.RegisterActivity
+import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 
 class LoginActivity : AppCompatActivity() {
 
-        private val viewModel: LoginViewModel by inject()
+    private val viewModel: LoginViewModel by inject()
     private var rememberMe: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,15 +32,14 @@ class LoginActivity : AppCompatActivity() {
                 rememberMe
             ).observe(this, {
                 if (it.t == null) {
+                    saveToken("token", "Bearer ${it.data?.token}")
                     onLoginSuccess()
-                    it.data?.let {
-                            it1 -> goToMenuActivity(it1) }
+                    it.data?.let { it1 -> goToMenuActivity(it1) }
                 } else {
                     it.t?.message?.let { it1 -> onLoginFailure(it1) }
                 }
                 hideProgressBar()
             })
-
         }
         check_box.setOnCheckedChangeListener { _, isChecked ->
             rememberMe = isChecked
@@ -81,17 +81,13 @@ class LoginActivity : AppCompatActivity() {
         progress_bar.visibility = View.GONE
     }
 
-//    fun saveToken(key: String, data: String) {
-//        MySharedPreferences(applicationContext).putData(key, data)
-//    }
+    private fun saveToken(key: String, data: String) {
+        MySharedPreferences(applicationContext).putData(key, data)
+    }
 
     private fun resetEditText() {
         et_email.setText("")
         etPassword.setText("")
     }
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        presenter.dispose()
-//    }
 }

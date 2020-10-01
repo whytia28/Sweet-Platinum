@@ -9,7 +9,6 @@ import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.pojo.*
 import com.example.sweetPlatinum.room.History
 import com.example.sweetPlatinum.room.HistoryDAO
-import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -19,14 +18,11 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.ByteArrayOutputStream
 
 
-class SweetRepository(private val historyDAO: HistoryDAO) {
-    private val apiService: ApiService
+class SweetRepository(private val historyDAO: HistoryDAO, private val apiService: ApiService) {
+
     private val disposable = CompositeDisposable()
     private val listHistoryLocal = MutableLiveData<List<History>>()
     private val listHistory = MutableLiveData<List<GetBattleResponse.Data>>()
@@ -34,17 +30,6 @@ class SweetRepository(private val historyDAO: HistoryDAO) {
     private val authData = MutableLiveData<AuthResponse>()
     private val loginData = MutableLiveData<LoginResponse>()
     private val registerData = MutableLiveData<Response<RegisterResponse>>()
-
-    init {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://binar-gdd-cc8.herokuapp.com/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-
-        apiService = retrofit.create(ApiService::class.java)
-    }
-
 
 
     fun autoLogin(token: String, context: Context): LiveData<AuthResponse> {
@@ -61,7 +46,12 @@ class SweetRepository(private val historyDAO: HistoryDAO) {
         return authData
     }
 
-    fun loginPerson(context: Context, email: String, password: String, rememberMe: Boolean): LiveData<LoginResponse> {
+    fun loginPerson(
+        context: Context,
+        email: String,
+        password: String,
+        rememberMe: Boolean
+    ): LiveData<LoginResponse> {
         val body = PostLoginBody(email, password)
         disposable.add(
             apiService.validateLogin(body)
@@ -70,15 +60,18 @@ class SweetRepository(private val historyDAO: HistoryDAO) {
                 .subscribe({ response ->
                     if (response.code() == 200) {
                         response.body()?.let {
-                            loginData.postValue(it)
                             if (rememberMe) {
-                                saveToken(context, "token", "Bearer ${it.data?.token}")
+                                loginData.postValue(it)
                             }
                         }
                     } else {
                         response.errorBody()?.string()?.let {
                             val jsonObject = JSONObject(it)
-                            Toast.makeText(context, jsonObject.getString("errors"), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                jsonObject.getString("errors"),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }, {
@@ -89,7 +82,12 @@ class SweetRepository(private val historyDAO: HistoryDAO) {
         return loginData
     }
 
-    fun registerPerson(context: Context, email: String, username: String, password: String): LiveData<Response<RegisterResponse>> {
+    fun registerPerson(
+        context: Context,
+        email: String,
+        username: String,
+        password: String
+    ): LiveData<Response<RegisterResponse>> {
         val body = PostBodyRegister(email, password, username)
         disposable.add(
             apiService.registerUser(body)
@@ -163,7 +161,7 @@ class SweetRepository(private val historyDAO: HistoryDAO) {
         )
     }
 
-    fun saveHistory(token: String, body: PostBattleBody) {
+    fun saveHistory(token: String, body: PostBattleBody): LiveData<PostBattleResponse>  {
         disposable.add(
             apiService.saveHistoryBattle(token, body)
                 .subscribeOn(Schedulers.io())
@@ -174,9 +172,10 @@ class SweetRepository(private val historyDAO: HistoryDAO) {
 
                 })
         )
+        return history
     }
 
-    fun saveHistoryLocal(history: History) {
+    fun saveHistoryLocal(history: History){
         GlobalScope.launch {
             historyDAO.create(history)
         }
@@ -192,9 +191,6 @@ class SweetRepository(private val historyDAO: HistoryDAO) {
         }
     }
 
-    private fun saveToken(context: Context, key: String, data: String) {
-        MySharedPreferences(context).putData(key, data)
-    }
 
     fun dispose() {
         disposable.dispose()

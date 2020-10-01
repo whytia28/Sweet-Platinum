@@ -25,6 +25,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.SplashTheme)
         setContentView(R.layout.activity_splash_screen)
 
 
@@ -59,8 +60,8 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun goToLandingPage() {
-        val goToLoginIntent = Intent(this, LandingActivity::class.java)
-        startActivity(goToLoginIntent)
+        val goToLandingIntent = Intent(this, LandingActivity::class.java)
+        startActivity(goToLandingIntent)
         finish()
     }
 
@@ -81,10 +82,5 @@ class SplashScreenActivity : AppCompatActivity() {
         startActivity(loginIntent)
         finish()
     }
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        viewModel.dispose()
-//    }
 
 }

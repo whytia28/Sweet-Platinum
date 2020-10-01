@@ -2,14 +2,13 @@ package com.example.sweetPlatinum.di
 
 import android.content.Context
 import com.example.sweetPlatinum.BuildConfig
-import com.example.sweetPlatinum.battleActivity.GamePlayPresenter
+import com.example.sweetPlatinum.battleActivity.GamePlayViewModel
 import com.example.sweetPlatinum.login.LoginViewModel
 import com.example.sweetPlatinum.menuActivity.MenuActivityPresenter
 import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
 import com.example.sweetPlatinum.menuActivity.ui.history.HistoryPresenter
 import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
 import com.example.sweetPlatinum.network.ApiService
-import com.example.sweetPlatinum.register.RegisterActivityPresenter
 import com.example.sweetPlatinum.register.RegisterViewModel
 import com.example.sweetPlatinum.repository.SweetRepository
 import com.example.sweetPlatinum.room.HistoryDatabase
@@ -50,12 +49,6 @@ val appModule = module {
     factory {
         ProfilePresenter(get())
     }
-    factory { (context: Context) ->
-        GamePlayPresenter(context, get())
-    }
-    factory {
-        RegisterActivityPresenter(get())
-    }
     factory {
         HistoryPresenter(get())
     }
@@ -70,10 +63,11 @@ val dbModule = module {
 }
 
 val repositoryModule = module {
-    factory { SweetRepository(get()) }
+    factory { SweetRepository(get(), get()) }
 }
 val viewModule = module {
     viewModel { SplashScreenViewModel(get()) }
     viewModel { RegisterViewModel(get()) }
     viewModel { LoginViewModel(get()) }
+    viewModel { GamePlayViewModel(get()) }
 }

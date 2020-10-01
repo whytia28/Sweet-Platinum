@@ -12,6 +12,7 @@ import com.example.sweetPlatinum.login.LoginActivity
 class LandingActivity : AppCompatActivity(), FragmentListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.SplashTheme)
         setContentView(R.layout.activity_landing)
 
         openFirstFragment()
