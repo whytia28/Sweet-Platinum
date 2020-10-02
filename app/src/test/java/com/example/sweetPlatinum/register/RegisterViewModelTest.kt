@@ -43,5 +43,7 @@ class RegisterViewModelTest: KoinTest{
     @After
     fun after(){
         stopKoin()
+        TrampolineSchedulerRX.tearDown()
+        InstantRuleExecution.tearDown()
     }
 }

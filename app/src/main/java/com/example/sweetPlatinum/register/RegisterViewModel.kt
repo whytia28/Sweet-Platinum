@@ -27,9 +27,9 @@ class RegisterViewModel(private val apiService: ApiService) : ViewModel() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
-                    registerData.postValue(response)
+//                    registerData.postValue(response)
                 }, {
-                    registerData.value?.body()?.t = it
+//                    registerData.value?.body()?.t = it
                 })
         )
 
