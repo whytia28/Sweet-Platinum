@@ -11,7 +11,6 @@ import com.example.sweetPlatinum.pojo.LoginResponse
 import com.example.sweetPlatinum.register.RegisterActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import kotlinx.android.synthetic.main.activity_login.*
-import org.json.JSONObject
 import org.koin.android.ext.android.inject
 
 class LoginActivity : AppCompatActivity() {
@@ -44,8 +43,8 @@ class LoginActivity : AppCompatActivity() {
         })
 
         viewModel.errorData.observe(this, {
-            val jsonObject = JSONObject(it)
-            Toast.makeText(this, jsonObject.getString("errors"), Toast.LENGTH_SHORT)
+
+            Toast.makeText(this, it.getString("errors"), Toast.LENGTH_SHORT)
                 .show()
             hideProgressBar()
         })

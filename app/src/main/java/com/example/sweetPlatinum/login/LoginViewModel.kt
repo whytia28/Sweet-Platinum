@@ -8,12 +8,13 @@ import com.example.sweetPlatinum.pojo.PostLoginBody
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import org.json.JSONObject
 
 
 class LoginViewModel(private val apiService: ApiService) : ViewModel() {
 
     val loginData = MutableLiveData<LoginResponse>()
-    val errorData = MutableLiveData<String>()
+    val errorData = MutableLiveData<JSONObject>()
     private val disposable = CompositeDisposable()
 
     fun loginPerson(
@@ -35,7 +36,8 @@ class LoginViewModel(private val apiService: ApiService) : ViewModel() {
                         }
                     } else {
                         response.errorBody()?.string().let {
-                            errorData.postValue(it)
+                            val jsonObject = JSONObject(it)
+                            errorData.postValue(jsonObject)
                         }
                     }
                 }, {
