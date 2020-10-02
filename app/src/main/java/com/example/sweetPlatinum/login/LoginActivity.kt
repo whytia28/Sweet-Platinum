@@ -11,6 +11,7 @@ import com.example.sweetPlatinum.pojo.LoginResponse
 import com.example.sweetPlatinum.register.RegisterActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import kotlinx.android.synthetic.main.activity_login.*
+import org.json.JSONObject
 import org.koin.android.ext.android.inject
 
 class LoginActivity : AppCompatActivity() {
@@ -26,21 +27,29 @@ class LoginActivity : AppCompatActivity() {
         btn_login.setOnClickListener {
             showProgressBar()
             viewModel.loginPerson(
-                this,
                 et_email.text.toString(),
                 etPassword.text.toString(),
                 rememberMe
-            ).observe(this, {
-                if (it.t == null) {
-                    saveToken("token", "Bearer ${it.data?.token}")
-                    onLoginSuccess()
-                    it.data?.let { it1 -> goToMenuActivity(it1) }
-                } else {
-                    it.t?.message?.let { it1 -> onLoginFailure(it1) }
-                }
-                hideProgressBar()
-            })
+            )
         }
+        viewModel.loginData.observe(this, {
+            if (it.t == null) {
+                saveToken("token", "Bearer ${it.data?.token}")
+                onLoginSuccess()
+                it.data?.let { it1 -> goToMenuActivity(it1) }
+            } else {
+                it.t?.message?.let { it1 -> onLoginFailure(it1) }
+            }
+            hideProgressBar()
+        })
+
+        viewModel.errorData.observe(this, {
+            val jsonObject = JSONObject(it)
+            Toast.makeText(this, jsonObject.getString("errors"), Toast.LENGTH_SHORT)
+                .show()
+            hideProgressBar()
+        })
+
         check_box.setOnCheckedChangeListener { _, isChecked ->
             rememberMe = isChecked
         }
