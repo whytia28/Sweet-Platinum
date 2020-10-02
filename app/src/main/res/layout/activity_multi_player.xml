@@ -37,6 +37,30 @@
         app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="@id/guideline4" />
 
+    <TextView
+        android:id="@+id/battle_score_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
+        app:layout_constraintBottom_toTopOf="@id/guideline5"
+        app:layout_constraintEnd_toEndOf="@id/rock1" />
+
+    <TextView
+        android:id="@+id/battle_score_opponent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/rock2"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
+        app:layout_constraintBottom_toTopOf="@id/guideline5"
+        app:layout_constraintEnd_toEndOf="@id/guideline4" />
+
     <ImageView
         android:id="@+id/rock1"
         android:layout_width="92dp"
@@ -149,7 +173,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -170,6 +194,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.30" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
