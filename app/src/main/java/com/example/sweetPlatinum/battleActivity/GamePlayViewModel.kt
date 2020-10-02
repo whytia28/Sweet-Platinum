@@ -20,6 +20,8 @@ class GamePlayViewModel(private val apiService: ApiService, private val historyD
 
     private val disposable = CompositeDisposable()
     private val history = MutableLiveData<PostBattleResponse>()
+    val scoreBattle : MutableLiveData<Int> = MutableLiveData(0)
+    val scoreBattleOpponent : MutableLiveData<Int> = MutableLiveData(0)
 
     fun saveHistory(token: String, body: PostBattleBody): LiveData<PostBattleResponse> {
         disposable.add(
@@ -46,5 +48,12 @@ class GamePlayViewModel(private val apiService: ApiService, private val historyD
         val date = Date()
 
         return dateFormat.format(date)
+    }
+
+    fun scoreUp() {
+        this.scoreBattle.value = this.scoreBattle.value?.plus(10)
+    }
+    fun scoreUpOpponent() {
+        this.scoreBattleOpponent.value = this.scoreBattleOpponent.value?.plus(10)
     }
 }

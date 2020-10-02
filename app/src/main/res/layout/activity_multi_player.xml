@@ -7,6 +7,27 @@
     android:background="@drawable/background_gradient"
     tools:context="com.example.sweetPlatinum.battleActivity.MultiPlayerActivity">
 
+
+    <View
+        android:id="@+id/view_score"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline5"
+        app:layout_constraintEnd_toEndOf="@id/player_one"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="@id/guideline" />
+
+    <View
+        android:id="@+id/view_score2"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@id/guideline5"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintStart_toStartOf="@id/player_two"
+        app:layout_constraintTop_toBottomOf="@id/guideline" />
+
     <ImageView
         android:id="@+id/btn_share"
         android:layout_width="wrap_content"
@@ -29,6 +50,7 @@
         app:layout_constraintStart_toStartOf="@id/guideline3" />
 
     <TextView
+        android:id="@+id/player_two"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/player_2"
@@ -42,24 +64,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/score"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/guideline3"
-        app:layout_constraintTop_toBottomOf="@id/guideline"
         app:layout_constraintBottom_toTopOf="@id/guideline5"
-        app:layout_constraintEnd_toEndOf="@id/rock1" />
+        app:layout_constraintEnd_toEndOf="@id/player_one"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/guideline" />
 
     <TextView
         android:id="@+id/battle_score_opponent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/score"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/rock2"
-        app:layout_constraintTop_toBottomOf="@id/guideline"
         app:layout_constraintBottom_toTopOf="@id/guideline5"
-        app:layout_constraintEnd_toEndOf="@id/guideline4" />
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintStart_toStartOf="@id/player_two"
+        app:layout_constraintTop_toBottomOf="@id/guideline" />
 
     <ImageView
         android:id="@+id/rock1"
@@ -144,7 +166,7 @@
         android:layout_marginStart="10dp"
         android:contentDescription="@string/button_save"
         android:src="@drawable/ic_save"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
         app:layout_constraintStart_toStartOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
@@ -156,7 +178,7 @@
         android:layout_marginEnd="10dp"
         android:contentDescription="@string/button_restart"
         android:src="@drawable/refresh"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
         app:layout_constraintEnd_toEndOf="@id/guideline4"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
@@ -195,5 +217,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
