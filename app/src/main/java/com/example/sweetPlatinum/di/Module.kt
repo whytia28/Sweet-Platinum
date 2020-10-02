@@ -4,13 +4,11 @@ import android.content.Context
 import com.example.sweetPlatinum.BuildConfig
 import com.example.sweetPlatinum.battleActivity.GamePlayViewModel
 import com.example.sweetPlatinum.login.LoginViewModel
-import com.example.sweetPlatinum.menuActivity.MenuActivityPresenter
-import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
-import com.example.sweetPlatinum.menuActivity.ui.history.HistoryPresenter
-import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
+import com.example.sweetPlatinum.menuActivity.MenuViewModel
+import com.example.sweetPlatinum.menuActivity.ui.history.HistoryViewModel
+import com.example.sweetPlatinum.menuActivity.ui.profile.ProfileViewModel
 import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.register.RegisterViewModel
-import com.example.sweetPlatinum.repository.SweetRepository
 import com.example.sweetPlatinum.room.HistoryDatabase
 import com.example.sweetPlatinum.saveBattle.SaveBattlePresenter
 import com.example.sweetPlatinum.splashScreen.SplashScreenViewModel
@@ -39,19 +37,6 @@ val appModule = module {
 
         retrofit.create(ApiService::class.java)
     }
-
-    factory { (context: Context) ->
-        MenuActivityPresenter(context)
-    }
-    factory {
-        BattlePresenter()
-    }
-    factory {
-        ProfilePresenter(get())
-    }
-    factory {
-        HistoryPresenter(get())
-    }
     factory { (context: Context) ->
         SaveBattlePresenter(context)
     }
@@ -62,12 +47,12 @@ val dbModule = module {
     factory { get<HistoryDatabase>().historyDAO() }
 }
 
-val repositoryModule = module {
-    factory { SweetRepository(get(), get()) }
-}
 val viewModule = module {
     viewModel { SplashScreenViewModel(get()) }
     viewModel { RegisterViewModel(get()) }
     viewModel { LoginViewModel(get()) }
-    viewModel { GamePlayViewModel(get()) }
+    viewModel { HistoryViewModel(get()) }
+    viewModel { ProfileViewModel(get()) }
+    viewModel { MenuViewModel(get()) }
+    viewModel { GamePlayViewModel(get(), get()) }
 }

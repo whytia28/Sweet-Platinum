@@ -17,7 +17,7 @@ class SaveBattlePresenter(context: Context) {
         GlobalScope.launch {
             val listHistory = historyDb?.historyDAO()?.read()
             listHistory?.let {
-//                listener?.showAllHistory(it)
+                listener?.showAllHistory(it)
             }
         }
     }

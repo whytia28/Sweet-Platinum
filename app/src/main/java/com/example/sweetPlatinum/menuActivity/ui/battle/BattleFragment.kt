@@ -14,15 +14,12 @@ import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
 import com.example.sweetPlatinum.pojo.LoginResponse
 import kotlinx.android.synthetic.main.fragment_battle.*
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
 
 
-class BattleFragment : Fragment(), BattlePresenter.Listener {
+class BattleFragment : Fragment() {
 
     private lateinit var battleViewModel: BattleViewModel
     private lateinit var username: String
-    private val presenter: BattlePresenter by inject { parametersOf(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,9 +52,6 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
         tv_multi_player.text = getString(R.string.vs_player, username)
         tv_single_player.text = getString(R.string.vs_cpu, username)
 
-
-        presenter.listener = this
-
         single_player.setOnClickListener {
             goToSinglePlayer(username)
         }
@@ -73,14 +67,14 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
 
     }
 
-    override fun goToMultiPlayer(username: String) {
+     private fun goToMultiPlayer(username: String) {
         val multiPlayerIntent = Intent(context, MultiPlayerActivity::class.java)
         multiPlayerIntent.putExtra("username", username)
         startActivity(multiPlayerIntent)
         activity?.overridePendingTransition(R.anim.from_right, R.anim.to_left)
     }
 
-    override fun goToSinglePlayer(username: String) {
+     private fun goToSinglePlayer(username: String) {
         val singlePlayerIntent = Intent(context, SinglePlayerActivity::class.java)
         singlePlayerIntent.putExtra("username", username)
         startActivity(singlePlayerIntent)

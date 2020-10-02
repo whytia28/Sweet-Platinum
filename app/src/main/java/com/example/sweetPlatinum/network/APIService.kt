@@ -13,7 +13,7 @@ interface ApiService {
     fun validateLogin(@Body body: PostLoginBody): Observable<Response<LoginResponse>>
 
     @GET("v1/auth/me")
-    fun autoLogin(@Header("Authorization") auth: String): Single<AuthResponse>
+    fun autoLogin(@Header("Authorization") auth: String): Single<Response<AuthResponse>>
 
     @POST("v1/auth/register")
     fun registerUser(@Body bodyRegister: PostBodyRegister): Single<Response<RegisterResponse>>
@@ -22,10 +22,10 @@ interface ApiService {
     fun updateUser(
         @Header("Authorization") auth: String,
         @Body photo: RequestBody
-    ): Single<UpdateResponse>
+    ): Single<Response<UpdateResponse>>
 
     @GET("v1/users")
-    fun getProfileUser(@Header("Authorization") auth: String): Single<GetProfileResponse>
+    fun getProfileUser(@Header("Authorization") auth: String): Single<Response<GetProfileResponse>>
 
     @GET("v1/battle")
     fun getHistoryBattle(@Header("Authorization") auth: String): Single<Response<GetBattleResponse>>

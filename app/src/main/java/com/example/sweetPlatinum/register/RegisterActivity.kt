@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_register.*
-import org.json.JSONObject
 import org.koin.android.ext.android.inject
 
 class RegisterActivity : AppCompatActivity() {
@@ -25,26 +24,32 @@ class RegisterActivity : AppCompatActivity() {
         btn_register.setOnClickListener {
             showProgressBar()
             viewModel.registerPerson(
-                this,
                 et_email.text.toString(),
                 et_username.text.toString(),
                 etPassword.text.toString()
-            ).observe(this, { response ->
-                if (response.code() == 422) {
-                    response.errorBody()?.string()?.let {
-                        val jsonObject = JSONObject(it)
-                        Toast.makeText(this, jsonObject.getString("errors"), Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                } else {
-                    onRegisterSuccess()
-                }
-                hideProgressBar()
-            })
+            )
         }
         btn_reset.setOnClickListener {
             resetEditText()
         }
+
+        observeRegister()
+        observeError()
+    }
+
+    private fun observeRegister() {
+        viewModel.registerData.observe(this, {
+            onRegisterSuccess()
+            hideProgressBar()
+        })
+    }
+
+    private fun observeError() {
+        viewModel.registerError.observe(this, {
+            Toast.makeText(this, it.getString("errors"), Toast.LENGTH_SHORT)
+                .show()
+            hideProgressBar()
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -26,20 +26,10 @@ class LoginActivity : AppCompatActivity() {
         btn_login.setOnClickListener {
             showProgressBar()
             viewModel.loginPerson(
-                this,
                 et_email.text.toString(),
                 etPassword.text.toString(),
                 rememberMe
-            ).observe(this, {
-                if (it.t == null) {
-                    saveToken("token", "Bearer ${it.data?.token}")
-                    onLoginSuccess()
-                    it.data?.let { it1 -> goToMenuActivity(it1) }
-                } else {
-                    it.t?.message?.let { it1 -> onLoginFailure(it1) }
-                }
-                hideProgressBar()
-            })
+            )
         }
         check_box.setOnCheckedChangeListener { _, isChecked ->
             rememberMe = isChecked
@@ -51,6 +41,30 @@ class LoginActivity : AppCompatActivity() {
             goToRegister()
         }
 
+        observeLogin()
+        observeError()
+
+    }
+
+    private fun observeLogin() {
+        viewModel.loginData.observe(this, {
+            if (it.t == null) {
+                saveToken("token", "Bearer ${it.data?.token}")
+                onLoginSuccess()
+                it.data?.let { it1 -> goToMenuActivity(it1) }
+            } else {
+                it.t?.message?.let { it1 -> onLoginFailure(it1) }
+            }
+            hideProgressBar()
+        })
+    }
+
+    private fun observeError() {
+        viewModel.errorData.observe(this, {
+            Toast.makeText(this, it.getString("errors"), Toast.LENGTH_SHORT)
+                .show()
+            hideProgressBar()
+        })
     }
 
     private fun onLoginSuccess() {

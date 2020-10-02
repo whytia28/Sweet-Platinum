@@ -17,12 +17,11 @@ import com.example.sweetPlatinum.setting.SettingActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
 
 
-class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
+class MenuActivity : AppCompatActivity() {
 
-    private val menuActivityPresenter: MenuActivityPresenter by inject { parametersOf(this) }
+    private val viewModel: MenuViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +30,6 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
 //        val toolbar: Toolbar = findViewById(R.id.menu_actionbar)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.itemIconTintList = null
-        menuActivityPresenter.listener = this
 
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
@@ -58,7 +56,7 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
                 MySharedPreferences(this).deleteData()
                 startActivity(loginIntent)
                 overridePendingTransition(R.anim.from_left, R.anim.to_right)
-                menuActivityPresenter.deleteAllHistory()
+                viewModel.deleteAllHistory()
                 onLogoutSuccess()
             }
 
@@ -78,7 +76,7 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onLogoutSuccess() {
+    private fun onLogoutSuccess() {
         Toast.makeText(this, R.string.logout_success, Toast.LENGTH_SHORT).show()
         finish()
     }
