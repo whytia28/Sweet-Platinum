@@ -25,7 +25,6 @@ class RegisterActivity : AppCompatActivity() {
         btn_register.setOnClickListener {
             showProgressBar()
             viewModel.registerPerson(
-                this,
                 et_email.text.toString(),
                 et_username.text.toString(),
                 etPassword.text.toString()
@@ -42,6 +41,8 @@ class RegisterActivity : AppCompatActivity() {
                 hideProgressBar()
             })
         }
+
+
         btn_reset.setOnClickListener {
             resetEditText()
         }

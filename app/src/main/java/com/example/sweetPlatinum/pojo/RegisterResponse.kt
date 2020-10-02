@@ -3,12 +3,17 @@ package com.example.sweetPlatinum.pojo
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterResponse(
+class RegisterResponse() {
+    var t: Throwable? = null
     @SerializedName("data")
-    val `data`: Data,
+    lateinit var `data`: Data
     @SerializedName("success")
-    val success: String
-) {
+    lateinit var success: String
+
+    constructor(t: Throwable): this(){
+        this.t = t
+    }
+
     data class Data(
         @SerializedName("email")
         val email: String,
