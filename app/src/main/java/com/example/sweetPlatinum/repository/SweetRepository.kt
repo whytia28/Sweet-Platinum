@@ -5,10 +5,12 @@ import android.graphics.Bitmap
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.sweetPlatinum.menuActivity.MenuActivityPresenter
 import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.pojo.*
 import com.example.sweetPlatinum.room.History
 import com.example.sweetPlatinum.room.HistoryDAO
+import com.example.sweetPlatinum.room.HistoryDatabase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -30,6 +32,7 @@ class SweetRepository(private val historyDAO: HistoryDAO, private val apiService
     private val authData = MutableLiveData<AuthResponse>()
     private val loginData = MutableLiveData<LoginResponse>()
     private val registerData = MutableLiveData<Response<RegisterResponse>>()
+
 
 
     fun autoLogin(token: String, context: Context): LiveData<AuthResponse> {
