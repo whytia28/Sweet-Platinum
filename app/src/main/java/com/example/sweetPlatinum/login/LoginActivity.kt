@@ -31,6 +31,24 @@ class LoginActivity : AppCompatActivity() {
                 rememberMe
             )
         }
+        viewModel.loginData.observe(this, {
+            if (it.t == null) {
+                saveToken("token", "Bearer ${it.data?.token}")
+                onLoginSuccess()
+                it.data?.let { it1 -> goToMenuActivity(it1) }
+            } else {
+                it.t?.message?.let { it1 -> onLoginFailure(it1) }
+            }
+            hideProgressBar()
+        })
+
+        viewModel.errorData.observe(this, {
+
+            Toast.makeText(this, it.getString("errors"), Toast.LENGTH_SHORT)
+                .show()
+            hideProgressBar()
+        })
+
         check_box.setOnCheckedChangeListener { _, isChecked ->
             rememberMe = isChecked
         }
