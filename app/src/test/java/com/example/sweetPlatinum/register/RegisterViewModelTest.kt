@@ -24,7 +24,7 @@ import retrofit2.Response
 
 class RegisterViewModelTest: KoinTest{
     private val viewModel: RegisterViewModel by inject()
-    private val observer = mock<Observer<Response<RegisterResponse>>>()
+    private val observer = mock<Observer<RegisterResponse>>()
 
     @Before
     fun before(){
@@ -35,7 +35,9 @@ class RegisterViewModelTest: KoinTest{
 
     @Test
     fun `Test Register`(){
-        viewModel.registerPerson("emailku1@mail.com", "username1", "password").observeForever(){
+        viewModel.registerPerson("emailku1@mail.com", "username1", "password")
+
+        viewModel.registerDataSuccess.observeForever {
             verify(observer, atLeastOnce()).onChanged(it)
         }
     }

@@ -28,19 +28,16 @@ class RegisterActivity : AppCompatActivity() {
                 et_email.text.toString(),
                 et_username.text.toString(),
                 etPassword.text.toString()
-            ).observe(this, { response ->
-                if (response.code() == 422) {
-                    response.errorBody()?.string()?.let {
-                        val jsonObject = JSONObject(it)
-                        Toast.makeText(this, jsonObject.getString("errors"), Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                } else {
-                    onRegisterSuccess()
-                }
-                hideProgressBar()
-            })
+            )
         }
+
+        viewModel.registerDataError.observe(this,{
+                Toast.makeText(this, "Error + $it", Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.registerDataSuccess.observe(this, {
+            onRegisterSuccess()
+        })
 
 
         btn_reset.setOnClickListener {
