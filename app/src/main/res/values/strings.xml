@@ -79,4 +79,6 @@
     <string name="delete_history_failed">Delete History Failed</string>
     <string name="save_battle">Save Battle</string>
     <string name="edit_btn">EDIT</string>
+    <string name="score" translatable="false">0</string>
+    <string name="cancel_btn">CANCEL</string>
 </resources>

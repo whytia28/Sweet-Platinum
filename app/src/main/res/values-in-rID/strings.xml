@@ -65,4 +65,5 @@
     <string name="title_login">Masuk</string>
     <string name="title_register">Daftar</string>
     <string name="edit_btn">UBAH</string>
+    <string name="cancel_btn">BATAL</string>
 </resources>

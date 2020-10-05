@@ -45,6 +45,7 @@ class MultiPlayerActivity : AppCompatActivity() {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         paper1.setOnClickListener {
             playerOne = Controller.gameChoice[1]
@@ -52,6 +53,7 @@ class MultiPlayerActivity : AppCompatActivity() {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         scissor1.setOnClickListener {
             playerOne = Controller.gameChoice[2]
@@ -59,6 +61,7 @@ class MultiPlayerActivity : AppCompatActivity() {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         rock2.setOnClickListener {
             playerTwo = Controller.gameChoice[0]
@@ -66,6 +69,7 @@ class MultiPlayerActivity : AppCompatActivity() {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         paper2.setOnClickListener {
             playerTwo = Controller.gameChoice[1]
@@ -73,6 +77,7 @@ class MultiPlayerActivity : AppCompatActivity() {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         scissor2.setOnClickListener {
             playerTwo = Controller.gameChoice[2]
@@ -80,6 +85,7 @@ class MultiPlayerActivity : AppCompatActivity() {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         iv_restart.setOnClickListener {
             startNew()
@@ -95,12 +101,28 @@ class MultiPlayerActivity : AppCompatActivity() {
         btn_share.setOnClickListener {
             shareTo()
         }
+        viewModel.scoreBattle.observe(this, {
+            battle_score_player.text = it.toString()
+        })
+        viewModel.scoreBattleOpponent.observe(this, {
+            battle_score_opponent.text = it.toString()
+        })
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         overridePendingTransition(R.anim.from_left, R.anim.to_right)
         return true
+    }
+
+
+    private fun scoreBattle() {
+        if (winner == "Player Win") {
+            viewModel.scoreUp()
+        } else if (winner == "Opponent Win") {
+            viewModel.scoreUpOpponent()
+        }
     }
 
     private fun onPlayerSelected() {
@@ -125,6 +147,7 @@ class MultiPlayerActivity : AppCompatActivity() {
     private fun startNew() {
         playerOne = ""
         playerTwo = ""
+        winner = ""
         iv_save.setImageResource(R.drawable.ic_save)
         rock1.foreground = null
         paper1.foreground = null
@@ -150,6 +173,7 @@ class MultiPlayerActivity : AppCompatActivity() {
                     "Draw"
                 }
             }
+
 
             message = when (winner) {
                 "Player Win" -> {

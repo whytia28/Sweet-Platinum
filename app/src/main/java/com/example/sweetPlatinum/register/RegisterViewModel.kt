@@ -1,6 +1,5 @@
 package com.example.sweetPlatinum.register
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sweetPlatinum.network.ApiService
@@ -12,29 +11,37 @@ import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 
 class RegisterViewModel(private val apiService: ApiService) : ViewModel() {
-    private val disposable = CompositeDisposable()
-    val registerDataError = MutableLiveData<String>()
-    val registerDataSuccess = MutableLiveData<RegisterResponse>()
-    val throwable = MutableLiveData<Throwable>()
 
-    fun registerPerson(email: String, username: String, password: String){
+    val registerData = MutableLiveData<RegisterResponse>()
+    val registerError = MutableLiveData<JSONObject>()
+    private val disposable = CompositeDisposable()
+
+    fun registerPerson(
+        email: String,
+        username: String,
+        password: String
+    ) {
         val body = PostBodyRegister(email, password, username)
         disposable.add(
             apiService.registerUser(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
-                    if (response.code() == 422) {
-                        response.errorBody()?.string()?.let {
-                            val jsonObject = JSONObject(it)
-                            registerDataError.postValue(jsonObject.getString("errors"))
+                    if (response.code() == 200) {
+                        response.body()?.let {
+                            registerData.postValue(it)
                         }
                     } else {
-                        registerDataSuccess.postValue(response.body())
+                        response.errorBody()?.string()?.let {
+                            val jsonObject = JSONObject(it)
+                            registerError.postValue(jsonObject)
+                        }
                     }
                 }, {
-                    throwable.postValue(it)
+
                 })
         )
+
     }
+
 }

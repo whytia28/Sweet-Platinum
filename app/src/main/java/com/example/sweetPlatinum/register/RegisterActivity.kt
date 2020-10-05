@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_register.*
-import org.json.JSONObject
 import org.koin.android.ext.android.inject
 
 class RegisterActivity : AppCompatActivity() {
@@ -43,6 +42,24 @@ class RegisterActivity : AppCompatActivity() {
         btn_reset.setOnClickListener {
             resetEditText()
         }
+
+        observeRegister()
+        observeError()
+    }
+
+    private fun observeRegister() {
+        viewModel.registerData.observe(this, {
+            onRegisterSuccess()
+            hideProgressBar()
+        })
+    }
+
+    private fun observeError() {
+        viewModel.registerError.observe(this, {
+            Toast.makeText(this, it.getString("errors"), Toast.LENGTH_SHORT)
+                .show()
+            hideProgressBar()
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {

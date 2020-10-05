@@ -47,15 +47,13 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun autoLogin() {
         val token = MySharedPreferences(this).getData("token").toString()
-        viewModel.autoLogin(token, this).observe(this, {
-            if (it.t == null) {
-                it?.data?.let { response ->
-                    goToMenuActivity(response)
-                }
-            } else {
-                goToLoginActivity()
-                it.t?.message?.let { it1 -> onAuthLoginFailed(it1) }
-            }
+        viewModel.autoLogin(token)
+        viewModel.loginData.observe(this, {
+            it.data?.let { it1 -> goToMenuActivity(it1) }
+        })
+        viewModel.loginError.observe(this, {
+            goToLoginActivity()
+            onAuthLoginFailed(it.getString("errors"))
         })
     }
 
