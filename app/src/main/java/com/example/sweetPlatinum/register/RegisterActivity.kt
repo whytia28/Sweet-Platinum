@@ -29,16 +29,6 @@ class RegisterActivity : AppCompatActivity() {
                 etPassword.text.toString()
             )
         }
-
-        viewModel.registerDataError.observe(this,{
-                Toast.makeText(this, "Error + $it", Toast.LENGTH_SHORT).show()
-        })
-
-        viewModel.registerDataSuccess.observe(this, {
-            onRegisterSuccess()
-        })
-
-
         btn_reset.setOnClickListener {
             resetEditText()
         }

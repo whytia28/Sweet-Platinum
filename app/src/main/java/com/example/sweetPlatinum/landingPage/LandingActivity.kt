@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.sweetPlatinum.*
 import com.example.sweetPlatinum.login.LoginActivity
+import com.example.sweetPlatinum.R
 
 class LandingActivity : AppCompatActivity(), FragmentListener {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,7 +1,6 @@
 package com.example.sweetPlatinum.di
 
 import android.content.Context
-import com.example.sweetPlatinum.BuildConfig
 import com.example.sweetPlatinum.battleActivity.GamePlayViewModel
 import com.example.sweetPlatinum.login.LoginViewModel
 import com.example.sweetPlatinum.menuActivity.MenuViewModel
@@ -12,6 +11,7 @@ import com.example.sweetPlatinum.register.RegisterViewModel
 import com.example.sweetPlatinum.room.HistoryDatabase
 import com.example.sweetPlatinum.saveBattle.SaveBattlePresenter
 import com.example.sweetPlatinum.splashScreen.SplashScreenViewModel
+import com.example.sweetPlatinum.BuildConfig
 import okhttp3.OkHttpClient
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module

@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.LoginResponse
 import com.example.sweetPlatinum.register.RegisterActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
+import com.example.sweetPlatinum.R
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 
