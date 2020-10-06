@@ -53,6 +53,7 @@ class SplashScreenActivity : AppCompatActivity() {
         })
         viewModel.loginError.observe(this, {
             goToLoginActivity()
+            viewModel.deleteAllHistory()
             onAuthLoginFailed(it.getString("errors"))
         })
     }

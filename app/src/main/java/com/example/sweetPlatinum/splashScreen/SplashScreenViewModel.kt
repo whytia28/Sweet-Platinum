@@ -4,12 +4,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.pojo.AuthResponse
+import com.example.sweetPlatinum.room.HistoryDAO
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
-class SplashScreenViewModel(private val apiService: ApiService) : ViewModel() {
+class SplashScreenViewModel(private val apiService: ApiService, private val historyDAO: HistoryDAO) : ViewModel() {
 
     val loginData = MutableLiveData<AuthResponse>()
     val loginError = MutableLiveData<JSONObject>()
@@ -35,5 +38,11 @@ class SplashScreenViewModel(private val apiService: ApiService) : ViewModel() {
 
                 })
         )
+    }
+
+    fun deleteAllHistory() {
+        GlobalScope.launch {
+            historyDAO.deleteAll()
+        }
     }
 }

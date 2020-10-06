@@ -13,7 +13,8 @@ import com.example.sweetPlatinum.room.HistoryDatabase
 import com.example.sweetPlatinum.saveBattle.SaveBattlePresenter
 import com.example.sweetPlatinum.splashScreen.SplashScreenViewModel
 import okhttp3.OkHttpClient
-import org.koin.android.viewmodel.ext.koin.viewModel
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -43,12 +44,12 @@ val appModule = module {
 }
 
 val dbModule = module {
-    factory { HistoryDatabase.getInstance(context = get())!! }
+    factory { HistoryDatabase.getInstance(androidContext())!! }
     factory { get<HistoryDatabase>().historyDAO() }
 }
 
 val viewModule = module {
-    viewModel { SplashScreenViewModel(get()) }
+    viewModel { SplashScreenViewModel(get(), get()) }
     viewModel { RegisterViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { HistoryViewModel(get()) }
