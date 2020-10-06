@@ -66,10 +66,10 @@
         android:text="@string/score"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/guideline5"
-        app:layout_constraintEnd_toEndOf="@id/player_one"
-        app:layout_constraintStart_toStartOf="@id/guideline3"
-        app:layout_constraintTop_toBottomOf="@id/guideline" />
+        app:layout_constraintBottom_toBottomOf="@id/view_score"
+        app:layout_constraintEnd_toEndOf="@id/view_score"
+        app:layout_constraintStart_toStartOf="@id/view_score"
+        app:layout_constraintTop_toTopOf="@id/view_score" />
 
     <TextView
         android:id="@+id/battle_score_opponent"
@@ -78,10 +78,10 @@
         android:text="@string/score"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/guideline5"
-        app:layout_constraintEnd_toEndOf="@id/guideline4"
-        app:layout_constraintStart_toStartOf="@id/player_two"
-        app:layout_constraintTop_toBottomOf="@id/guideline" />
+        app:layout_constraintBottom_toBottomOf="@id/view_score2"
+        app:layout_constraintEnd_toEndOf="@id/view_score2"
+        app:layout_constraintStart_toStartOf="@id/view_score2"
+        app:layout_constraintTop_toTopOf="@id/view_score2" />
 
     <ImageView
         android:id="@+id/rock1"

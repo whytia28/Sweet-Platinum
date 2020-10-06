@@ -7,6 +7,50 @@
     android:background="@drawable/background_gradient"
     tools:context="com.example.sweetPlatinum.battleActivity.MultiPlayerActivity">
 
+    <View
+        android:id="@+id/view_score"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline5"
+        app:layout_constraintEnd_toEndOf="@id/player_one"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="@id/guideline" />
+
+    <View
+        android:id="@+id/view_score2"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@id/guideline5"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintStart_toStartOf="@id/cpu"
+        app:layout_constraintTop_toTopOf="@id/guideline" />
+
+    <TextView
+        android:id="@+id/battle_score_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/view_score"
+        app:layout_constraintEnd_toEndOf="@id/view_score"
+        app:layout_constraintStart_toStartOf="@id/view_score"
+        app:layout_constraintTop_toTopOf="@id/view_score" />
+
+    <TextView
+        android:id="@+id/battle_score_cpu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/view_score2"
+        app:layout_constraintEnd_toEndOf="@id/view_score2"
+        app:layout_constraintStart_toStartOf="@id/view_score2"
+        app:layout_constraintTop_toTopOf="@id/view_score2" />
+
     <ImageView
         android:id="@+id/btn_share"
         android:layout_width="wrap_content"
@@ -29,6 +73,7 @@
         app:layout_constraintStart_toStartOf="@id/guideline3" />
 
     <TextView
+        android:id="@+id/cpu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cpu"

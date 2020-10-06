@@ -47,6 +47,7 @@ class SinglePlayerActivity : AppCompatActivity() {
             setOverlay()
             showResult()
             showButtonShare()
+            scoreBattle()
         }
 
         paper1.setOnClickListener {
@@ -54,6 +55,7 @@ class SinglePlayerActivity : AppCompatActivity() {
             setOverlay()
             showResult()
             showButtonShare()
+            scoreBattle()
         }
 
         scissor1.setOnClickListener {
@@ -61,6 +63,7 @@ class SinglePlayerActivity : AppCompatActivity() {
             setOverlay()
             showResult()
             showButtonShare()
+            scoreBattle()
         }
 
         iv_restart.setOnClickListener {
@@ -78,12 +81,28 @@ class SinglePlayerActivity : AppCompatActivity() {
         btn_share.setOnClickListener {
             shareTo()
         }
+
+        viewModel.scoreBattle.observe(this, {
+            battle_score_player.text = it.toString()
+        })
+
+        viewModel.scoreBattleOpponent.observe(this, {
+            battle_score_cpu.text = it.toString()
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         overridePendingTransition(R.anim.from_left, R.anim.to_right)
         return true
+    }
+
+    private fun scoreBattle() {
+        if (winner == "Player Win") {
+            viewModel.scoreUp()
+        } else if (winner == "Opponent Win") {
+            viewModel.scoreUpOpponent()
+        }
     }
 
     private fun showResult() {
@@ -126,7 +145,7 @@ class SinglePlayerActivity : AppCompatActivity() {
                 kotlin.run {
                     dialogMessage.show()
                 }
-            }, 1000)
+            }, 100)
             dialog.btn_exit.setOnClickListener {
                 dialogMessage.dismiss()
             }
@@ -183,6 +202,7 @@ class SinglePlayerActivity : AppCompatActivity() {
 
     private fun startNew() {
         playerOne = ""
+        winner = ""
         iv_save.setImageResource(R.drawable.ic_save)
         rock1.foreground = null
         rock2.foreground = null
