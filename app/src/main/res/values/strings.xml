@@ -9,7 +9,6 @@
     <string name="multi_player">Multi Player</string>
     <string name="single_player">Single Player</string>
     <string name="exit">EXIT</string>
-    <string name="button_back">Button Back</string>
     <string name="player_1" translatable="false">Player 1</string>
     <string name="player_2">Player 2</string>
     <string name="rock">Rock</string>
@@ -43,7 +42,6 @@
     <string name="player_2_win">Player 2 Win</string>
     <string name="draw">Draw</string>
     <string name="player_win">%1$s Win</string>
-    <string name="edit">Edit</string>
     <string name="data_profile">DATA PROFILE</string>
     <string name="image_profile" translatable="false">image profile</string>
     <string name="button_set_profile" translatable="false">button set profile</string>
@@ -80,5 +78,5 @@
     <string name="save_battle">Save Battle</string>
     <string name="edit_btn">EDIT</string>
     <string name="score" translatable="false">0</string>
-    <string name="cancel_btn">CANCEL</string>
+    <string name="cancel_btn">Cancel</string>
 </resources>
