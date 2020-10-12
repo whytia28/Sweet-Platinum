@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_battle.*
 class BattleFragment : Fragment() {
 
     private lateinit var battleViewModel: BattleViewModel
-    private lateinit var username: String
+    private  var username: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
