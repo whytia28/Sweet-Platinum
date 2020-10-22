@@ -3,15 +3,14 @@ package com.example.sweetPlatinum.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.room.History
-import com.example.sweetPlatinum.saveBattle.SaveBattlePresenter
+import com.example.sweetPlatinum.saveBattle.SaveBattleViewModel
 import kotlinx.android.synthetic.main.history_local_item.view.*
 
 class AdapterHistoryLocal(
-    private val historyBattle: List<History>, private val presenter: SaveBattlePresenter
+    private val historyBattle: List<History>, private val viewModel: SaveBattleViewModel
 ) : RecyclerView.Adapter<AdapterHistoryLocal.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,8 +22,8 @@ class AdapterHistoryLocal(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(historyBattle[position])
         holder.itemView.tv_delete.setOnClickListener {
-            presenter.deleteHistory(historyBattle[position])
-            presenter.getListHistory()
+            viewModel.deleteHistory(historyBattle[position])
+            viewModel.getListHistory()
         }
     }
 

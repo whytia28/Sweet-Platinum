@@ -1,10 +1,9 @@
 package com.example.sweetPlatinum.saveBattle
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.adapter.AdapterHistoryLocal
@@ -13,8 +12,8 @@ import kotlinx.android.synthetic.main.activity_save_battle.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class SaveBattleActivity : AppCompatActivity(), SaveBattlePresenter.Listener {
-    private val presenter: SaveBattlePresenter by inject { parametersOf(this) }
+class SaveBattleActivity : AppCompatActivity() {
+    private val viewModel: SaveBattleViewModel by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,13 +22,18 @@ class SaveBattleActivity : AppCompatActivity(), SaveBattlePresenter.Listener {
         supportActionBar?.title = getString(R.string.save_battle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        presenter.listener = this
-        presenter.getListHistory()
+        viewModel.getUpdateList().observe(this, { result ->
+            if (result > 0) {
+                onSuccessDelete()
+            } else {
+                onFailedDelete()
+            }
+        })
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.getListHistory()
+        getHistory()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -38,15 +42,21 @@ class SaveBattleActivity : AppCompatActivity(), SaveBattlePresenter.Listener {
         return true
     }
 
+    private fun getHistory() {
+        viewModel.getListHistory().observe(this, {
+            showAllHistory(it)
+        })
+    }
+
     private fun setRecyclerView(listHistory: List<History>) {
         rv_history.layoutManager = LinearLayoutManager(this)
         rv_history.setHasFixedSize(true)
-        val adapter = AdapterHistoryLocal(listHistory, presenter)
+        val adapter = AdapterHistoryLocal(listHistory, viewModel)
         rv_history.adapter = adapter
         setupUi(listHistory)
     }
 
-    override fun setupUi(listHistory: List<History>) {
+    private fun setupUi(listHistory: List<History>) {
         if (listHistory.isNotEmpty()) {
             tv_history_empty.visibility = View.GONE
         } else {
@@ -54,20 +64,20 @@ class SaveBattleActivity : AppCompatActivity(), SaveBattlePresenter.Listener {
         }
     }
 
-    override fun showAllHistory(listHistory: List<History>) {
+    private fun showAllHistory(listHistory: List<History>) {
         runOnUiThread {
             setRecyclerView(listHistory)
         }
     }
 
-    override fun onSuccessDelete() {
+    private fun onSuccessDelete() {
         runOnUiThread {
             Toast.makeText(this, getString(R.string.delete_history_success), Toast.LENGTH_SHORT)
                 .show()
         }
     }
 
-    override fun onFailedDelete() {
+    private fun onFailedDelete() {
         runOnUiThread {
             Toast.makeText(this, getString(R.string.delete_history_failed), Toast.LENGTH_SHORT)
                 .show()

@@ -3,7 +3,6 @@ package com.example.sweetPlatinum.menuActivity.ui.profile
 import android.graphics.Bitmap
 import androidx.lifecycle.Observer
 import com.example.sweetPlatinum.di.appModule
-import com.example.sweetPlatinum.di.dbModule
 import com.example.sweetPlatinum.di.viewModule
 import com.example.sweetPlatinum.pojo.GetProfileResponse
 import com.example.sweetPlatinum.pojo.UpdateResponse
@@ -28,7 +27,7 @@ class ProfileViewModelTest: KoinTest {
 
     @Before
     fun before() {
-        startKoin(listOf(appModule, dbModule, viewModule))
+        startKoin(listOf(appModule, viewModule))
         TrampolineSchedulerRX.start()
         InstantRuleExecution.start()
     }

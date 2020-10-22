@@ -26,6 +26,7 @@ class ThirdFragment : Fragment() {
         ivNext.setOnClickListener {
             val intentKeLoginActivity = Intent(activity, LoginActivity::class.java)
             startActivity(intentKeLoginActivity)
+            activity?.finish()
             activity?.overridePendingTransition(R.anim.from_right, R.anim.to_left)
         }
     }

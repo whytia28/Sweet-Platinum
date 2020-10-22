@@ -1,7 +1,5 @@
 package com.example.sweetPlatinum.room
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 @Dao

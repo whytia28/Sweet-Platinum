@@ -17,11 +17,12 @@ import com.example.sweetPlatinum.setting.SettingActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 
 class MenuActivity : AppCompatActivity() {
 
-    private val viewModel: MenuViewModel by inject()
+    private val viewModel: MenuViewModel by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

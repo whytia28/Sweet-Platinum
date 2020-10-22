@@ -2,7 +2,6 @@ package com.example.sweetPlatinum.menuActivity.ui.history
 
 import androidx.lifecycle.Observer
 import com.example.sweetPlatinum.di.appModule
-import com.example.sweetPlatinum.di.dbModule
 import com.example.sweetPlatinum.di.viewModule
 import com.example.sweetPlatinum.pojo.GetBattleResponse
 import com.example.sweetPlatinum.utils.InstantRuleExecution
@@ -25,7 +24,7 @@ class HistoryViewModelTest : KoinTest {
 
     @Before
     fun before() {
-        startKoin(listOf(appModule, dbModule, viewModule))
+        startKoin(listOf(appModule, viewModule))
         TrampolineSchedulerRX.start()
         InstantRuleExecution.start()
     }

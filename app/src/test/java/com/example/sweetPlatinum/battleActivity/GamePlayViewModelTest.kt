@@ -3,7 +3,6 @@ package com.example.sweetPlatinum.battleActivity
 import android.content.Context
 import androidx.lifecycle.Observer
 import com.example.sweetPlatinum.di.appModule
-import com.example.sweetPlatinum.di.dbModule
 import com.example.sweetPlatinum.di.viewModule
 import com.example.sweetPlatinum.pojo.PostBattleBody
 import com.example.sweetPlatinum.pojo.PostBattleResponse
@@ -27,7 +26,7 @@ class GamePlayViewModelTest : KoinTest {
 
     @Before
     fun before() {
-        startKoin(listOf(appModule, dbModule, viewModule)) with (mock { Context::class.java })
+        startKoin(listOf(appModule, viewModule)) with (mock { Context::class.java })
         TrampolineSchedulerRX.start()
         InstantRuleExecution.start()
     }

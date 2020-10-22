@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_single_player.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.view.*
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class SinglePlayerActivity : AppCompatActivity() {
 
@@ -27,7 +28,7 @@ class SinglePlayerActivity : AppCompatActivity() {
     private lateinit var mode: String
     private lateinit var date: String
 
-    private val viewModel: GamePlayViewModel by inject()
+    private val viewModel: GamePlayViewModel by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

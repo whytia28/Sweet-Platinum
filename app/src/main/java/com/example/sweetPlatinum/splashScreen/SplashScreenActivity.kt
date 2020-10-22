@@ -14,6 +14,7 @@ import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class SplashScreenActivity : AppCompatActivity() {
     private lateinit var sharedPref: SharedPreferences
 
 
-    private val viewModel: SplashScreenViewModel by inject()
+    private val viewModel: SplashScreenViewModel by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

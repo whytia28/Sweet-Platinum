@@ -1,10 +1,11 @@
 package com.example.sweetPlatinum.splashScreen
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.pojo.AuthResponse
-import com.example.sweetPlatinum.room.HistoryDAO
+import com.example.sweetPlatinum.room.HistoryDatabase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -12,11 +13,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
-class SplashScreenViewModel(private val apiService: ApiService, private val historyDAO: HistoryDAO) : ViewModel() {
+class SplashScreenViewModel(private val apiService: ApiService, context: Context) : ViewModel() {
 
     val loginData = MutableLiveData<AuthResponse>()
     val loginError = MutableLiveData<JSONObject>()
     private val disposable = CompositeDisposable()
+    private var historyDb = HistoryDatabase.getInstance(context)
 
     fun autoLogin(token: String) {
         disposable.add(
@@ -42,7 +44,7 @@ class SplashScreenViewModel(private val apiService: ApiService, private val hist
 
     fun deleteAllHistory() {
         GlobalScope.launch {
-            historyDAO.deleteAll()
+            historyDb?.historyDAO()?.deleteAll()
         }
     }
 }

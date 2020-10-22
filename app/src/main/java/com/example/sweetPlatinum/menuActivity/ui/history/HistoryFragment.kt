@@ -13,11 +13,12 @@ import com.example.sweetPlatinum.pojo.GetBattleResponse
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import kotlinx.android.synthetic.main.fragment_history.*
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class HistoryFragment : Fragment() {
 
     private lateinit var token: String
-    private val historyViewModel: HistoryViewModel by inject()
+    private val historyViewModel: HistoryViewModel by inject { parametersOf(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
