@@ -14,10 +14,10 @@ import com.nhaarman.mockito_kotlin.verify
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.koin.standalone.StandAloneContext.startKoin
-import org.koin.standalone.StandAloneContext.stopKoin
-import org.koin.standalone.inject
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
+import org.koin.test.inject
 
 class ProfileViewModelTest: KoinTest {
     private val viewModel: ProfileViewModel by inject()
@@ -27,7 +27,7 @@ class ProfileViewModelTest: KoinTest {
 
     @Before
     fun before() {
-        startKoin(listOf(appModule, viewModule))
+        startKoin { modules(appModule, viewModule) }
         TrampolineSchedulerRX.start()
         InstantRuleExecution.start()
     }

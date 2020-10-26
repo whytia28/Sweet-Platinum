@@ -1,6 +1,6 @@
 package com.example.sweetPlatinum.battleActivity
 
-import android.content.Context
+
 import androidx.lifecycle.Observer
 import com.example.sweetPlatinum.di.appModule
 import com.example.sweetPlatinum.di.viewModule
@@ -14,19 +14,21 @@ import com.nhaarman.mockito_kotlin.verify
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.koin.android.ext.koin.with
-import org.koin.standalone.StandAloneContext.startKoin
-import org.koin.standalone.StandAloneContext.stopKoin
-import org.koin.standalone.inject
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
+import org.koin.core.parameter.parametersOf
 import org.koin.test.KoinTest
+import org.koin.test.inject
 
 class GamePlayViewModelTest : KoinTest {
-    private val viewModel: GamePlayViewModel by inject()
+    private val viewModel: GamePlayViewModel by inject { parametersOf(this) }
     private val observer = mock<Observer<PostBattleResponse>>()
 
     @Before
     fun before() {
-        startKoin(listOf(appModule, viewModule)) with (mock { Context::class.java })
+        startKoin {
+            modules(appModule, viewModule)
+        }
         TrampolineSchedulerRX.start()
         InstantRuleExecution.start()
     }
