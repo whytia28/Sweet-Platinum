@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
@@ -49,10 +50,14 @@ class BattleFragment : Fragment() {
         tv_single_player.text = getString(R.string.vs_cpu, username)
 
         single_player.setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(activity, R.anim.bounce_animation)
+            single_player.startAnimation(animation)
             goToSinglePlayer(username)
         }
 
         multi_player.setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(activity, R.anim.bounce_animation)
+            multi_player.startAnimation(animation)
             goToMultiPlayer(username)
         }
 
