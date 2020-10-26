@@ -64,4 +64,5 @@
     <string name="title_register">Daftar</string>
     <string name="edit_btn">UBAH</string>
     <string name="cancel_btn">BATAL</string>
+    <string name="button_download_history">Tombol unduh riwayat</string>
 </resources>

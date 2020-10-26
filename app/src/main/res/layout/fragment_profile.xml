@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:elevation="8dp"
-        app:cardBackgroundColor="@color/colorAccent"
+        app:cardBackgroundColor="@color/colorCard"
         app:cardCornerRadius="8dp"
         app:cardUseCompatPadding="true"
         app:contentPadding="4dp"

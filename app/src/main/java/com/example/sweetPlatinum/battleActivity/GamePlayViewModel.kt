@@ -8,7 +8,6 @@ import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.pojo.PostBattleBody
 import com.example.sweetPlatinum.pojo.PostBattleResponse
 import com.example.sweetPlatinum.room.History
-import com.example.sweetPlatinum.room.HistoryDAO
 import com.example.sweetPlatinum.room.HistoryDatabase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

@@ -19,15 +19,14 @@ import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import kotlinx.android.synthetic.main.fragment_profile.*
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
 
 
     private var bitmapResult: Bitmap? = null
     private lateinit var token: String
-    private val profileViewModel: ProfileViewModel by inject { parametersOf(this) }
+    private val profileViewModel: ProfileViewModel by viewModel()
 
     companion object {
         const val REQUEST_CODE = 201

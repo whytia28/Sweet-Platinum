@@ -16,8 +16,7 @@ import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import kotlinx.android.synthetic.main.activity_single_player.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.view.*
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SinglePlayerActivity : AppCompatActivity() {
 
@@ -28,7 +27,7 @@ class SinglePlayerActivity : AppCompatActivity() {
     private lateinit var mode: String
     private lateinit var date: String
 
-    private val viewModel: GamePlayViewModel by inject { parametersOf(this) }
+    private val viewModel: GamePlayViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

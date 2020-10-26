@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
 import com.example.sweetPlatinum.battleActivity.SinglePlayerActivity
@@ -18,16 +17,13 @@ import kotlinx.android.synthetic.main.fragment_battle.*
 
 class BattleFragment : Fragment() {
 
-    private lateinit var battleViewModel: BattleViewModel
-    private  var username: String = ""
+    private var username: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        battleViewModel =
-            ViewModelProvider(this).get(BattleViewModel::class.java)
         return inflater.inflate(R.layout.fragment_battle, container, false)
 
     }
@@ -64,20 +60,20 @@ class BattleFragment : Fragment() {
             activity?.finish()
         }
 
-
     }
 
-     private fun goToMultiPlayer(username: String) {
+    private fun goToMultiPlayer(username: String) {
         val multiPlayerIntent = Intent(context, MultiPlayerActivity::class.java)
         multiPlayerIntent.putExtra("username", username)
         startActivity(multiPlayerIntent)
         activity?.overridePendingTransition(R.anim.from_right, R.anim.to_left)
     }
 
-     private fun goToSinglePlayer(username: String) {
+    private fun goToSinglePlayer(username: String) {
         val singlePlayerIntent = Intent(context, SinglePlayerActivity::class.java)
         singlePlayerIntent.putExtra("username", username)
         startActivity(singlePlayerIntent)
         activity?.overridePendingTransition(R.anim.from_right, R.anim.to_left)
     }
+
 }

@@ -11,12 +11,11 @@ import com.example.sweetPlatinum.pojo.LoginResponse
 import com.example.sweetPlatinum.register.RegisterActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import kotlinx.android.synthetic.main.activity_login.*
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
 
-    private val viewModel: LoginViewModel by inject { parametersOf(this) }
+    private val viewModel: LoginViewModel by viewModel()
     private var rememberMe: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
