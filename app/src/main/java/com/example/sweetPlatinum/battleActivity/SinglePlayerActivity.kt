@@ -13,6 +13,7 @@ import com.example.sweetPlatinum.logic.Controller
 import com.example.sweetPlatinum.pojo.PostBattleBody
 import com.example.sweetPlatinum.room.History
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
+import com.example.sweetPlatinum.utils.AnimUtil
 import kotlinx.android.synthetic.main.activity_single_player.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.view.*
@@ -26,6 +27,7 @@ class SinglePlayerActivity : AppCompatActivity() {
     private lateinit var message: String
     private lateinit var mode: String
     private lateinit var date: String
+    private lateinit var animUtil: AnimUtil
 
     private val viewModel: GamePlayViewModel by viewModel()
 
@@ -41,6 +43,7 @@ class SinglePlayerActivity : AppCompatActivity() {
         player_one.text = username
         mode = "Singleplayer"
         date = viewModel.getCurrentDate()
+        animUtil = AnimUtil()
 
         rock1.setOnClickListener {
             playerOne = Controller.gameChoice[0]
@@ -67,10 +70,12 @@ class SinglePlayerActivity : AppCompatActivity() {
         }
 
         iv_restart.setOnClickListener {
+            animUtil.rotateAnimation(it)
             startNew()
         }
 
         iv_save.setOnClickListener {
+            animUtil.bounceAnimation(it)
             val token = MySharedPreferences(applicationContext).getData("token").toString()
             val body = PostBattleBody(mode, winner)
             viewModel.saveHistory(token, body).observe(this, {
@@ -231,5 +236,4 @@ class SinglePlayerActivity : AppCompatActivity() {
             }
         }
     }
-
 }

@@ -18,6 +18,7 @@ import com.gkemon.XMLtoPDF.model.FailureResponse
 import com.gkemon.XMLtoPDF.model.SuccessResponse
 import kotlinx.android.synthetic.main.fragment_history.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class HistoryFragment : Fragment() {
 
@@ -47,7 +48,7 @@ class HistoryFragment : Fragment() {
                 .fromViewIDSource()
                 .fromViewID(activity, R.id.rv_history_battle)
                 .setDefaultPageSize(PdfGenerator.PageSize.A4)
-                .setFileName("history")
+                .setFileName("history-sweet-platinum-${Date().time}")
                 .setFolderName("Sweet Platinum")
                 .openPDFafterGeneration(true)
                 .build(object : PdfGeneratorListener() {

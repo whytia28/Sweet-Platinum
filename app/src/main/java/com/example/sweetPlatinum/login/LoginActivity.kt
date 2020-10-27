@@ -10,6 +10,7 @@ import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.LoginResponse
 import com.example.sweetPlatinum.register.RegisterActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
+import com.example.sweetPlatinum.utils.AnimUtil
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,11 +18,15 @@ class LoginActivity : AppCompatActivity() {
 
     private val viewModel: LoginViewModel by viewModel()
     private var rememberMe: Boolean = false
+    private lateinit var animUtil: AnimUtil
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.title = getString(R.string.title_login)
+
+        animUtil = AnimUtil()
 
         btn_login.setOnClickListener {
             showProgressBar()
@@ -38,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
             resetEditText()
         }
         tv_here.setOnClickListener {
+            animUtil.bounceAnimation(it)
             goToRegister()
         }
 

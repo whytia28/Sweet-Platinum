@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
@@ -13,12 +12,14 @@ import com.example.sweetPlatinum.battleActivity.SinglePlayerActivity
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
 import com.example.sweetPlatinum.pojo.LoginResponse
+import com.example.sweetPlatinum.utils.AnimUtil
 import kotlinx.android.synthetic.main.fragment_battle.*
 
 
 class BattleFragment : Fragment() {
 
     private var username: String = ""
+    private lateinit var animUtil: AnimUtil
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +35,7 @@ class BattleFragment : Fragment() {
 
         val context = view.context as MenuActivity
         context.supportActionBar?.title = getString(R.string.title_battle)
+        animUtil = AnimUtil()
 
         if (context.intent.hasExtra("data")) {
             context.intent.getParcelableExtra<LoginResponse.Data>("data")?.let {
@@ -50,14 +52,12 @@ class BattleFragment : Fragment() {
         tv_single_player.text = getString(R.string.vs_cpu, username)
 
         single_player.setOnClickListener {
-            val animation = AnimationUtils.loadAnimation(activity, R.anim.bounce_animation)
-            single_player.startAnimation(animation)
+            animUtil.bounceAnimation(it)
             goToSinglePlayer(username)
         }
 
         multi_player.setOnClickListener {
-            val animation = AnimationUtils.loadAnimation(activity, R.anim.bounce_animation)
-            multi_player.startAnimation(animation)
+            animUtil.bounceAnimation(it)
             goToMultiPlayer(username)
         }
 

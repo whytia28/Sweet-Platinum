@@ -12,12 +12,11 @@ import com.example.sweetPlatinum.logic.Controller
 import com.example.sweetPlatinum.pojo.PostBattleBody
 import com.example.sweetPlatinum.room.History
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
+import com.example.sweetPlatinum.utils.AnimUtil
 import kotlinx.android.synthetic.main.activity_multi_player.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.view.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class MultiPlayerActivity : AppCompatActivity() {
     private var playerOne: String = ""
@@ -27,6 +26,7 @@ class MultiPlayerActivity : AppCompatActivity() {
     private var username: String? = ""
     private lateinit var mode: String
     private lateinit var date: String
+    private lateinit var animUtil: AnimUtil
 
     private val viewModel: GamePlayViewModel by viewModel()
 
@@ -40,6 +40,7 @@ class MultiPlayerActivity : AppCompatActivity() {
         player_one.text = username
         mode = "Multiplayer"
         date = viewModel.getCurrentDate()
+        animUtil = AnimUtil()
 
         rock1.setOnClickListener {
             playerOne = Controller.gameChoice[0]
@@ -90,9 +91,11 @@ class MultiPlayerActivity : AppCompatActivity() {
             scoreBattle()
         }
         iv_restart.setOnClickListener {
+            animUtil.rotateAnimation(it)
             startNew()
         }
         iv_save.setOnClickListener {
+            animUtil.bounceAnimation(it)
             val token = MySharedPreferences(applicationContext).getData("token").toString()
             val body = PostBattleBody(mode, winner)
             viewModel.saveHistory(token, body).observe(this, {
@@ -256,5 +259,4 @@ class MultiPlayerActivity : AppCompatActivity() {
             btn_share.visibility = View.GONE
         }
     }
-
 }

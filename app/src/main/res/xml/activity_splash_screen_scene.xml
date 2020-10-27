@@ -16,7 +16,7 @@
            <KeyAttribute
                motion:motionTarget="@+id/imageView"
                motion:framePosition="100"
-               android:alpha="0.0" />
+               android:alpha="0.1" />
        </KeyFrameSet>
     </Transition>
     <Transition
@@ -25,6 +25,14 @@
         motion:constraintSetStart="@id/start" />
 
     <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:layout_height="0dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:id="@+id/moving_cloud"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toTopOf="@+id/imageView" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">

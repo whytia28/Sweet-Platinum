@@ -7,6 +7,19 @@
     app:layoutDescription="@xml/activity_splash_screen_scene">
 
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/moving_cloud"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:lottie_fileName="moving_cloud.json"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        app:layout_constraintBottom_toTopOf="@id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="224dp"
