@@ -1,6 +1,5 @@
 package com.example.sweetPlatinum.di
 
-import com.example.sweetPlatinum.BaseApp
 import com.example.sweetPlatinum.BuildConfig
 import com.example.sweetPlatinum.battleActivity.GamePlayViewModel
 import com.example.sweetPlatinum.login.LoginViewModel
@@ -21,10 +20,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = BuildConfig.BASE_URL
 val appModule = module {
-
-//    single {
-//        BaseApp().applicationContext
-//    }
 
     single {
         OkHttpClient.Builder()

@@ -2,7 +2,6 @@ package com.example.sweetPlatinum.menuActivity
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.example.sweetPlatinum.room.HistoryDAO
 import com.example.sweetPlatinum.room.HistoryDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

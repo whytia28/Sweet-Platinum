@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,6 +11,16 @@
     <FrameLayout
         android:id="@+id/setting_holder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/moving_cloud"
+            android:layout_width="wrap_content"
+            android:layout_height="221dp"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="moving_cloud.json"
+            app:lottie_loop="true" />
+
+    </FrameLayout>
 
 </LinearLayout>

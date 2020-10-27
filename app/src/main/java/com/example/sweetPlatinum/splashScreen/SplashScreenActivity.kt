@@ -13,9 +13,7 @@ import com.example.sweetPlatinum.login.LoginActivity
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class SplashScreenActivity : AppCompatActivity() {
 

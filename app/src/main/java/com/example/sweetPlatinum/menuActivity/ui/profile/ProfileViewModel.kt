@@ -1,7 +1,6 @@
 package com.example.sweetPlatinum.menuActivity.ui.profile
 
 import android.graphics.Bitmap
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sweetPlatinum.network.ApiService

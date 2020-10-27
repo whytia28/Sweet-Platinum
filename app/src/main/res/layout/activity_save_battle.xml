@@ -7,6 +7,18 @@
     android:background="@drawable/background_sweet"
     tools:context="com.example.sweetPlatinum.saveBattle.SaveBattleActivity">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/moving_cloud"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="moving_cloud.json"
+        app:lottie_loop="true" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history"
         android:layout_width="match_parent"
@@ -28,6 +40,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

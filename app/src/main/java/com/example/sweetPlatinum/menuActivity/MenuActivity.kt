@@ -27,7 +27,6 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-//        val toolbar: Toolbar = findViewById(R.id.menu_actionbar)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.itemIconTintList = null
 
