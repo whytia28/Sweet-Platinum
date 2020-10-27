@@ -1,8 +1,12 @@
 package com.example.sweetPlatinum.battleActivity
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.sweetPlatinum.network.ApiService
 import com.example.sweetPlatinum.pojo.PostBattleBody
+import com.example.sweetPlatinum.pojo.PostBattleResponse
 import com.example.sweetPlatinum.room.History
 import com.example.sweetPlatinum.room.HistoryDatabase
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,23 +17,26 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class GamePlayPresenter(context: Context, private val apiService: ApiService) {
+class GamePlayViewModel(private val apiService: ApiService, context: Context) : ViewModel() {
 
-    private val disposable = CompositeDisposable()
     private var historyDb = HistoryDatabase.getInstance(context)
-    var listener: Listener? = null
+    private val disposable = CompositeDisposable()
+    private val history = MutableLiveData<PostBattleResponse>()
+    val scoreBattle: MutableLiveData<Int> = MutableLiveData(0)
+    val scoreBattleOpponent: MutableLiveData<Int> = MutableLiveData(0)
 
-    fun saveHistory(token: String, body: PostBattleBody) {
+    fun saveHistory(token: String, body: PostBattleBody): LiveData<PostBattleResponse> {
         disposable.add(
             apiService.saveHistoryBattle(token, body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    listener?.onSuccessSaveHistory()
+                    history.postValue(it)
                 }, {
-                    it?.localizedMessage?.let { it1 -> listener?.onFailedSaveHistory(it1) }
+
                 })
         )
+        return history
     }
 
     fun saveHistoryLocal(history: History) {
@@ -45,18 +52,11 @@ class GamePlayPresenter(context: Context, private val apiService: ApiService) {
         return dateFormat.format(date)
     }
 
-    fun dispose() {
-        disposable.dispose()
+    fun scoreUp() {
+        this.scoreBattle.value = this.scoreBattle.value?.plus(10)
     }
 
-    interface Listener {
-        fun startNew()
-        fun setOverlay()
-        fun showResult()
-        fun setCpuOverlay()
-        fun onSuccessSaveHistory()
-        fun onFailedSaveHistory(errorMessage: String)
-        fun shareTo()
-        fun showButtonShare()
+    fun scoreUpOpponent() {
+        this.scoreBattleOpponent.value = this.scoreBattleOpponent.value?.plus(10)
     }
 }

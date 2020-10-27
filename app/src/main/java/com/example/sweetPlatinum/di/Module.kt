@@ -1,26 +1,30 @@
 package com.example.sweetPlatinum.di
 
-import android.content.Context
-import com.example.sweetPlatinum.menuActivity.MenuActivityPresenter
-import com.example.sweetPlatinum.menuActivity.ui.battle.BattlePresenter
-import com.example.sweetPlatinum.menuActivity.ui.profile.ProfilePresenter
-import com.example.sweetPlatinum.network.ApiService
+import com.example.sweetPlatinum.BaseApp
 import com.example.sweetPlatinum.BuildConfig
-import com.example.sweetPlatinum.battleActivity.GamePlayPresenter
-import com.example.sweetPlatinum.login.LoginActivityPresenter
-import com.example.sweetPlatinum.menuActivity.ui.history.HistoryPresenter
-import com.example.sweetPlatinum.register.RegisterActivityPresenter
-import com.example.sweetPlatinum.saveBattle.SaveBattlePresenter
-import com.example.sweetPlatinum.splashScreen.SplashScreenPresenter
+import com.example.sweetPlatinum.battleActivity.GamePlayViewModel
+import com.example.sweetPlatinum.login.LoginViewModel
+import com.example.sweetPlatinum.menuActivity.MenuViewModel
+import com.example.sweetPlatinum.menuActivity.ui.history.HistoryViewModel
+import com.example.sweetPlatinum.menuActivity.ui.profile.ProfileViewModel
+import com.example.sweetPlatinum.network.ApiService
+import com.example.sweetPlatinum.register.RegisterViewModel
+import com.example.sweetPlatinum.saveBattle.SaveBattleViewModel
+import com.example.sweetPlatinum.splashScreen.SplashScreenViewModel
 import okhttp3.OkHttpClient
-import org.koin.core.module.Module
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = BuildConfig.BASE_URL
-val appModule: Module = module {
+val appModule = module {
+
+//    single {
+//        BaseApp().applicationContext
+//    }
 
     single {
         OkHttpClient.Builder()
@@ -37,32 +41,16 @@ val appModule: Module = module {
 
         retrofit.create(ApiService::class.java)
     }
+}
 
-    factory { (context: Context) ->
-        MenuActivityPresenter(context)
-    }
-    factory {
-        BattlePresenter()
-    }
-    factory {
-        ProfilePresenter(get())
-    }
-    factory { (context: Context) ->
-        GamePlayPresenter(context, get())
-    }
-    factory {
-        SplashScreenPresenter(get())
-    }
-    factory {
-        LoginActivityPresenter(get())
-    }
-    factory {
-        RegisterActivityPresenter(get())
-    }
-    factory {
-        HistoryPresenter(get())
-    }
-    factory { (context: Context) ->
-        SaveBattlePresenter(context)
-    }
+val viewModule = module {
+    viewModel { SplashScreenViewModel(get(), androidContext()) }
+    viewModel { RegisterViewModel(get()) }
+    viewModel { LoginViewModel(get()) }
+    viewModel { HistoryViewModel(get()) }
+    viewModel { ProfileViewModel(get()) }
+    viewModel { MenuViewModel(androidContext()) }
+    viewModel { GamePlayViewModel(get(), androidContext()) }
+    viewModel { SaveBattleViewModel(androidContext()) }
+
 }

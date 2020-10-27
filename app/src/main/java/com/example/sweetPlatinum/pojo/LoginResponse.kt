@@ -5,12 +5,18 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-data class LoginResponse(
+class LoginResponse() {
+
+    var t: Throwable? = null
     @SerializedName("data")
-    val `data`: Data,
+    var `data`: Data? = null
     @SerializedName("success")
-    val success: Boolean
-) {
+    var success: Boolean? = false
+
+    constructor(t: Throwable) : this() {
+        this.t = t
+    }
+
     @Parcelize
     data class Data(
         @SerializedName("email")

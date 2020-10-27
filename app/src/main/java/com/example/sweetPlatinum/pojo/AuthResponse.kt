@@ -4,13 +4,17 @@ package com.example.sweetPlatinum.pojo
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+class AuthResponse() {
 
-data class AuthResponse(
+    var t: Throwable? = null
     @SerializedName("data")
-    val `data`: Data,
+    val `data`: Data? = null
     @SerializedName("success")
-    val success: Boolean
-) {
+    var success: Boolean = false
+
+    constructor(t: Throwable) : this() {
+        this.t = t
+    }
     @Parcelize
     data class Data(
         @SerializedName("email")

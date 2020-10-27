@@ -13,13 +13,13 @@ import com.example.sweetPlatinum.logic.Controller
 import com.example.sweetPlatinum.pojo.PostBattleBody
 import com.example.sweetPlatinum.room.History
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
+import com.example.sweetPlatinum.utils.AnimUtil
 import kotlinx.android.synthetic.main.activity_single_player.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.view.*
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
+class SinglePlayerActivity : AppCompatActivity() {
 
     private var playerOne: String = ""
     private var winner: String = ""
@@ -27,8 +27,9 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
     private lateinit var message: String
     private lateinit var mode: String
     private lateinit var date: String
+    private lateinit var animUtil: AnimUtil
 
-    private val presenter: GamePlayPresenter by inject { parametersOf(this) }
+    private val viewModel: GamePlayViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,16 +39,18 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         username = intent.getStringExtra("username")
-        presenter.listener = this
+
         player_one.text = username
         mode = "Singleplayer"
-        date = presenter.getCurrentDate()
+        date = viewModel.getCurrentDate()
+        animUtil = AnimUtil()
 
         rock1.setOnClickListener {
             playerOne = Controller.gameChoice[0]
             setOverlay()
             showResult()
             showButtonShare()
+            scoreBattle()
         }
 
         paper1.setOnClickListener {
@@ -55,6 +58,7 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             setOverlay()
             showResult()
             showButtonShare()
+            scoreBattle()
         }
 
         scissor1.setOnClickListener {
@@ -62,29 +66,51 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             setOverlay()
             showResult()
             showButtonShare()
+            scoreBattle()
         }
 
         iv_restart.setOnClickListener {
+            animUtil.rotateAnimation(it)
             startNew()
         }
 
         iv_save.setOnClickListener {
+            animUtil.bounceAnimation(it)
             val token = MySharedPreferences(applicationContext).getData("token").toString()
             val body = PostBattleBody(mode, winner)
-            presenter.saveHistory(token, body)
+            viewModel.saveHistory(token, body).observe(this, {
+                onSuccessSaveHistory()
+            })
         }
 
         btn_share.setOnClickListener {
             shareTo()
         }
+
+        viewModel.scoreBattle.observe(this, {
+            battle_score_player.text = it.toString()
+        })
+
+        viewModel.scoreBattleOpponent.observe(this, {
+            battle_score_cpu.text = it.toString()
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
+        overridePendingTransition(R.anim.from_left, R.anim.to_right)
         return true
     }
 
-    override fun showResult() {
+    private fun scoreBattle() {
+        if (winner == "Player Win") {
+            viewModel.scoreUp()
+        } else if (winner == "Opponent Win") {
+            viewModel.scoreUpOpponent()
+        }
+    }
+
+    private fun showResult() {
         if (playerOne != "") {
             val control = Controller()
             val result = control.singlePlayer(playerOne)
@@ -124,16 +150,16 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
                 kotlin.run {
                     dialogMessage.show()
                 }
-            }, 1000)
+            }, 100)
             dialog.btn_exit.setOnClickListener {
                 dialogMessage.dismiss()
             }
             val history = History(null, date, message, mode)
-            presenter.saveHistoryLocal(history)
+            viewModel.saveHistoryLocal(history)
         }
     }
 
-    override fun setCpuOverlay() {
+    private fun setCpuOverlay() {
         when (Controller.cpuChoice) {
             Controller.gameChoice[0] -> {
                 rock2.foreground =
@@ -152,7 +178,7 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         }
     }
 
-    override fun onSuccessSaveHistory() {
+    private fun onSuccessSaveHistory() {
         Toast.makeText(
             this,
             getString(R.string.save_history_success),
@@ -161,15 +187,7 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         iv_save.setImageResource(R.drawable.ic_saved)
     }
 
-    override fun onFailedSaveHistory(errorMessage: String) {
-        Toast.makeText(
-            this,
-            errorMessage,
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
-    override fun shareTo() {
+    private fun shareTo() {
         val shareIntent = Intent(Intent.ACTION_SEND)
         val body = getString(R.string.body_share, message)
         shareIntent.type = "text/plain"
@@ -178,7 +196,7 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_to)))
     }
 
-    override fun showButtonShare() {
+    private fun showButtonShare() {
         if (playerOne.isNotEmpty()) {
             btn_share.visibility = View.VISIBLE
         } else {
@@ -187,8 +205,9 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
     }
 
 
-    override fun startNew() {
+    private fun startNew() {
         playerOne = ""
+        winner = ""
         iv_save.setImageResource(R.drawable.ic_save)
         rock1.foreground = null
         rock2.foreground = null
@@ -199,7 +218,7 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         btn_share.visibility = View.GONE
     }
 
-    override fun setOverlay() {
+    private fun setOverlay() {
         when (playerOne) {
             Controller.gameChoice[0] -> {
                 rock1.foreground =
@@ -216,10 +235,5 @@ class SinglePlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
                     ResourcesCompat.getDrawable(resources, R.drawable.background_selection, null)
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.dispose()
     }
 }

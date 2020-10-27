@@ -16,13 +16,12 @@ import com.example.sweetPlatinum.saveBattle.SaveBattleActivity
 import com.example.sweetPlatinum.setting.SettingActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
+class MenuActivity : AppCompatActivity() {
 
-    private val menuActivityPresenter: MenuActivityPresenter by inject { parametersOf(this) }
+    private val viewModel: MenuViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +30,6 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
 //        val toolbar: Toolbar = findViewById(R.id.menu_actionbar)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.itemIconTintList = null
-        menuActivityPresenter.listener = this
 
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
@@ -57,25 +55,28 @@ class MenuActivity : AppCompatActivity(), MenuActivityPresenter.Listener {
                 val loginIntent = Intent(this, LoginActivity::class.java)
                 MySharedPreferences(this).deleteData()
                 startActivity(loginIntent)
-                menuActivityPresenter.deleteAllHistory()
+                overridePendingTransition(R.anim.from_left, R.anim.to_right)
+                viewModel.deleteAllHistory()
                 onLogoutSuccess()
             }
 
             R.id.save_battle -> {
                 val saveIntent = Intent(this, SaveBattleActivity::class.java)
                 startActivity(saveIntent)
+                overridePendingTransition(R.anim.from_right, R.anim.to_left)
             }
 
             R.id.setting -> {
                 val settingIntent = Intent(this, SettingActivity::class.java)
                 startActivity(settingIntent)
+                overridePendingTransition(R.anim.from_right, R.anim.to_left)
             }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onLogoutSuccess() {
+    private fun onLogoutSuccess() {
         Toast.makeText(this, R.string.logout_success, Toast.LENGTH_SHORT).show()
         finish()
     }

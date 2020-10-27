@@ -8,7 +8,7 @@ interface HistoryDAO {
     fun create(historyBattle: History)
 
     @Query("SELECT * FROM history")
-    fun read(): List<History>
+    fun read():List<History>
 
     @Update
     fun update(historyBattle: History): Int

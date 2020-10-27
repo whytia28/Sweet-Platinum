@@ -14,21 +14,19 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import kotlinx.android.synthetic.main.fragment_profile.*
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProfileFragment : Fragment(), ProfilePresenter.Listener {
+class ProfileFragment : Fragment() {
 
-    private lateinit var profileViewModel: ProfileViewModel
-    private lateinit var bitmapResult: Bitmap
+
+    private var bitmapResult: Bitmap? = null
     private lateinit var token: String
-    private val presenter: ProfilePresenter by inject { parametersOf(this) }
+    private val profileViewModel: ProfileViewModel by viewModel()
 
     companion object {
         const val REQUEST_CODE = 201
@@ -46,8 +44,6 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
@@ -56,10 +52,9 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
 
         val context = view.context as MenuActivity
         context.supportActionBar?.title = getString(R.string.title_profile)
-        presenter.listener = this
         token = context.let { MySharedPreferences(it).getData("token") }.toString()
 
-        tv_edit.setOnClickListener {
+        btn_edit.setOnClickListener {
             showEditUi()
         }
 
@@ -86,20 +81,51 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
         }
 
         btn_save.setOnClickListener {
-            presenter.updateUser(
-                token,
-                bitmapResult,
-                et_username.text.toString(),
-                et_email.text.toString()
-            )
+            showProgressBar()
+            bitmapResult?.let { it1 ->
+                profileViewModel.updateUser(
+                    token,
+                    it1,
+                    et_username.text.toString(),
+                    et_email.text.toString()
+                )
+
+                profileViewModel.dataProfileUpdate.observe(viewLifecycleOwner, {
+                    onUpdateSuccess()
+                    showProfile(it.data.username, it.data.email, it.data.photo)
+                    hiddenProgressBar()
+                })
+
+                profileViewModel.dataProfileError.observe(viewLifecycleOwner, {
+                    onUpdateFailed(it.getString("errors"))
+                    hiddenProgressBar()
+                })
+            }
         }
 
-        btn_back.setOnClickListener {
+        btn_cancel.setOnClickListener {
             showSetupUi()
-            presenter.getProfileUser(token)
+            getProfileUser()
         }
 
-        presenter.getProfileUser(token)
+        getProfileUser()
+    }
+
+    private fun getProfileUser() {
+        showProgressBar()
+        profileViewModel.getProfileUser(token)
+        profileViewModel.dataProfile.observe(viewLifecycleOwner, {
+            if (it.data.photo != null) {
+                showProfile(it.data.username, it.data.email, it.data.photo!!)
+            } else {
+                showProfile(it.data.username, it.data.email, "")
+            }
+            hiddenProgressBar()
+        })
+        profileViewModel.dataProfileError.observe(viewLifecycleOwner, {
+            showProfileFailed(it.getString("errors"))
+            hiddenProgressBar()
+        })
     }
 
     private fun checkPermission(): Boolean {
@@ -134,25 +160,6 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        when (requestCode) {
-            REQUEST_CODE -> {
-                for (i in permissions.indices) {
-                    if ((permissions[i] == arrayListPermission[i]) && (grantResults[i] == PackageManager.PERMISSION_GRANTED)) {
-                        Toast.makeText(
-                            context,
-                            "Permission ${permissions[1]} granted",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        Toast.makeText(
-                            context,
-                            "Permission ${permissions[1]} not granted",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -185,35 +192,38 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
         startActivityForResult(intentCamera, CAMERA_REQUEST)
     }
 
-    override fun showEditUi() {
+    private fun showEditUi() {
         iv_set_profile.visibility = View.VISIBLE
         btn_save.visibility = View.VISIBLE
         et_email.isEnabled = true
         et_username.isEnabled = true
-        btn_back.visibility = View.VISIBLE
+        btn_cancel.visibility = View.VISIBLE
+        btn_edit.visibility = View.GONE
     }
 
-    override fun showSetupUi() {
+    private fun showSetupUi() {
         iv_set_profile.visibility = View.GONE
         btn_save.visibility = View.GONE
         et_email.isEnabled = false
         et_username.isEnabled = false
-        btn_back.visibility = View.GONE
+        btn_cancel.visibility = View.GONE
+        btn_edit.visibility = View.VISIBLE
+
     }
 
-    override fun showProgressBar() {
+    private fun showProgressBar() {
         progress_bar.visibility = View.VISIBLE
     }
 
-    override fun hiddenProgressBar() {
+    private fun hiddenProgressBar() {
         progress_bar.visibility = View.GONE
     }
 
-    override fun onUpdateSuccess() {
+    private fun onUpdateSuccess() {
         Toast.makeText(context, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
     }
 
-    override fun showProfile(username: String, email: String, photo: String) {
+    private fun showProfile(username: String, email: String, photo: String) {
         et_username.setText(username)
         et_email.setText(email)
         activity?.let {
@@ -221,16 +231,12 @@ class ProfileFragment : Fragment(), ProfilePresenter.Listener {
         }
     }
 
-    override fun showProfileFailed(errorMessage: String) {
+    private fun showProfileFailed(errorMessage: String) {
         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onUpdateFailed(errorMessage: String) {
+    private fun onUpdateFailed(errorMessage: String) {
         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.dispose()
-    }
 }

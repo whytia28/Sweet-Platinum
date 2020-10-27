@@ -14,29 +14,31 @@ import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class SplashScreenActivity : AppCompatActivity(), SplashScreenPresenter.Listener {
+class SplashScreenActivity : AppCompatActivity() {
 
     private val splashTimeOut: Long = 6000 // 2
     private lateinit var sharedPref: SharedPreferences
-    private val presenter: SplashScreenPresenter by inject { parametersOf(this) }
+
+
+    private val viewModel: SplashScreenViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.SplashTheme)
         setContentView(R.layout.activity_splash_screen)
 
-        presenter.listener = this
-        sharedPref = applicationContext.getSharedPreferences("userData", Context.MODE_PRIVATE)
 
+        sharedPref = applicationContext.getSharedPreferences("userData", Context.MODE_PRIVATE)
 
         Handler().postDelayed({
             // This method will be executed once the timer is over
             // Start your app main activity
 
             if (sharedPref.contains("token")) {
-                val token = MySharedPreferences(this).getData("token").toString()
-                presenter.autoLogin(token)
+                autoLogin()
             } else {
                 goToLandingPage()
             }
@@ -45,33 +47,44 @@ class SplashScreenActivity : AppCompatActivity(), SplashScreenPresenter.Listener
         }, splashTimeOut)
     }
 
-    override fun goToLandingPage() {
-        val goToLoginIntent = Intent(this, LandingActivity::class.java)
-        startActivity(goToLoginIntent)
+    private fun autoLogin() {
+        val token = MySharedPreferences(this).getData("token").toString()
+        viewModel.autoLogin(token)
+        viewModel.loginData.observe(this, {
+            it.data?.let { it1 -> goToMenuActivity(it1) }
+        })
+        viewModel.loginError.observe(this, {
+            goToLoginActivity()
+            viewModel.deleteAllHistory()
+            onAuthLoginFailed(it.getString("errors"))
+        })
+    }
+
+    private fun goToLandingPage() {
+        val goToLandingIntent = Intent(this, LandingActivity::class.java)
+        startActivity(goToLandingIntent)
+        overridePendingTransition(R.anim.from_right, R.anim.to_left)
         finish()
     }
 
-    override fun goToMenuActivity(data: AuthResponse.Data) {
+    private fun goToMenuActivity(data: AuthResponse.Data) {
         val intent = Intent(this, MenuActivity::class.java)
         intent.putExtra("dataFromAuth", data)
         startActivity(intent)
+        overridePendingTransition(R.anim.from_right, R.anim.to_left)
         finish()
     }
 
-    override fun onAuthLoginFailed(errorMessage: String) {
+    private fun onAuthLoginFailed(errorMessage: String) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
         MySharedPreferences(this).deleteData()
     }
 
-    override fun goToLoginActivity() {
+    private fun goToLoginActivity() {
         val loginIntent = Intent(this, LoginActivity::class.java)
         startActivity(loginIntent)
+        overridePendingTransition(R.anim.from_right, R.anim.to_left)
         finish()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.dispose()
     }
 
 }

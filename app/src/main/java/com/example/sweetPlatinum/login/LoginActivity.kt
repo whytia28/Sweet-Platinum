@@ -10,24 +10,31 @@ import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.LoginResponse
 import com.example.sweetPlatinum.register.RegisterActivity
 import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
+import com.example.sweetPlatinum.utils.AnimUtil
 import kotlinx.android.synthetic.main.activity_login.*
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginActivity : AppCompatActivity(), LoginActivityPresenter.Listener {
+class LoginActivity : AppCompatActivity() {
 
-    private val presenter: LoginActivityPresenter by inject { parametersOf(this) }
+    private val viewModel: LoginViewModel by viewModel()
     private var rememberMe: Boolean = false
+    private lateinit var animUtil: AnimUtil
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.title = getString(R.string.title_login)
-        presenter.listener = this
+
+        animUtil = AnimUtil()
 
         btn_login.setOnClickListener {
-            presenter.loginPerson(et_email.text.toString(), etPassword.text.toString(), rememberMe)
-
+            showProgressBar()
+            viewModel.loginPerson(
+                et_email.text.toString(),
+                etPassword.text.toString(),
+                rememberMe
+            )
         }
         check_box.setOnCheckedChangeListener { _, isChecked ->
             rememberMe = isChecked
@@ -36,50 +43,73 @@ class LoginActivity : AppCompatActivity(), LoginActivityPresenter.Listener {
             resetEditText()
         }
         tv_here.setOnClickListener {
+            animUtil.bounceAnimation(it)
             goToRegister()
         }
 
+        observeLogin()
+        observeError()
+
     }
 
-    override fun onLoginSuccess() {
+    private fun observeLogin() {
+        viewModel.loginData.observe(this, {
+            if (it.t == null) {
+                saveToken("token", "Bearer ${it.data?.token}")
+                onLoginSuccess()
+                it.data?.let { it1 -> goToMenuActivity(it1) }
+            } else {
+                it.t?.message?.let { it1 -> onLoginFailure(it1) }
+            }
+            hideProgressBar()
+        })
+    }
+
+    private fun observeError() {
+        viewModel.errorData.observe(this, {
+            Toast.makeText(this, it.getString("errors"), Toast.LENGTH_SHORT)
+                .show()
+            hideProgressBar()
+        })
+    }
+
+    private fun onLoginSuccess() {
         Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_LONG).show()
     }
 
-    override fun onLoginFailure(failureMessage: String) {
+    private fun onLoginFailure(failureMessage: String) {
         Toast.makeText(this, failureMessage, Toast.LENGTH_LONG).show()
     }
 
-    override fun goToRegister() {
+    private fun goToRegister() {
         val registerIntent = Intent(this, RegisterActivity::class.java)
         startActivity(registerIntent)
+        overridePendingTransition(R.anim.from_right, R.anim.to_left)
     }
 
-    override fun goToMenuActivity(data: LoginResponse.Data) {
+    private fun goToMenuActivity(data: LoginResponse.Data) {
         val menuIntent = Intent(this, MenuActivity::class.java)
         menuIntent.putExtra("data", data)
         startActivity(menuIntent)
+        overridePendingTransition(R.anim.from_right, R.anim.to_left)
         finish()
     }
 
-    override fun showProgressBar() {
+    private fun showProgressBar() {
         progress_bar.visibility = View.VISIBLE
     }
 
-    override fun hideProgressBar() {
+    private fun hideProgressBar() {
         progress_bar.visibility = View.GONE
     }
 
-    override fun saveToken(key: String, data: String) {
+    private fun saveToken(key: String, data: String) {
         MySharedPreferences(applicationContext).putData(key, data)
     }
 
-    override fun resetEditText() {
+    private fun resetEditText() {
         et_email.setText("")
         etPassword.setText("")
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.dispose()
-    }
 }

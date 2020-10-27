@@ -4,8 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient"
+    android:background="@drawable/background_sweet"
     tools:context="com.example.sweetPlatinum.battleActivity.MultiPlayerActivity">
+
+    <View
+        android:id="@+id/view_score"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline5"
+        app:layout_constraintEnd_toEndOf="@id/player_one"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="@id/guideline" />
+
+    <View
+        android:id="@+id/view_score2"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@id/guideline5"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintStart_toStartOf="@id/cpu"
+        app:layout_constraintTop_toTopOf="@id/guideline" />
+
+    <TextView
+        android:id="@+id/battle_score_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/view_score"
+        app:layout_constraintEnd_toEndOf="@id/view_score"
+        app:layout_constraintStart_toStartOf="@id/view_score"
+        app:layout_constraintTop_toTopOf="@id/view_score" />
+
+    <TextView
+        android:id="@+id/battle_score_cpu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/view_score2"
+        app:layout_constraintEnd_toEndOf="@id/view_score2"
+        app:layout_constraintStart_toStartOf="@id/view_score2"
+        app:layout_constraintTop_toTopOf="@id/view_score2" />
 
     <ImageView
         android:id="@+id/btn_share"
@@ -29,6 +73,7 @@
         app:layout_constraintStart_toStartOf="@id/guideline3" />
 
     <TextView
+        android:id="@+id/cpu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cpu"
@@ -120,7 +165,7 @@
         android:layout_marginStart="10dp"
         android:contentDescription="@string/button_save"
         android:src="@drawable/ic_save"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
         app:layout_constraintStart_toStartOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
@@ -132,7 +177,7 @@
         android:layout_marginEnd="10dp"
         android:contentDescription="@string/button_restart"
         android:src="@drawable/refresh"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
         app:layout_constraintEnd_toEndOf="@id/guideline4"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
@@ -149,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -170,6 +215,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

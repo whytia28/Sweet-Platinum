@@ -1,22 +1,19 @@
 package com.example.sweetPlatinum.menuActivity
 
 import android.content.Context
+import androidx.lifecycle.ViewModel
+import com.example.sweetPlatinum.room.HistoryDAO
 import com.example.sweetPlatinum.room.HistoryDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MenuActivityPresenter(context: Context) {
+class MenuViewModel(context: Context): ViewModel() {
 
-    private val historyDb = HistoryDatabase.getInstance(context)
-    var listener: Listener? = null
+    private var historyDAO = HistoryDatabase.getInstance(context)
 
     fun deleteAllHistory() {
         GlobalScope.launch {
-            historyDb?.historyDAO()?.deleteAll()
+            historyDAO?.historyDAO()?.deleteAll()
         }
-    }
-
-    interface Listener {
-        fun onLogoutSuccess()
     }
 }

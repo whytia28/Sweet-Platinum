@@ -6,32 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
 import com.example.sweetPlatinum.R
+import com.example.sweetPlatinum.battleActivity.MultiPlayerActivity
 import com.example.sweetPlatinum.battleActivity.SinglePlayerActivity
 import com.example.sweetPlatinum.menuActivity.MenuActivity
 import com.example.sweetPlatinum.pojo.AuthResponse
 import com.example.sweetPlatinum.pojo.LoginResponse
-import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
+import com.example.sweetPlatinum.utils.AnimUtil
 import kotlinx.android.synthetic.main.fragment_battle.*
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
 
 
-class BattleFragment : Fragment(), BattlePresenter.Listener {
+class BattleFragment : Fragment() {
 
-    private lateinit var battleViewModel: BattleViewModel
-    private lateinit var username: String
-    private val presenter: BattlePresenter by inject { parametersOf(this) }
+    private var username: String = ""
+    private lateinit var animUtil: AnimUtil
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        battleViewModel =
-            ViewModelProvider(this).get(BattleViewModel::class.java)
         return inflater.inflate(R.layout.fragment_battle, container, false)
 
     }
@@ -41,6 +35,7 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
 
         val context = view.context as MenuActivity
         context.supportActionBar?.title = getString(R.string.title_battle)
+        animUtil = AnimUtil()
 
         if (context.intent.hasExtra("data")) {
             context.intent.getParcelableExtra<LoginResponse.Data>("data")?.let {
@@ -56,14 +51,13 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
         tv_multi_player.text = getString(R.string.vs_player, username)
         tv_single_player.text = getString(R.string.vs_cpu, username)
 
-
-        presenter.listener = this
-
         single_player.setOnClickListener {
+            animUtil.bounceAnimation(it)
             goToSinglePlayer(username)
         }
 
         multi_player.setOnClickListener {
+            animUtil.bounceAnimation(it)
             goToMultiPlayer(username)
         }
 
@@ -71,18 +65,20 @@ class BattleFragment : Fragment(), BattlePresenter.Listener {
             activity?.finish()
         }
 
-
     }
 
-    override fun goToMultiPlayer(username: String) {
+    private fun goToMultiPlayer(username: String) {
         val multiPlayerIntent = Intent(context, MultiPlayerActivity::class.java)
         multiPlayerIntent.putExtra("username", username)
         startActivity(multiPlayerIntent)
+        activity?.overridePendingTransition(R.anim.from_right, R.anim.to_left)
     }
 
-    override fun goToSinglePlayer(username: String) {
+    private fun goToSinglePlayer(username: String) {
         val singlePlayerIntent = Intent(context, SinglePlayerActivity::class.java)
         singlePlayerIntent.putExtra("username", username)
         startActivity(singlePlayerIntent)
+        activity?.overridePendingTransition(R.anim.from_right, R.anim.to_left)
     }
+
 }

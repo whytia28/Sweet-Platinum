@@ -5,15 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.sweetPlatinum.R
 import kotlinx.android.synthetic.main.fragment_second.*
 
 
 class SecondFragment : Fragment() {
-
-    private lateinit var listener: FragmentListener
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,11 +23,9 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         ivNext.setOnClickListener {
-            listener.openThirdFragment()
+            val action = SecondFragmentDirections.actionSecondFragmentToThirdFragment()
+            findNavController().navigate(action)
         }
     }
 
-    fun setListener(fragmentListener: FragmentListener) {
-        this.listener = fragmentListener
-    }
 }

@@ -2,23 +2,23 @@ package com.example.sweetPlatinum.battleActivity
 
 import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.logic.Controller
 import com.example.sweetPlatinum.pojo.PostBattleBody
-import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
-import com.example.sweetPlatinum.R
 import com.example.sweetPlatinum.room.History
+import com.example.sweetPlatinum.sharedPreference.MySharedPreferences
+import com.example.sweetPlatinum.utils.AnimUtil
 import kotlinx.android.synthetic.main.activity_multi_player.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.*
 import kotlinx.android.synthetic.main.custom_alert_dialog.view.*
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
+class MultiPlayerActivity : AppCompatActivity() {
     private var playerOne: String = ""
     private var playerTwo: String = ""
     private var winner: String = ""
@@ -26,8 +26,9 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
     private var username: String? = ""
     private lateinit var mode: String
     private lateinit var date: String
+    private lateinit var animUtil: AnimUtil
 
-    private val presenter: GamePlayPresenter by inject { parametersOf(this) }
+    private val viewModel: GamePlayViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,10 +37,10 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         supportActionBar?.title = getString(R.string.multi_player)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         username = intent.getStringExtra("username")
-        presenter.listener = this
         player_one.text = username
         mode = "Multiplayer"
-        date = presenter.getCurrentDate()
+        date = viewModel.getCurrentDate()
+        animUtil = AnimUtil()
 
         rock1.setOnClickListener {
             playerOne = Controller.gameChoice[0]
@@ -47,6 +48,7 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         paper1.setOnClickListener {
             playerOne = Controller.gameChoice[1]
@@ -54,6 +56,7 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         scissor1.setOnClickListener {
             playerOne = Controller.gameChoice[2]
@@ -61,6 +64,7 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         rock2.setOnClickListener {
             playerTwo = Controller.gameChoice[0]
@@ -68,6 +72,7 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         paper2.setOnClickListener {
             playerTwo = Controller.gameChoice[1]
@@ -75,6 +80,7 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         scissor2.setOnClickListener {
             playerTwo = Controller.gameChoice[2]
@@ -82,24 +88,46 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
             showResult()
             showButtonShare()
             onPlayerSelected()
+            scoreBattle()
         }
         iv_restart.setOnClickListener {
+            animUtil.rotateAnimation(it)
             startNew()
         }
         iv_save.setOnClickListener {
+            animUtil.bounceAnimation(it)
             val token = MySharedPreferences(applicationContext).getData("token").toString()
             val body = PostBattleBody(mode, winner)
-            presenter.saveHistory(token, body)
+            viewModel.saveHistory(token, body).observe(this, {
+                onSuccessSaveHistory()
+            })
         }
 
         btn_share.setOnClickListener {
             shareTo()
         }
+        viewModel.scoreBattle.observe(this, {
+            battle_score_player.text = it.toString()
+        })
+        viewModel.scoreBattleOpponent.observe(this, {
+            battle_score_opponent.text = it.toString()
+        })
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
+        overridePendingTransition(R.anim.from_left, R.anim.to_right)
         return true
+    }
+
+
+    private fun scoreBattle() {
+        if (winner == "Player Win") {
+            viewModel.scoreUp()
+        } else if (winner == "Opponent Win") {
+            viewModel.scoreUpOpponent()
+        }
     }
 
     private fun onPlayerSelected() {
@@ -121,9 +149,10 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         }
     }
 
-    override fun startNew() {
+    private fun startNew() {
         playerOne = ""
         playerTwo = ""
+        winner = ""
         iv_save.setImageResource(R.drawable.ic_save)
         rock1.foreground = null
         paper1.foreground = null
@@ -134,7 +163,7 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         btn_share.visibility = View.GONE
     }
 
-    override fun showResult() {
+    private fun showResult() {
         if (playerOne != "" && playerTwo != "") {
             val controller = Controller()
             val result = controller.multiPlayer(playerOne, playerTwo)
@@ -149,6 +178,7 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
                     "Draw"
                 }
             }
+
 
             message = when (winner) {
                 "Player Win" -> {
@@ -173,15 +203,11 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
                 dialogMessage.dismiss()
             }
             val history = History(null, date, message, mode)
-            presenter.saveHistoryLocal(history)
+            viewModel.saveHistoryLocal(history)
         }
     }
 
-    override fun setCpuOverlay() {
-
-    }
-
-    override fun setOverlay() {
+    private fun setOverlay() {
         when (playerOne) {
             Controller.gameChoice[0] -> {
                 rock1.foreground =
@@ -212,16 +238,12 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         }
     }
 
-    override fun onSuccessSaveHistory() {
+    private fun onSuccessSaveHistory() {
         Toast.makeText(this, getString(R.string.save_history_success), Toast.LENGTH_SHORT).show()
         iv_save.setImageResource(R.drawable.ic_saved)
     }
 
-    override fun onFailedSaveHistory(errorMessage: String) {
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun shareTo() {
+    private fun shareTo() {
         val shareIntent = Intent(Intent.ACTION_SEND)
         val body = getString(R.string.body_share, message)
         shareIntent.type = "text/plain"
@@ -230,16 +252,11 @@ class MultiPlayerActivity : AppCompatActivity(), GamePlayPresenter.Listener {
         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_to)))
     }
 
-    override fun showButtonShare() {
+    private fun showButtonShare() {
         if (playerOne.isNotEmpty() && playerTwo.isNotEmpty()) {
             btn_share.visibility = View.VISIBLE
         } else {
             btn_share.visibility = View.GONE
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.dispose()
     }
 }

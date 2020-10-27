@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient"
+    android:background="@drawable/background_sweet"
     tools:context="com.example.sweetPlatinum.landingPage.FirstFragment">
 
     <ImageView
@@ -12,7 +12,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:contentDescription="@string/image_multi_player"
-        android:src="@drawable/ic_multiplayer"
+        android:src="@drawable/multi_player_sweet"
         app:layout_constraintBottom_toTopOf="@id/ivNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

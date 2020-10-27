@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient"
+    android:background="@drawable/background_sweet"
     android:padding="16dp"
     tools:context="com.example.sweetPlatinum.register.RegisterActivity">
 
@@ -82,19 +82,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_email" />
 
-    <EditText
-        android:id="@+id/etPassword"
-        style="@style/MyEditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="@string/password"
-        android:inputType="textPassword"
-        android:labelFor="@id/etPassword"
-        android:textSize="20sp"
-        android:theme="@style/MyEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPassword" />
+        app:layout_constraintTop_toBottomOf="@id/tvPassword"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            style="@style/MyEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/password"
+            android:inputType="textPassword"
+            android:labelFor="@id/etPassword"
+            android:textSize="18sp"
+            android:theme="@style/MyEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <Button
@@ -105,7 +116,7 @@
         android:background="@drawable/ripple_effect"
         android:text="@string/register"
         app:layout_constraintEnd_toEndOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+        app:layout_constraintTop_toBottomOf="@id/password_layout" />
 
     <Button
         android:id="@+id/btn_reset"
@@ -115,7 +126,7 @@
         android:background="@drawable/ripple_effect"
         android:text="@string/reset"
         app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+        app:layout_constraintTop_toBottomOf="@id/password_layout" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

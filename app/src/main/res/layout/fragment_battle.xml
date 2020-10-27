@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient"
+    android:background="@drawable/background_sweet"
     tools:context="com.example.sweetPlatinum.menuActivity.ui.battle.BattleFragment">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose_your_opponent"
@@ -20,10 +21,10 @@
 
     <ImageView
         android:id="@+id/multi_player"
-        android:layout_width="0dp"
+        android:layout_width="164dp"
         android:layout_height="128dp"
         android:contentDescription="@string/multi_player"
-        android:src="@drawable/ic_multiplayer"
+        android:src="@drawable/multi_player_sweet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
@@ -37,17 +38,17 @@
         android:hint="@string/multi_player"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/multi_player"
-        app:layout_constraintStart_toStartOf="@id/multi_player"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/multi_player" />
 
     <ImageView
         android:id="@+id/single_player"
-        android:layout_width="0dp"
+        android:layout_width="164dp"
         android:layout_height="128dp"
         android:layout_marginTop="40dp"
         android:contentDescription="@string/single_player"
-        android:src="@drawable/ic_vs_computer"
+        android:src="@drawable/single_player_sweet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_multi_player" />
@@ -61,8 +62,8 @@
         android:hint="@string/single_player"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/single_player"
-        app:layout_constraintStart_toStartOf="@id/single_player"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/single_player" />
 
     <Button

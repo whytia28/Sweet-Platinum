@@ -8,7 +8,6 @@
     <string name="multi_player">Dua Pemain</string>
     <string name="single_player">Satu Pemain</string>
     <string name="exit">KELUAR</string>
-    <string name="button_back">tombol kembali</string>
     <string name="player_2">Pemain 2</string>
     <string name="rock">Batu</string>
     <string name="paper">Kertas</string>
@@ -35,7 +34,6 @@
     <string name="player_2_win">Pemain 2 Menang</string>
     <string name="draw">Seri</string>
     <string name="player_win">%1$s Menang</string>
-    <string name="edit">Ubah</string>
     <string name="data_profile">PROFIL DATA</string>
     <string name="save">SIMPAN</string>
     <string name="update_success">Berhasil Ubah Profil</string>
@@ -65,4 +63,6 @@
     <string name="title_login">Masuk</string>
     <string name="title_register">Daftar</string>
     <string name="edit_btn">UBAH</string>
+    <string name="cancel_btn">BATAL</string>
+    <string name="button_download_history">Tombol unduh riwayat</string>
 </resources>
