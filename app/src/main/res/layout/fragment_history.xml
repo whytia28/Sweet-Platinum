@@ -38,6 +38,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/guideline4">
 
+<!--        <aglibs.loading.skeleton.layout.SkeletonRecyclerView-->
+<!--            android:id="@+id/rv_history_battle"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@id/guideline4"-->
+<!--            app:skeletonViewHolderItem="@layout/item_history" />-->
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_history_battle"
             android:layout_width="match_parent"

@@ -72,8 +72,10 @@ class HistoryFragment : Fragment() {
 
     private fun getHistory() {
         showProgressBar()
+//        rv_history_battle.startLoading()
         historyViewModel.getHistory(token).observe(viewLifecycleOwner, {
             getHistorySuccess(it)
+//            rv_history_battle.stopLoading()
             hideProgressBar()
         })
     }

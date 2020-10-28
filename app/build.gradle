@@ -109,6 +109,9 @@ dependencies {
     //lottie airbnb
     implementation 'com.airbnb.android:lottie:3.4.4'
 
+    //Skeleton loading
+    implementation 'com.github.AgnaldoNP:AGSkeletonLoading:1.1'
+
 
     androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
     androidTestImplementation "androidx.test:runner:1.3.0"
