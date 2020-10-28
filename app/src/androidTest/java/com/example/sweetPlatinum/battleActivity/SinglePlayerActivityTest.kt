@@ -6,7 +6,6 @@ import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
 import com.example.sweetPlatinum.R
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 

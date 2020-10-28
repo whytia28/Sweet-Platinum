@@ -8,7 +8,6 @@
     tools:context="com.example.sweetPlatinum.menuActivity.ui.battle.BattleFragment">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/moving_cloud"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@id/guideline3"
@@ -20,7 +19,6 @@
         app:lottie_loop="true" />
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose_your_opponent"

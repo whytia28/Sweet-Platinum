@@ -9,7 +9,6 @@
     tools:context="com.example.sweetPlatinum.landingPage.SecondFragment">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/moving_cloud"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
@@ -33,7 +32,6 @@
     </ImageView>
 
     <TextView
-        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
