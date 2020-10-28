@@ -25,7 +25,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:contentDescription="@string/title_profile"
-        android:src="@drawable/ic_image_user"
+        android:src="@drawable/ic_profiles"
         app:layout_constraintBottom_toTopOf="@id/ivNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
