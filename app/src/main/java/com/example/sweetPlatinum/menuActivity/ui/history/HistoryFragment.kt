@@ -71,12 +71,10 @@ class HistoryFragment : Fragment() {
     }
 
     private fun getHistory() {
-        showProgressBar()
-//        rv_history_battle.startLoading()
+        rv_history_battle.startLoading()
         historyViewModel.getHistory(token).observe(viewLifecycleOwner, {
             getHistorySuccess(it)
-//            rv_history_battle.stopLoading()
-            hideProgressBar()
+            rv_history_battle.stopLoading()
         })
     }
 
@@ -90,17 +88,9 @@ class HistoryFragment : Fragment() {
 
     }
 
-    private fun showProgressBar() {
-        progress_bar.visibility = View.VISIBLE
-    }
-
-    private fun hideProgressBar() {
-        progress_bar.visibility = View.GONE
-    }
-
     private fun setupUi(listHistory: List<GetBattleResponse.Data>) {
-        if (listHistory.isNotEmpty()) {
-            tv_history_empty.visibility = View.GONE
+        if (listHistory.isEmpty()) {
+            tv_history_empty.visibility = View.VISIBLE
         }
     }
 

@@ -67,7 +67,7 @@
     <string name="history_battle">HISTORY BATTLE</string>
     <string name="history_is_empty">History is empty!</string>
     <string name="date">Date: </string>
-    <string name="date_now" translatable="false">date now</string>
+    <string name="date_now" translatable="false">2020-10-12T10:28:48.457Z</string>
     <string name="mode">Mode: </string>
     <string name="history">History: </string>
     <string name="cpu_win">Cpu Win</string>

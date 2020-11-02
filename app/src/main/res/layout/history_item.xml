@@ -9,68 +9,83 @@
     app:cardUseCompatPadding="true"
     app:contentPadding="8dp">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <TextView
             android:id="@+id/title_date"
             style="@style/TexContent"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/date"
+            app:layout_constraintEnd_toEndOf="@id/guideline1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:hint="@string/date_now"
+            android:text="@string/date_now"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/title_date"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title_date"
             app:layout_constraintTop_toTopOf="@id/title_date" />
 
         <TextView
             android:id="@+id/title_mode"
             style="@style/TexContent"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/mode"
+            app:layout_constraintEnd_toEndOf="@id/guideline1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_date" />
 
         <TextView
             android:id="@+id/tv_mode"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:hint="@string/single_player"
+            android:text="@string/single_player"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/title_mode"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title_mode"
             app:layout_constraintTop_toTopOf="@id/title_mode" />
 
         <TextView
             android:id="@+id/title_history"
             style="@style/TexContent"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/history"
+            app:layout_constraintEnd_toEndOf="@id/guideline1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_mode" />
 
         <TextView
             android:id="@+id/tv_history"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:hint="@string/cpu_win"
+            android:text="@string/cpu_win"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/title_history"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title_history"
             app:layout_constraintTop_toTopOf="@id/title_history" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
