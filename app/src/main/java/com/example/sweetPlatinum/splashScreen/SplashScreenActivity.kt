@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sweetPlatinum.R
@@ -31,7 +32,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         sharedPref = applicationContext.getSharedPreferences("userData", Context.MODE_PRIVATE)
 
-        Handler().postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             // This method will be executed once the timer is over
             // Start your app main activity
 

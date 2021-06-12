@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -145,8 +146,7 @@ class SinglePlayerActivity : AppCompatActivity() {
             builder.setCustomTitle(tv_result)
             dialog.congrats.text = message
             val dialogMessage = builder.create()
-            val handler = Handler()
-            handler.postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 kotlin.run {
                     dialogMessage.show()
                 }
