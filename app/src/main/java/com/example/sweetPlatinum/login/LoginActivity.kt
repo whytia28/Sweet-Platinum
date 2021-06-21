@@ -103,8 +103,8 @@ class LoginActivity : AppCompatActivity() {
         progress_bar.visibility = View.GONE
     }
 
-    private fun saveToken(key: String, data: String) {
-        MySharedPreferences(applicationContext).putData(key, data)
+    private fun saveToken(token: String, data: String) {
+        MySharedPreferences(applicationContext).putData(token, data)
     }
 
     private fun resetEditText() {

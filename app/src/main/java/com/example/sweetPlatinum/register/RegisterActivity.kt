@@ -39,6 +39,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun observeRegister() {
         viewModel.registerData.observe(this, {
             onRegisterSuccess()
+            goToLoginActivity()
             hideProgressBar()
         })
     }
@@ -57,11 +58,15 @@ class RegisterActivity : AppCompatActivity() {
         return true
     }
 
-    private fun onRegisterSuccess() {
-        Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_LONG).show()
-        startActivity(Intent(this, LoginActivity::class.java))
+    private fun goToLoginActivity(){
+        val loginIntent = Intent(this, LoginActivity::class.java)
+        startActivity(loginIntent)
         overridePendingTransition(R.anim.from_left, R.anim.to_right)
         finish()
+    }
+
+    private fun onRegisterSuccess() {
+        Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_LONG).show()
     }
 
     private fun resetEditText() {
